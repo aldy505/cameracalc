@@ -1,0 +1,110 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>camera calculator</title>
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="script.js"></script>
+</head>
+
+<body><br>
+	<div class="container">
+		<div class="row">
+			<div class="col col-sm-6">
+				<h2>search aputure from fc/lux</h2>
+				<form class="form-control">
+					<div class="row">
+						<div class="col col-sm-3">ISO:&nbsp;</div>
+						<div class="col col-sm-9"><input class="inp"
+								type="number" id="isoo" required></div>
+					</div>
+					<div class="row">
+						<div class="col col-sm-3">Footcandle:</div>
+						<div class="col col-sm-9"><input class="inp"
+								type="number" id="fc"></div>
+					</div>
+					<div class="row">
+						<div class="col col-sm-3">Lux:</div>
+						<div class="col col-sm-9"><input class="inp"
+								type="number" id="lux"></div>
+					</div>
+					<div class="row">
+						<div class="col col-sm-3">Select FPS:</div>
+						<div class="col col-sm-9"><select class="inp"
+								id="fps">
+								<option>24</option>
+								<option>25</option>
+								<option>30</option>
+								<option>48</option>
+								<option>50</option>
+								<option>60</option>
+								<option>72</option>
+								<option>75</option>
+								<option>90</option>
+								<option>96</option>
+								<option>100</option>
+								<option>120</option>
+							</select></div>
+					</div>
+					<p class="bg-warning">Please note we're using 180
+						degree shutter here.</p>
+					<p>Your aperture needs to be: <strong id="result">.</strong></p>
+					<br>
+					<p hidden>iso: <strong id="xiso">.</strong>; fc:
+						<strong id="xfc">.</strong>; lux: <strong id="xlux">.</strong>;
+						fps: <strong id="xfps">.</strong>; fpss:
+						<strong id="fpss">.</strong>; hasil: <strong
+							id="hasil">.</strong></p>
+				</form>
+			</div>
+			<div class="col col-sm-6">
+				<h2>search fc/lux from aperture</h2>
+				<form class="form-control">
+					<div class="row">
+						<div class="col col-sm-3">ISO:&nbsp;</div>
+						<div class="col col-sm-9"><input class="inp2"
+								type="number" id="iso" required></div>
+					</div>
+					<div class="row">
+						<div class="col col-sm-3">Aperture:</div>
+						<div class="col col-sm-9"><input class="inp2"
+								type="number" id="aperture"></div>
+					</div>
+					<div class="row">
+						<div class="col col-sm-3">Select FPS:</div>
+						<div class="col col-sm-9"><select class="inp2"
+								id="fpsss">
+								<option>24</option>
+								<option>25</option>
+								<option>30</option>
+								<option>48</option>
+								<option>50</option>
+								<option>60</option>
+								<option>72</option>
+								<option>75</option>
+								<option>90</option>
+								<option>96</option>
+								<option>100</option>
+								<option>120</option>
+							</select></div>
+					</div>
+					<p class="bg-warning">Please note we're using 180
+						degree shutter here.</p>
+					<p>Your lights needs to be: <strong id="lights">.</strong></p>
+					<br>
+					<p hidden>iso: <strong id="yiso">.</strong>;
+						aperture: <strong id="yaperture">.</strong>;
+						fps: <strong id="yfps">.</strong>; fpss:
+						<strong id="fpssss">.</strong>; hasil:
+						<strong id="lampu">.</strong></p>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>
