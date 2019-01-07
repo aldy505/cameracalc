@@ -7,11 +7,13 @@ This is actually an impromptu project on my curiosity at calculating something f
 ## Features
  - Calculate foot candle and lux from aperture, fps, and iso 
  - Calculate aperture from fps, iso, and foot candle/lux
+ - Calculate foot candle and lux from certain distance with certain lights
+ - Calculate focal length you need with another sensor from full-frame
 
 ## Environmental support
 Runs on anything that could open an HTML page with CSS and JavaScript support. 
 
 ## Development
-In the future I'll add some more, like you can calculate some light photometrics or calculate some things inside your camera.
+In the future I'll add some more, but I don't know what it'll be, yet.
 If you want to contribute, feel free! It's an open source project.
 
