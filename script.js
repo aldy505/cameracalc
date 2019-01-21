@@ -82,6 +82,7 @@ $(document).ready(function () {
 		ke = ke + "<option>" + Camera[k] + "</option>";
 	}
 	$("#inp4cam").html(ke);
+	$("#inp5cam").html(ke);
 
 	function cari() {
 		var cahaya = 0,
@@ -171,6 +172,7 @@ $(document).ready(function () {
 
 	function carid() {
 		var focal = parseInt($("#inp4focal").val());
+		var sen = $("#inp4sen").val();
 		var cam = $("#inp4cam").val();
 		var ar = $("#inpt4ar").val();
 		var id;
@@ -178,6 +180,14 @@ $(document).ready(function () {
 			if (cam == Camera[k]) {
 				id = k;
 			}
+		}
+
+		if (sen == "MFT") {
+			focal = focal / 2;
+		} else if (sen == "APS") {
+			focal = focal / 1.5;
+		} else if (sen == "Full-Frame") {
+			// do nothing
 		}
 
 		var hasil = focal * CropFactor[id];
@@ -190,13 +200,47 @@ $(document).ready(function () {
 		}
 		hasil = parseFloat(Math.round(hasil * 100) / 100).toFixed(
 			1);
-		$("#inp4result").text(hasil);
+		$("#inp4result").text(hasil + " mm");
 		$("#sensize").text(SensorWidth[id] + " x " +
 			SensorHeight[id] + " mm (" + SensorDiagonal[
 				id] + " diagonally)");
+	}
+
+	function carie() {
+		var focal = parseInt($("#inp5focal").val());
+		var sen = $("#inp5sen").val();
+		var cam = $("#inp5cam").val();
+		var ar = $("#inp5ar").val();
+		var id;
+		for (k = 0; k < 35; k++) {
+			if (cam == Camera[k]) {
+				id = k;
+			}
+		}
+
+		var hasil = focal / CropFactor[id];
+
+		if (sen == "MFT") {
+			hasil = hasil * 2;
+		} else if (sen == "APS") {
+			hasil = hasil * 1.5;
+		} else if (sen == "Full-Frame") {
+			hasil = hasil * 1;
+		}
+		if (ar == "4:3") {
+			hasil = hasil * (4 / 3);
+		} else if (ar == "2.40:1") {
+			hasil = hasil * (36 / 48.6);
+		} else if (ar == "16:9") {
+			hasil = hasil * 1;
+		}
+		hasil = parseFloat(Math.round(hasil * 100) / 100).toFixed(
+			1);
+		$("#inp5result").text(hasil + " mm");
+		$("#sensize2").text(sen);
 		var asprat = parseFloat(Math.round(AspectRatio[id] *
 			100) / 100).toFixed(2);
-		$("#asprat").text(asprat);
+		$("#asprat2").text(asprat);
 	}
 
 	$(".inp").change(function () {
@@ -212,6 +256,9 @@ $(document).ready(function () {
 	});
 	$(".inp4").change(function () {
 		carid();
+	});
+	$(".inp5").change(function () {
+		carie();
 	});
 
 
@@ -309,7 +356,6 @@ $(document).ready(function () {
 
 	$("#inp3type").change(function () {
 		inpType();
-		console.log(inpType());
 	});
 
 	$(".inp3").change(function () {
