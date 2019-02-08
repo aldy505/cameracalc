@@ -218,14 +218,14 @@ $(document).ready(function () {
 			}
 		}
 
-		var hasil = focal / CropFactor[id];
+		var hasil = focal * CropFactor[id];
 
 		if (sen == "MFT") {
-			hasil = hasil * 2;
+			hasil = hasil / 2;
 		} else if (sen == "APS") {
-			hasil = hasil * 1.5;
+			hasil = hasil / 1.5;
 		} else if (sen == "Full-Frame") {
-			hasil = hasil * 1;
+			hasil = hasil / 1;
 		}
 		if (ar == "4:3") {
 			hasil = hasil * (4 / 3);
