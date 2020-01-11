@@ -2,192 +2,260 @@
 <html lang="en">
 
 <head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>camera calculator</title>
-	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-		rel="stylesheet" type="text/css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/squel/5.12.2/squel-basic.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src="script.js"></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>camera calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="script.js"></script>
 </head>
 
 <body>
-	<br>
-	<div class="container">
-
-		<h1 class="text-center">Camera Calculator</h1><br>
-		<div id="homepage" class="text-center">
-			<p>I'm searching for..</p>
-			<button type="button" class="btn btn-info" id="btn1">Footcandle/lux
-				calculator</button>
-			<button type="button" class="btn btn-info" id="btn2">Photometrics
-				calculator</button>
-			<button type="button" class="btn btn-info" id="btn3">Sensor
-				calculator</button>
-		</div>
-		<div class="row" id="firstpage">
-			<div class="col col-sm-6">
-				<h2>search aputure from fc/lux</h2>
-				<form class="form-group">
-					<div class="row">
-						<div class="col col-sm-3">ISO:&nbsp;</div>
-						<div class="col col-sm-9"><input class="inp form-control"
-								type="number" id="isoo" required></div>
-					</div>
-					<div class="row">
-						<div class="col col-sm-3">Footcandle:</div>
-						<div class="col col-sm-9"><input class="inp form-control"
-								type="number" id="fc"></div>
-					</div>
-					<div class="row">
-						<div class="col col-sm-3">Lux:</div>
-						<div class="col col-sm-9"><input class="inp form-control"
-								type="number" id="lux"></div>
-					</div>
-					<div class="row">
-						<div class="col col-sm-3">Select FPS:</div>
-						<div class="col col-sm-9"><select class="inp form-control"
-								id="fps">
-								<option>24</option>
-								<option>25</option>
-								<option>30</option>
-								<option>48</option>
-								<option>50</option>
-								<option>60</option>
-								<option>72</option>
-								<option>75</option>
-								<option>90</option>
-								<option>96</option>
-								<option>100</option>
-								<option>120</option>
-							</select></div>
-					</div>
-					<p class="bg-warning">Please note we're using 180
-						degree shutter here.</p>
-					<p>Your aperture needs to be: <strong id="result">.</strong></p>
-					<br>
-					<p hidden>iso: <strong id="xiso">.</strong>; fc:
-						<strong id="xfc">.</strong>; lux: <strong id="xlux">.</strong>;
-						fps: <strong id="xfps">.</strong>; fpss:
-						<strong id="fpss">.</strong>; hasil: <strong
-							id="hasil">.</strong></p>
-				</form>
-			</div>
-			<div class="col col-sm-6">
-				<h2>search fc/lux from aperture</h2>
-				<form class="form-group">
-					<div class="row">
-						<div class="col col-sm-3">ISO:&nbsp;</div>
-						<div class="col col-sm-9"><input class="inp2 form-control"
-								type="number" id="iso" required></div>
-					</div>
-					<div class="row">
-						<div class="col col-sm-3">Aperture:</div>
-						<div class="col col-sm-9"><input class="inp2 form-control"
-								type="number" id="aperture"></div>
-					</div>
-					<div class="row">
-						<div class="col col-sm-3">Select FPS:</div>
-						<div class="col col-sm-9"><select class="inp2 form-control"
-								id="fpsss">
-								<option>24</option>
-								<option>25</option>
-								<option>30</option>
-								<option>48</option>
-								<option>50</option>
-								<option>60</option>
-								<option>72</option>
-								<option>75</option>
-								<option>90</option>
-								<option>96</option>
-								<option>100</option>
-								<option>120</option>
-							</select></div>
-					</div>
-					<p class="bg-warning">Please note we're using 180
-						degree shutter here.</p>
-					<p>Your lights needs to be: <strong id="lights">.</strong></p>
-					<br>
-					<p hidden>iso: <strong id="yiso">.</strong>;
-						aperture: <strong id="yaperture">.</strong>;
-						fps: <strong id="yfps">.</strong>; fpss:
-						<strong id="fpssss">.</strong>; hasil:
-						<strong id="lampu">.</strong></p>
-				</form>
-			</div>
-		</div>
-		<div class="" id="secondpage">
-			<h2>footcandle/lux within distance</h2>
-			<form class="form-group">
-				<div class="row">
-					<div class="col col-sm-3">Select category:</div>
-					<div class="col col-sm-9"><select id="inp3type"
-							class="inp3 form-control">
-							<option>LED</option>
-							<option>HMI</option>
-							<option>Tungsten</option>
-							<option>Fluorescent</option>
-						</select></div>
-				</div>
-				<div class="row">
-					<div class="col col-sm-3">Select light:</div>
-					<div class="col col-sm-9"><select id="inp3name"
-							class="inp3 form-control"></select></div>
-				</div>
-				<div class="row">
-					<div class="col col-sm-3">Object distance: (in
-						metres)</div>
-					<div class="col col-sm-9"><input type="number" id="inp3dist"
-							class="inp3 form-control"></div>
-				</div>
-				<br>
-				<div class="row">
-					<p>Based on your notes, we found that you need
-						<span id="inp3result">.</span></p>
-				</div>
-			</form>
-		</div>
-		<div id="thirdpage">
-			<h2>lens from certain sensor</h2>
-			<form action="" class="form-group">
-				<div class="row">
-					<div class="col col-sm-4">Lens focal length
-						(full-frame equivalent):</div>
-					<div class="col col-sm-8"><input type="number"
-							class="form-control inp4" id="inp4focal"></div>
-				</div>
-				<div class="row">
-					<div class="col col-sm-4">Select camera that
-						you'll use:</div>
-					<div class="col col-sm-8"><select id="inp4cam"
-							class="inp4 form-control"></select></div>
-				</div>
-				<div class="row">
-					<div class="col col-sm-4">Select aspect ratio:</div>
-					<div class="col col-sm-8"><select id="inp4ar"
-							class="inp4 form-control">
-							<option>16:9</option>
-							<option>2.40:1</option>
-							<option>4:3</option>
-						</select></div>
-				</div>
-				<div class="container row"><br>
-					<p>Your lens should be: <strong id="inp4result">.</strong></p>
-					<p>because your selected camera has a sensor size
-						of <strong id="sensize"></strong>, which has
-						an aspect ratio of <strong id="asprat"></strong></p>
-				</div>
-
-			</form>
-		</div>
-
-		<div id="goback" class="text-center">
-			<button type="button" id="homebtn" class="btn btn-link">Go
-				back to front page</button>
-		</div>
-	</div>
+    <br>
+    <div class="container">
+        <h1 class="text-center">Camera Calculator</h1>
+        <br>
+        <div id="homepage" class="text-center">
+            <p>I'm searching for..</p>
+            <button type="button" class="btn btn-info" id="btn1">Footcandle/lux calculator
+            </button>
+            <button type="button" class="btn btn-info" id="btn2">Photometrics calculator
+            </button>
+            <button type="button" class="btn btn-info" id="btn3">Sensor calculator
+            </button>
+        </div>
+        <div class="row" id="firstpage">
+            <div class="row row-cols-12 row-cols-sm-6">
+                <div class="col">
+                    <h2>search aputure from fc/lux</h2>
+                    <form class="form-group">
+                        <div class="row">
+                            <div class="col col-sm-3">ISO:&nbsp;</div>
+                            <div class="col col-sm-9">
+                                <input class="inp form-control" type="number" id="isoo" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-3">Footcandle:</div>
+                            <div class="col col-sm-9">
+                                <input class="inp form-control" type="number" id="fc">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-3">Lux:</div>
+                            <div class="col col-sm-9">
+                                <input class="inp form-control" type="number" id="lux">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-3">Select FPS:</div>
+                            <div class="col col-sm-9">
+                                <select class="inp form-control" id="fps">
+                                    <option>24</option>
+                                    <option>25</option>
+                                    <option>30</option>
+                                    <option>48</option>
+                                    <option>50</option>
+                                    <option>60</option>
+                                    <option>72</option>
+                                    <option>75</option>
+                                    <option>90</option>
+                                    <option>96</option>
+                                    <option>100</option>
+                                    <option>120</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="bg-warning">Please note we're using 180 degree shutter here.</p>
+                        <p>Your aperture needs to be: <strong id="result">.</strong>
+                        </p>
+                        <br>
+                        <p hidden>iso: <strong id="xiso">.</strong>; fc:
+                            <strong id="xfc">.</strong>; lux: <strong id="xlux">.</strong>; fps: <strong id="xfps">.</strong>; fpss: <strong id="fpss">.</strong>; hasil: <strong id="hasil">.</strong>
+                        </p>
+                    </form>
+                </div>
+                <div class="col">
+                    <h2>search fc/lux from aperture</h2>
+                    <form class="form-group">
+                        <div class="row">
+                            <div class="col col-sm-3">ISO:&nbsp;</div>
+                            <div class="col col-sm-9">
+                                <input class="inp2 form-control" type="number" id="iso" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-3">Aperture:</div>
+                            <div class="col col-sm-9">
+                                <input class="inp2 form-control" type="number" id="aperture">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-3">Select FPS:</div>
+                            <div class="col col-sm-9">
+                                <select class="inp2 form-control" id="fpsss">
+                                    <option>24</option>
+                                    <option>25</option>
+                                    <option>30</option>
+                                    <option>48</option>
+                                    <option>50</option>
+                                    <option>60</option>
+                                    <option>72</option>
+                                    <option>75</option>
+                                    <option>90</option>
+                                    <option>96</option>
+                                    <option>100</option>
+                                    <option>120</option>
+                                </select>
+                            </div>
+                        </div>
+                        <p class="bg-warning">Please note we're using 180 degree shutter here.</p>
+                        <p>Your lights needs to be: <strong id="lights">.</strong>
+                        </p>
+                        <br>
+                        <p hidden>iso: <strong id="yiso">.</strong>; aperture: <strong id="yaperture">.</strong>; fps: <strong id="yfps">.</strong>; fpss:
+                            <strong id="fpssss">.</strong>; hasil:
+                            <strong id="lampu">.</strong>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="" id="secondpage">
+            <h2>footcandle/lux within distance</h2>
+            <form class="form-group">
+                <div class="row">
+                    <div class="col col-sm-3">Select category:</div>
+                    <div class="col col-sm-9">
+                        <select id="inp3type" class="inp3 form-control">
+                            <option>LED</option>
+                            <option>HMI</option>
+                            <option>Tungsten</option>
+                            <option>Fluorescent</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-3">Select light:</div>
+                    <div class="col col-sm-9">
+                        <select id="inp3name" class="inp3 form-control"></select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col col-sm-3">Object distance: (in metres)
+                    </div>
+                    <div class="col col-sm-9">
+                        <input type="number" id="inp3dist" class="inp3 form-control">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <p>Based on your notes, we found that you need
+                        <span id="inp3result">.</span>
+                    </p>
+                </div>
+            </form>
+        </div>
+        <div id="thirdpage">
+            <h2>lens from certain sensor</h2>
+            <div class="row row-cols-sm-6 row-cols-12">
+                <div class="col">
+                    <form action="" class="form-group">
+                        <div class="row">
+                            <div class="col col-sm-4">Select your camera's sensor:</div>
+                            <div class="col col-sm-8">
+                                <select name="" id="inp4sen" class="inp4 form-control">
+                                    <option>Full-frame</option>
+                                    <option>APS</option>
+                                    <option>MFT</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-4">Lens focal length:
+                            </div>
+                            <div class="col col-sm-8">
+                                <input type="number" class="form-control inp4" id="inp4focal">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-4">Select camera that you'll use:</div>
+                            <div class="col col-sm-8">
+                                <select id="inp4cam" class="inp4 form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-4">Select aspect ratio:
+                            </div>
+                            <div class="col col-sm-8">
+                                <select id="inp4ar" class="inp4 form-control">
+                                    <option>16:9</option>
+                                    <option>2.40:1</option>
+                                    <option>4:3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="container row">
+                            <br>
+                            <p>Your lens should be: <strong id="inp4result">.</strong>
+                            </p>
+                            <p>because your selected camera has a sensor size of <strong id="sensize"></strong>, which has an aspect ratio of <strong id="asprat"></strong>
+                            </p>
+                        </div>
+                    </form>
+                </div>
+                <div class="col">
+                    <form action="" class="form-group">
+                        <div class="row">
+                            <div class="col col-sm-4">Select camera sensor:
+                            </div>
+                            <div class="col col-sm-8">
+                                <select name="" id="inp5cam" class="inp5 form-control"></select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-4">Lens focal length:
+                            </div>
+                            <div class="col col-sm-8">
+                                <input type="number" class="form-control inp5" id="inp5focal">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-4">Select aspect ratio:
+                            </div>
+                            <div class="col col-sm-8">
+                                <select id="inp5ar" class="inp5 form-control">
+                                    <option>16:9</option>
+                                    <option>2.40:1</option>
+                                    <option>4:3</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col col-sm-4">Select your camera's sensor:</div>
+                            <div class="col col-sm-8">
+                                <select name="" id="inp5sen" class="inp5 form-control">
+                                    <option>Full-frame</option>
+                                    <option>APS</option>
+                                    <option>MFT</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="container row">
+                        <br>
+                        <p>Your lens should be: <strong id="inp5result">.</strong>
+                        </p>
+                        <p>because your selected camera has a sensor size of <strong id="sensize2"></strong>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="goback" class="text-center">
+            <button type="button" id="homebtn" class="btn btn-link">Go back to front page</button>
+        </div>
+    </div>
 </body>
 
 </html>
