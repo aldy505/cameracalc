@@ -1,27 +1,28 @@
 # Camera Calculator
+This is actually an impromptu project on my curiosity at calculating something for film camera. As you know (*or you might don't know*), there is no free online camera calculator out there yet that can calculate some of camera's settings like ISO, aperture, FPS, or even footcandle. (*Except ARRI's photometric data, but it's just calculating their light*). **So I made one!**
 
-This is actually an impromptu project on my curiosity at calculating something for film camera. As you know (*or you might don't know*), there're no online camera calculator out there yet that can calculate some of camera's settings like ISO, aperture, FPS, or even foot candle. (*Except ARRI's photometric data, but it's just calculating their light*). 
-
-**So I made one!**
+Running website link: [here](http://cameracalc.reinaldyrfl.dx.am/)
+Rendered HTML source code: [here](https://github.com/aldy505/cameracalc/tree/production)
+Database of Photometrics and Camera sensor data (that you can mess around): [here](https://github.com/aldy505/cameracalc/tree/json-db)
 
 ## Features
- - Calculate foot candle and lux from aperture, fps, and iso 
- - Calculate aperture from fps, iso, and foot candle/lux
- - Calculate foot candle and lux from certain distance with certain lights
- - Calculate focal length you need with another sensor from full-frame
+- Calculate footcandle and lux from aperture, fps, and iso
+- Calculate aperture from fps, iso, and foot candle/lux
+- Calculate footcandle and lux from certain distance with certain lights
+- Calculate focal length equivalent from some camera to another camera
 
 ## Environmental support
-Runs on anything that could open an HTML page with CSS and JavaScript support. 
+Runs on anything that could open an HTML page with CSS and JavaScript support.
+
 
 ## Development
-In the future I'll add some more, but I don't know what it'll be, yet.
-If you want to contribute, feel free! It's an open source project.
+I want to add some other features, but either I don't know what that is or I don't know how to implement it yet.
+Please feel free to put any request on [issues](https://github.com/aldy505/cameracalc/issues).
 
-## v2.0 Update
- - Re-written in Nuxtjs (Vue), Vue-Bootstrap
- - Updated UIg, much simpler and cleaner
- - New light data
- - Using JSON as database
+  
 
-I don't have all the time in the world. I will be working on this project on my spare time.
+## Changelog
 
+Please refer to the [changelog](https://github.com/aldy505/cameracalc/blob/master/CHANGELOG.md) for detailed information.
+
+ 
