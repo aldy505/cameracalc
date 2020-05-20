@@ -1,26 +1,26 @@
 <template lang="pug">
 div
   header.mt-5.mx-auto
-    a(href="/" style="text-decoration:none")
+    nuxt-link(to="/")
       h1.text-center.text-dark Camera Calculator
   main.mt-4
     .container
       .row
         .col-12.col-md-3.offset-md-2 
-          a.btn.btn-outline-dark.btn-block(
-            href="intensity"
-            role="button"
-          ) Light Intensity
+          nuxt-link(to="/intensity")
+            button.btn.btn-outline-dark.btn-block(
+              role="button"
+            ) Light Intensity
         .col-12.col-md-3 
-          a.btn.btn-outline-dark.btn-block(
-            href="sensor"
-            role="button"
-          ) Sensor Size
+          nuxt-link(to="/sensor")
+            button.btn.btn-outline-dark.btn-block(
+              role="button"
+            ) Sensor Size
         .col-12.col-md-3 
-          a.btn.btn-outline-dark.btn-block(
-            href="photometrics"
-            role="button"
-          ) Light Photometrics
+          nuxt-link(to="/photometrics")
+            button.btn.btn-outline-dark.btn-block(
+              role="button"
+            ) Light Photometrics
       .pt-4
         <nuxt />
 </template>

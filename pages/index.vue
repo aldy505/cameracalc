@@ -6,11 +6,11 @@
     .mx-auto.mt-5
       .row
         .col-md-1.col-4
-          img.img-icon(src="/github.png")
+          img.img-icon(src="github.png")
         .col-md-3.col-8
           a(href="https://github.com/aldy505/cameracalc") GitHub Repository
         .col-md-1.col-4
-          img.img-icon(src="/mail.png")
+          img.img-icon(src="mail.png")
         .col-md-3.col-8
           a(href="mailto:reinaldyrfl@gmail.com") Email Inquiry
 
