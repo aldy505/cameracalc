@@ -84,5 +84,12 @@ export default {
       config.node = { fs: 'empty' };
     },
     
+  },
+  generate: {
+    routes: [
+      '/photometrics',
+      '/intensity',
+      '/sensor'
+    ]
   }
 }
