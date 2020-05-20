@@ -11,8 +11,8 @@ import { setContext, getLocation, getRouteData, normalizeError } from './utils'
 
 /* Plugins */
 
-import nuxt_plugin_bootstrapvue_1e38a352 from 'nuxt_plugin_bootstrapvue_1e38a352' // Source: .\\bootstrap-vue.js (mode: 'all')
-import nuxt_plugin_axios_a8dd0fb0 from 'nuxt_plugin_axios_a8dd0fb0' // Source: .\\axios.js (mode: 'all')
+import nuxt_plugin_bootstrapvue_3772bf38 from 'nuxt_plugin_bootstrapvue_3772bf38' // Source: .\\bootstrap-vue.js (mode: 'all')
+import nuxt_plugin_axios_400bfa09 from 'nuxt_plugin_axios_400bfa09' // Source: .\\axios.js (mode: 'all')
 
 // Component: <ClientOnly>
 Vue.component(ClientOnly.name, ClientOnly)
@@ -41,7 +41,7 @@ Vue.component(Nuxt.name, Nuxt)
 
 Vue.use(Meta, {"keyName":"head","attribute":"data-n-head","ssrAttribute":"data-n-head-ssr","tagIDKeyName":"hid"})
 
-const defaultTransition = {"name":"page","mode":"out-in","appear":true,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
+const defaultTransition = {"name":"page","mode":"out-in","appear":false,"appearClass":"appear","appearActiveClass":"appear-active","appearToClass":"appear-to"}
 
 async function createApp (ssrContext) {
   const router = await createRouter(ssrContext)
@@ -51,7 +51,7 @@ async function createApp (ssrContext) {
   // here we inject the router and store to all child components,
   // making them available everywhere as `this.$router` and `this.$store`.
   const app = {
-    head: {"title":"nuxt","meta":[{"charset":"utf-8"},{"name":"title","content":"Camera Calculator"},{"name":"description","content":"The online calculator on camera settings and lighting intensity."},{"name":"keywords","content":"calculator, film, camera, lighting, iso, aperture"},{"name":"robots","content":"index, follow"},{"name":"language","content":"English"},{"name":"author","content":"Reinaldy Rafli"},{"name":"revisit-after","content":"14 days"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"cameracalc v2.0"}],"link":[{"rel":"icon","type":"image\u002Fx-icon","href":"\u002Ffavicon.ico"}],"style":[],"script":[]},
+    head: {"title":"Camera Calculator – Free Calculator for Film Camera Department","meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1"},{"hid":"description","name":"description","content":"Calculate things like photometrics, focal length equivalent, and more.."},{"hid":"title","name":"title","content":"Camera Calculator – Free Calculator for Film Camera Department"},{"hid":"keywords","name":"keywords","content":"camera, department, film, production, calculator, free"},{"hid":"author","name":"author","content":"Reinaldy Rafli"},{"name":"robots","content":"index, follow"},{"name":"revisit-after","content":"5 days"},{"name":"language","content":"English"},{"property":"og:type","content":"website"},{"property":"og:url","content":""},{"property":"og:title","content":"Camera Calculator – Free Calculator for Film Camera Department"},{"property":"og:description","content":"Calculate things like photometrics, focal length equivalent, and more.."},{"property":"og:image","content":"head-icon.png"},{"property":"twitter:card","content":"summary_large_image"},{"property":"twitter:url","content":""},{"property":"twitter:title","content":"Camera Calculator – Free Calculator for Film Camera Department"},{"property":"twitter:description","content":"Calculate things like photometrics, focal length equivalent, and more.."},{"property":"twitter:image","content":"head-icon.png"}],"link":[{"rel":"icon","type":"image\u002Fpng","sizes":"192x192","href":"favicon-192.png"},{"rel":"icon","type":"image\u002Fpng","sizes":"32x32","href":"favicon-32.png"},{"rel":"apple-touch-icon","type":"image\u002Fpng","sizes":"180x180","href":"favicon-180.png"}],"script":[{"src":"https:\u002F\u002Fcdnjs.cloudflare.com\u002Fajax\u002Flibs\u002Fjquery\u002F3.5.1\u002Fjquery.min.js","integrity":"sha256-9\u002FaliU8dGd2tb6OSsuzixeV4y\u002FfaTqgFtohetphbbj0=","crossorigin":"anonymous"}],"style":[]},
 
     router,
     nuxt: {
@@ -151,12 +151,12 @@ async function createApp (ssrContext) {
 
   // Plugin execution
 
-  if (typeof nuxt_plugin_bootstrapvue_1e38a352 === 'function') {
-    await nuxt_plugin_bootstrapvue_1e38a352(app.context, inject)
+  if (typeof nuxt_plugin_bootstrapvue_3772bf38 === 'function') {
+    await nuxt_plugin_bootstrapvue_3772bf38(app.context, inject)
   }
 
-  if (typeof nuxt_plugin_axios_a8dd0fb0 === 'function') {
-    await nuxt_plugin_axios_a8dd0fb0(app.context, inject)
+  if (typeof nuxt_plugin_axios_400bfa09 === 'function') {
+    await nuxt_plugin_axios_400bfa09(app.context, inject)
   }
 
   // If server-side, wait for async component to be resolved first
