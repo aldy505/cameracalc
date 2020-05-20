@@ -17,3 +17,11 @@ Runs on anything that could open an HTML page with CSS and JavaScript support.
 In the future I'll add some more, but I don't know what it'll be, yet.
 If you want to contribute, feel free! It's an open source project.
 
+## v2.0 Update
+ - Re-written in Nuxtjs (Vue), Vue-Bootstrap
+ - Updated UIg, much simpler and cleaner
+ - New light data
+ - Using JSON as database
+
+I don't have all the time in the world. I will be working on this project on my spare time.
+
