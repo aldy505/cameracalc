@@ -22,31 +22,31 @@ div
 </template>
 
 <script>
-import ApertureToFclux from '~/components/ApertureToFclux.vue'
-import FcluxToAperture from '~/components/FcluxToAperture.vue'
+import ApertureToFclux from "~/components/ApertureToFclux.vue"
+import FcluxToAperture from "~/components/FcluxToAperture.vue"
 
 export default {
-    components: {
-        ApertureToFclux, FcluxToAperture
+  components: {
+    ApertureToFclux,
+    FcluxToAperture,
+  },
+  data: function () {
+    return {
+      isFclux: false,
+      isAperture: true,
+      btnText: "Switch to: Aperture &mdash;&gt; FC/LUX",
+    }
+  },
+  methods: {
+    toggleclass: function () {
+      this.isFclux = !this.isFclux
+      this.isAperture = !this.isAperture
+      this.btnText = this.isAperture
+        ? "Switch to: Aperture &mdash;&gt; FC/LUX"
+        : "Switch to: FC/LUX &mdash;&gt; Aperture"
     },
-    data: function() {
-        return { 
-            isFclux: false,
-            isAperture: true,
-            btnText: 'Switch to: Aperture &mdash;&gt; FC/LUX',
-        } 
-    },
-    methods: {
-        toggleclass: function() {
-            this.isFclux = !this.isFclux;
-            this.isAperture = !this.isAperture;
-            this.btnText = this.isAperture ? 'Switch to: Aperture &mdash;&gt; FC/LUX' : 'Switch to: FC/LUX &mdash;&gt; Aperture';
-        }
-    
-  }
+  },
 }
 </script>
 
-<style lang="stylus">
-
-</style>
+<style lang="stylus"></style>

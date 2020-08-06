@@ -42,54 +42,56 @@ div
 </template>
 
 <script>
-export default {
-    name: "FcluxToAperture",
-    data: function() {
-        return {
-            output: '',
-        }
-    },
-    methods: {
-        calculate: function() {
-            let fc = $("#fc_1").val();
-            let lux = $("#lux_1").val();
-            let iso = $("#iso_1").val();
-            let fps = $("#fps_1").val();
-            let fpsConst;
-            // validate FC and Lux
-            if (fc == "" && lux == "") {
-                this.output = '<strong class="text-danger">Please fill the footcandle OR lux</strong>'
-            } else {
-                // Checking what did they input
-                if (fc == "" && lux != "") {
-                    fc = lux / 10.764; 
-                } else if (fc != "" && lux == "") {
-                    fc = fc;
-                } else if (fc != "" && lux != "") {
-                    fc = fc; // we will just use footcandle
-                }
-                // Checking the fps
-                if (fps == "24" || fps == "48" || fps == "96") {
-                    fpsConst = 0.009696;
-                } else if (fps == "25" || fps == "50" || fps == "100") {
-                    fpsConst = 0.0099;
-                } else if (fps == "30" || fps == "60" || fps == "120") {
-                    fpsConst = 0.01086;
-                }
+import $ from "jquery"
 
-                // Now we calculate hard!
-                if (fc != "") {
-                    let result = ((1 / (2 * fps)) * fc * fpsConst * iso);
-                    this.output = '<strong class="text-success">Your aperture needs to be: f/' + parseFloat(Math.round(result * 100) / 100).toFixed(2) + "</strong>";
-                } else {
-                    this.output = "<strong class='text-warning'>Some error happened.</strong>"
-                }
-            }
-        }
+export default {
+  name: "FcluxToAperture",
+  data: function () {
+    return {
+      output: "",
     }
+  },
+  methods: {
+    calculate: function () {
+      let fc = $("#fc_1").val()
+      let lux = $("#lux_1").val()
+      let iso = $("#iso_1").val()
+      let fps = $("#fps_1").val()
+      let fpsConst
+      // validate FC and Lux
+      if (fc == "" && lux == "") {
+        this.output =
+          '<strong class="text-danger">Please fill the footcandle OR lux</strong>'
+      } else {
+        // Checking what did they input
+        if (fc == "" && lux != "") {
+          fc = lux / 10.764
+        }
+
+        // Checking the fps
+        if (fps == "24" || fps == "48" || fps == "96") {
+          fpsConst = 0.009696
+        } else if (fps == "25" || fps == "50" || fps == "100") {
+          fpsConst = 0.0099
+        } else if (fps == "30" || fps == "60" || fps == "120") {
+          fpsConst = 0.01086
+        }
+
+        // Now we calculate hard!
+        if (fc != "") {
+          let result = (1 / (2 * fps)) * fc * fpsConst * iso
+          this.output =
+            '<strong class="text-success">Your aperture needs to be: f/' +
+            parseFloat(Math.round(result * 100) / 100).toFixed(2) +
+            "</strong>"
+        } else {
+          this.output =
+            "<strong class='text-warning'>Some error happened.</strong>"
+        }
+      }
+    },
+  },
 }
 </script>
 
-<style lang="stylus" scoped>
-
-</style>
+<style lang="stylus" scoped></style>

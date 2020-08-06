@@ -1,6 +1,14 @@
 # Changelog
 Each version can be downloaded from [releases](https://github.com/aldy505/cameracalc/releases) page.
 
+## v2.1 / 2020-08-06
+ - [Code] Added file size calculation
+ - [Code] Using ESLint and Prettier to lint files
+ - [Code] Updated dependency of Nuxt, Axios, Bootstrap, and Lodash
+ - [Code] Updated development dependency of Stylus and Pug 
+ - [Database] Added support for file size calculation
+ - [Calculation] Added file size calculation
+
 ## v2.0 / 2020-05-20
 
  - [Code] Rewritten in Vue JS (with Nuxt JS environment)

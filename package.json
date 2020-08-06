@@ -1,26 +1,48 @@
 {
   "name": "cameracalc",
-  "version": "1.0.0",
-  "description": "v2.0",
-  "author": "Reinaldy Rafli",
-  "private": true,
+  "version": "2.1.0",
+  "description": "Open Source Calculator for Filmmaking/Camera Department",
+  "author": "Reinaldy Rafli <reinaldyrfl@gmail.com> (http://reinaldyrfl.rf.gd/)",
+  "keywords": [
+    "film",
+    "camera",
+    "calculator",
+    "production"
+  ],
+  "private": false,
+  "homepage": "http://cameracalc.reinaldyrfl.rf.gd/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aldy505/cameracalc.git"
+  },
+  "license": "GPL-3.0",
   "scripts": {
     "dev": "nuxt",
     "build": "nuxt build",
     "start": "nuxt start",
-    "generate": "nuxt generate"
+    "generate": "nuxt generate",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
-    "@nuxtjs/axios": "^5.3.6",
-    "bootstrap": "^4.1.3",
-    "bootstrap-vue": "^2.0.0",
+    "@nuxtjs/axios": "^5.12.1",
+    "bootstrap": "^4.5.1",
+    "bootstrap-vue": "^2.16.0",
+    "jquery": "^3.5.1",
     "lodash": "^4.17.19",
-    "nuxt": "^2.0.0"
+    "nuxt": "^2.14.1"
   },
   "devDependencies": {
-    "pug": "^2.0.4",
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.6.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-vue": "^6.2.2",
+    "prettier": "^2.0.5",
+    "pug": "^3.0.0",
     "pug-plain-loader": "^1.0.0",
-    "stylus": "^0.54.7",
+    "stylus": "^0.54.8",
     "stylus-loader": "^3.0.2"
   }
 }
