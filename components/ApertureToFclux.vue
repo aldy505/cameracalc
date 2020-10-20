@@ -1,34 +1,58 @@
-<template lang="pug">
-- var fps = ["24", "25", "30", "48", "50", "60", "96", "100", "120"];
-div
-    .row
-        h3 Aperture &mdash;&gt; FC/LUX
-    form
-        .row
-            .col-5.col-md-3.mt-2 Aperture:&nbsp;
-            .col-7.col-md-3.d-block.mt-2
-                input.inp.form-control(
-                    type="number"
-                    id="aperture_2"
-                    v-on:change="calculate"
-                    required
-                )
-            .col-5.col-md-3.mt-2 FPS:&nbsp;
-            .col-7.col-md-3.d-block.mt-2
-                select.inp.form-control#fps_2(v-on:change="calculate")
-                    each item in fps
-                        option= item
-        .row
-            .col-5.col-md-3.mt-2 ISO:
-            .col-7.col-md-3.d-block.mt-2 
-                input.inp.form-control(
-                    type="number"
-                    id="iso_2"
-                    v-on:change="calculate"
-                )
-        .mt-2.d-block
-            p We are using 180 degree shutter.
-            span(v-html="output") Your ISO needs to be: 
+<template>
+  <div>
+    <div class="row">
+      <h3>Aperture &mdash;&gt; FC/LUX</h3>
+    </div>
+    <form>
+      <div class="row">
+        <div class="col-5 col-md-3 mt-2">
+          Aperture:&nbsp;
+        </div>
+        <div class="col-7 col-md-3 d-block mt-2">
+          <input
+            id="aperture_2"
+            class="inp form-control"
+            type="number"
+            required="required"
+            @change="calculate"
+          >
+        </div>
+        <div class="col-5 col-md-3 mt-2">
+          FPS:&nbsp;
+        </div>
+        <div class="col-7 col-md-3 d-block mt-2">
+          <select id="fps_2" class="inp form-control" @change="calculate">
+            <option>24</option>
+            <option>25</option>
+            <option>30</option>
+            <option>48</option>
+            <option>50</option>
+            <option>60</option>
+            <option>96</option>
+            <option>100</option>
+            <option>120</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5 col-md-3 mt-2">
+          ISO:
+        </div>
+        <div class="col-7 col-md-3 d-block mt-2">
+          <input
+            id="iso_2"
+            class="inp form-control"
+            type="number"
+            @change="calculate"
+          >
+        </div>
+      </div>
+      <div class="mt-2 d-block">
+        <p>We are using 180 degree shutter.</p>
+        <span v-html="output">Your ISO needs to be: </span>
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -81,5 +105,3 @@ export default {
   },
 }
 </script>
-
-<style lang="stylus" scoped></style>

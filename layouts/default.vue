@@ -1,33 +1,50 @@
-<template lang="pug">
-div
-  header.mt-5.mx-auto
-    nuxt-link(to="/")
-      h1.text-center.text-dark Camera Calculator
-  main.mt-4
-    .container
-      .row
-        .col-12.col-md-3.py-1
-          nuxt-link(to="/intensity")
-            button.btn.btn-outline-dark.btn-block(
-              role="button"
-            ) Light Intensity
-        .col-12.col-md-3.py-1
-          nuxt-link(to="/sensor")
-            button.btn.btn-outline-dark.btn-block(
-              role="button"
-            ) Sensor Size
-        .col-12.col-md-3.py-1
-          nuxt-link(to="/photometrics")
-            button.btn.btn-outline-dark.btn-block(
-              role="button"
-            ) Light Photometrics
-        .col-12.col-md-3.py-1
-          nuxt-link(to="/file")
-            button.btn.btn-outline-dark.btn-block(
-              role="button"
-            ) File Size
-      .pt-4
-        <nuxt />
+<template>
+  <div>
+    <header class="mt-5 mx-auto">
+      <nuxt-link to="/">
+        <h1 class="text-center text-dark">
+          Camera Calculator
+        </h1>
+      </nuxt-link>
+    </header>
+    <main class="mt-4">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 col-md-3 py-1">
+            <nuxt-link to="/intensity">
+              <button class="btn btn-outline-dark btn-block" role="button">
+                Light Intensity
+              </button>
+            </nuxt-link>
+          </div>
+          <div class="col-12 col-md-3 py-1">
+            <nuxt-link to="/sensor">
+              <button class="btn btn-outline-dark btn-block" role="button">
+                Sensor Size
+              </button>
+            </nuxt-link>
+          </div>
+          <div class="col-12 col-md-3 py-1">
+            <nuxt-link to="/photometrics">
+              <button class="btn btn-outline-dark btn-block" role="button">
+                Light Photometrics
+              </button>
+            </nuxt-link>
+          </div>
+          <div class="col-12 col-md-3 py-1">
+            <nuxt-link to="/file">
+              <button class="btn btn-outline-dark btn-block" role="button">
+                File Size
+              </button>
+            </nuxt-link>
+          </div>
+        </div>
+        <div class="pt-4">
+          <nuxt />
+        </div>
+      </div>
+    </main>
+  </div>
 </template>
 
 <style lang="stylus">

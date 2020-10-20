@@ -1,7 +1,12 @@
 # Changelog
 Each version can be downloaded from [releases](https://github.com/aldy505/cameracalc/releases) page.
 
-## v2.1 / 2020-08-06
+## v2.1.1 / 2020-10-20
+ - [Code] Removed Pug JS dependency, template is written in vanilla HTML
+ - [Code] Refactoring code & folder structure
+ - [Code] Removing Prettier (clash with ESLint)
+
+## v2.1.0 / 2020-08-06
  - [Code] Added file size calculation
  - [Code] Using ESLint and Prettier to lint files
  - [Code] Updated dependency of Nuxt, Axios, Bootstrap, and Lodash
@@ -9,7 +14,7 @@ Each version can be downloaded from [releases](https://github.com/aldy505/camera
  - [Database] Added support for file size calculation
  - [Calculation] Added file size calculation
 
-## v2.0 / 2020-05-20
+## v2.0.0 / 2020-05-20
 
  - [Code] Rewritten in Vue JS (with Nuxt JS environment)
  - [Code] Using axios to load external JSON file
@@ -21,7 +26,7 @@ Each version can be downloaded from [releases](https://github.com/aldy505/camera
  - [UI] Updated UI.
  - [UI] Created icon/favicon
 
-## v0.1 / 2019-01-21
+## v0.1.0 / 2019-01-21
 
  - [Code] Written in JavaScript with jQuery library.
  - [Database] Using hardcoded database stored on variables.

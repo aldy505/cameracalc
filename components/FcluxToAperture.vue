@@ -1,44 +1,72 @@
-<template lang="pug">
-- var fps = ["24", "25", "30", "48", "50", "60", "96", "100", "120"];
-div
-    .row
-        h3 FC/LUX &mdash;&gt; Aperture
-    form
-        .row
-            .col-5.col-md-3.mt-2 ISO:&nbsp;
-            .col-7.col-md-3.d-block.mt-2
-                input.inp.form-control(
-                    type="number"
-                    id="iso_1"
-                    required
-                    v-on:change="calculate"
-                    value=""
-                )
-            .col-5.col-md-3.mt-2 FPS:&nbsp;
-            .col-7.col-md-3.d-block.mt-2
-                select.inp.form-control#fps_1(v-on:change="calculate")
-                    each item in fps
-                        option= item
-        .row
-            .col-5.col-md-3.mt-2 Footcandle:
-            .col-7.col-md-3.d-block.mt-2 
-                input.inp.form-control(
-                    type="number"
-                    id="fc_1"
-                    v-on:change="calculate"
-                    value=""
-                )
-            .col-5.col-md-3.mt-2 Lux:
-            .col-7.col-md-3.d-block.mt-2 
-                input.inp.form-control(
-                    type="number"
-                    id="lux_1"
-                    v-on:change="calculate"
-                    value=""
-                )
-        .d-block.mt-2
-            p We are using 180 degree shutter.
-            span(v-html="output")
+<template>
+  <div>
+    <div class="row">
+      <h3>FC/LUX &mdash;&gt; Aperture</h3>
+    </div>
+    <form>
+      <div class="row">
+        <div class="col-5 col-md-3 mt-2">
+          ISO:&nbsp;
+        </div>
+        <div class="col-7 col-md-3 d-block mt-2">
+          <input
+            id="iso_1"
+            class="inp form-control"
+            type="number"
+            required="required"
+            value=""
+            @change="calculate"
+          >
+        </div>
+        <div class="col-5 col-md-3 mt-2">
+          FPS:&nbsp;
+        </div>
+        <div class="col-7 col-md-3 d-block mt-2">
+          <select id="fps_1" class="inp form-control" @change="calculate">
+            <option>24</option>
+            <option>25</option>
+            <option>30</option>
+            <option>48</option>
+            <option>50</option>
+            <option>60</option>
+            <option>96</option>
+            <option>100</option>
+            <option>120</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-5 col-md-3 mt-2">
+          Footcandle:
+        </div>
+        <div class="col-7 col-md-3 d-block mt-2">
+          <input
+            id="fc_1"
+            class="inp form-control"
+            type="number"
+            value=""
+            @change="calculate"
+          >
+        </div>
+        <div class="col-5 col-md-3 mt-2">
+          Lux:
+        </div>
+        <div class="col-7 col-md-3 d-block mt-2">
+          <input
+            id="lux_1"
+            class="inp form-control"
+            type="number"
+            value=""
+            @change="calculate"
+          >
+        </div>
+      </div>
+      <div class="d-block mt-2">
+        <p>We are using 180 degree shutter.</p>
+        <span v-html="output" />
+      </div>
+    </form>
+  </div>
 </template>
 
 <script>
@@ -93,5 +121,3 @@ export default {
   },
 }
 </script>
-
-<style lang="stylus" scoped></style>

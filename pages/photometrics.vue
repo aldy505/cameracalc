@@ -1,41 +1,71 @@
-<template lang="pug">
-div
-    .body.container
-        .row
-            h2 Footcandle/Lux within distance
-        form
-            .row
-                .col-4.mt-2 Select category:
-                .col-8.mt-2
-                    select.inp3.form-control#type(v-on:change="lightsUpdate")
-                        option LED
-                        option HMI
-                        option Tungsten
-                        option Fluorescent
-            .row
-                .col-4.mt-2 Select lights:
-                .col-8.mt-2
-                    select.inp3.form-control#lightname(v-on:change="CalculatePhotometrics")
-                        option(v-for="item in LightNameList" :key="item.Light_Name") {{item.Light_Name}}
-            .row
-                .col-4.mt-2 Object distance (in meter):
-                .col-8.mt-2
-                    input.inp3.form-control(
-                        id="distance"
-                        type="number"
-                        v-on:change="CalculatePhotometrics"
-                    )
-            .d-block.mt-2
-                span(v-html="output")
-        .row.mt-3
-            button.btn.btn-block.btn-outline-primary(
-                type="button"
-                v-on:click="toggleLightDetail"
-                v-html="textLightDetail"
-            )
-        .row.mt-3(v-bind:class="{'d-none': isLightDetail}")
-            .card.bg-light.p-3.d-block.lightdetail
-                span(v-html="LightDetail")
+<template>
+  <div>
+    <div class="body container">
+      <div class="row">
+        <h2>Footcandle/Lux within distance</h2>
+      </div>
+      <form>
+        <div class="row">
+          <div class="col-4 mt-2">
+            Select category:
+          </div>
+          <div class="col-8 mt-2">
+            <select id="type" class="inp3 form-control" @change="lightsUpdate">
+              <option>LED</option>
+              <option>HMI</option>
+              <option>Tungsten</option>
+              <option>Fluorescent</option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 mt-2">
+            Select lights:
+          </div>
+          <div class="col-8 mt-2">
+            <select
+              id="lightname"
+              class="inp3 form-control"
+              @change="CalculatePhotometrics"
+            >
+              <option v-for="item in LightNameList" :key="item.Light_Name">
+                {{ item.Light_Name }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 mt-2">
+            Object distance (in meter):
+          </div>
+          <div class="col-8 mt-2">
+            <input
+              id="distance"
+              class="inp3 form-control"
+              type="number"
+              @change="CalculatePhotometrics"
+            >
+          </div>
+        </div>
+        <div class="d-block mt-2">
+          <span v-html="output" />
+        </div>
+      </form>
+      <div class="row mt-3">
+        <button
+          class="btn btn-block btn-outline-primary"
+          type="button"
+          @click="toggleLightDetail"
+          v-html="textLightDetail"
+        />
+      </div>
+      <div class="row mt-3" :class="{ 'd-none': isLightDetail }">
+        <div class="card bg-light p-3 d-block lightdetail">
+          <span v-html="LightDetail" />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>

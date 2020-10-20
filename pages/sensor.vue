@@ -1,36 +1,81 @@
-<template lang="pug">
-div
-  .body.container
-    .row
-      h2 Lens from sensor to sensor
-    form
-      .row
-        .col-4.mt-2 From camera:
-        .col-8.mt-2
-          select.inp4.form-control#fromcamera(v-on:change="CalculateSensor")
-            option(v-for="item in CameraList" :key="item.camera") {{ item.camera }}
-            
-      .row
-        .col-4.mt-2 To camera:
-        .col-8.mt-2
-          select.inp4.form-control#tocamera(v-on:change="CalculateSensor")
-            option(v-for="item in CameraList" :key="item.camera" ) {{ item.camera }}
-            //-<client-only><FetchCamera v-for="camera in cameras" :key="camera.camera" /></client-only>
-      .row
-        .col-4.col-md-2.mt-2 Lens focal length:
-        .col-8.col-md-4.mt-2
-          input.form-control.inp4#focallength(
-            type="number"
-            v-on:change="CalculateSensor"
-          )
-        .col-4.col-md-2.mt-2 Desired aspect ratio:
-        .col-8.col-md-4.mt-2
-          select.inp4.form-control#aspectratio(v-on:change="CalculateSensor")
-            option(value="1") 16:9
-            option(value="0.7407407407407407") 2.40:1 (cropped)
-            option(value="1.33") 4:3
-      .d-block.mt-2
-        span(v-html="output")
+<template>
+  <div>
+    <div class="body container">
+      <div class="row">
+        <h2>Lens from sensor to sensor</h2>
+      </div>
+      <form>
+        <div class="row">
+          <div class="col-4 mt-2">
+            From camera:
+          </div>
+          <div class="col-8 mt-2">
+            <select
+              id="fromcamera"
+              class="inp4 form-control"
+              @change="CalculateSensor"
+            >
+              <option v-for="item in CameraList" :key="item.camera">
+                {{ item.camera }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 mt-2">
+            To camera:
+          </div>
+          <div class="col-8 mt-2">
+            <select
+              id="tocamera"
+              class="inp4 form-control"
+              @change="CalculateSensor"
+            >
+              <option v-for="item in CameraList" :key="item.camera">
+                {{ item.camera }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-4 col-md-2 mt-2">
+            Lens focal length:
+          </div>
+          <div class="col-8 col-md-4 mt-2">
+            <input
+              id="focallength"
+              class="form-control inp4"
+              type="number"
+              @change="CalculateSensor"
+            >
+          </div>
+          <div class="col-4 col-md-2 mt-2">
+            Desired aspect ratio:
+          </div>
+          <div class="col-8 col-md-4 mt-2">
+            <select
+              id="aspectratio"
+              class="inp4 form-control"
+              @change="CalculateSensor"
+            >
+              <option value="1">
+                16:9
+              </option>
+              <option value="0.7407407407407407">
+                2.40:1 (cropped)
+              </option>
+              <option value="1.33">
+                4:3
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="d-block mt-2">
+          <span v-html="output" />
+        </div>
+      </form>
+    </div>
+  </div>
 </template>
 
 <script>

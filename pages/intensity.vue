@@ -1,24 +1,30 @@
-<template lang="pug">
-
-div
-    .body.container
-        div.fclux(
-            v-bind:class="{'d-none': isFclux}"
-        )
-            <FcluxToAperture />
-        div.aperture(
-            v-bind:class="{'d-none': isAperture}"
-        )
-            <ApertureToFclux />
-    .footer.mt-3
-        .row
-            .col-12.offset-md-3.col-md-6
-                button.btn.btn-block(
-                   type="button" 
-                   v-on:click="toggleclass"
-                   v-bind:class="{'btn-outline-info': isAperture, 'btn-outline-warning': isFclux}"
-                   v-html="btnText"
-                )
+<template>
+  <div>
+    <div class="body container">
+      <div class="fclux" :class="{ 'd-none': isFclux }">
+        <FcluxToAperture />
+      </div>
+      <div class="aperture" :class="{ 'd-none': isAperture }">
+        <ApertureToFclux />
+      </div>
+    </div>
+    <div class="footer mt-3">
+      <div class="row">
+        <div class="col-12 offset-md-3 col-md-6">
+          <button
+            class="btn btn-block"
+            type="button"
+            :class="{
+              'btn-outline-info': isAperture,
+              'btn-outline-warning': isFclux,
+            }"
+            @click="toggleclass"
+            v-html="btnText"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -48,5 +54,3 @@ export default {
   },
 }
 </script>
-
-<style lang="stylus"></style>

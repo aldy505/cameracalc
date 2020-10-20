@@ -1,5 +1,5 @@
 export default {
-  mode: "universal",
+  ssr: true,
   target: "static",
   /*
    ** Headers of the page
@@ -102,14 +102,7 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     "bootstrap-vue/nuxt",
-    // Doc: https://axios.nuxtjs.org/usage
-    "@nuxtjs/axios",
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
-  axios: {},
   /*
    ** Build configuration
    */
@@ -117,7 +110,7 @@ export default {
     /*
      ** You can extend webpack config here
      */
-    extend(config, { isDev, isClient }) {
+    extend(config) {
       config.node = { fs: "empty" }
     },
   },
