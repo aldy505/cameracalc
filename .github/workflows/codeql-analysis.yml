@@ -17,8 +17,6 @@ on:
   pull_request:
     # The branches below must be a subset of the branches above
     branches: [ master ]
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   analyze:
@@ -34,8 +32,10 @@ jobs:
         # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
 
     steps:
-    - name: Setup node
-      uses: actions/setup-node@v1
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Setup Node
+      uses: actions/setup-node@v2.1.2
       with:
         node-version: '12.x'
     - name: Install dependencies, lint, build
@@ -43,8 +43,6 @@ jobs:
         npm install
         npm run lintfix
         npm run generate
-    - name: Checkout repository
-      uses: actions/checkout@v2
 
     # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
