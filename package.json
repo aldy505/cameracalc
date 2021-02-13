@@ -1,6 +1,6 @@
 {
   "name": "cameracalc",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "Open Source Calculator for Filmmaking/Camera Department",
   "author": "Reinaldy Rafli <reinaldyrfl@gmail.com> (https://reinaldyrafli.com/)",
   "keywords": [
@@ -25,19 +25,19 @@
     "lintfix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
-    "axios": "^0.20.0",
-    "bootstrap": "4.5.3",
-    "bootstrap-vue": "2.18.0",
+    "axios": "0.21.1",
+    "bootstrap": "4.6.0",
+    "bootstrap-vue": "2.21.2",
     "jquery": "3.5.1",
     "lodash": "4.17.20",
-    "nuxt": "2.14.7"
+    "nuxt": "2.14.12"
   },
   "devDependencies": {
     "babel-eslint": "10.1.0",
-    "eslint": "7.11.0",
+    "eslint": "7.20.0",
     "eslint-loader": "4.0.2",
-    "eslint-plugin-vue": "7.1.0",
+    "eslint-plugin-vue": "7.5.0",
     "stylus": "0.54.8",
-    "stylus-loader": "4.1.1"
+    "stylus-loader": "4.3.3"
   }
 }

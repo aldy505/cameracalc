@@ -58,7 +58,6 @@ export default {
       { property: "twitter:image", content: "head-icon.png" },
     ],
     link: [
-      //{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: "icon",
         type: "image/png",

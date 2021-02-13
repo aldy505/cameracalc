@@ -1,6 +1,11 @@
 # Changelog
 Each version can be downloaded from [releases](https://github.com/aldy505/cameracalc/releases) page.
 
+## v2.1.2 / 2021-02-13
+ - [Code] Refactoring Github Actions
+ - [File] Wrong file name for `head-icon.png`
+ - [Dependencies] Updated dependencies
+
 ## v2.1.1 / 2020-10-20
  - [Code] Removed Pug JS dependency, template is written in vanilla HTML
  - [Code] Refactoring code & folder structure

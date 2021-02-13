@@ -2,7 +2,7 @@
 This is actually an impromptu project on my curiosity at calculating something for film camera. As you know (*or you might don't know*), there is no free online camera calculator out there yet that can calculate some of camera's settings like ISO, aperture, FPS, or even footcandle. (*Except ARRI's photometric data, but it's just calculating their light*). **So I made one!**
 
 * Running website link: [here](https://cameracalc.reinaldyrafli.com/)
-* Rendered HTML source code: [here](https://github.com/aldy505/cameracalc/tree/production)
+* Rendered HTML source code: [here](https://github.com/aldy505/cameracalc/releases)
 
 ## Features
 
