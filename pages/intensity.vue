@@ -19,8 +19,9 @@
               'btn-outline-warning': isFclux,
             }"
             @click="toggleclass"
-            v-html="btnText"
-          />
+          >
+            {{ btnText }}
+          </button>
         </div>
       </div>
     </div>
@@ -28,19 +29,12 @@
 </template>
 
 <script>
-import ApertureToFclux from "~/components/ApertureToFclux.vue"
-import FcluxToAperture from "~/components/FcluxToAperture.vue"
-
 export default {
-  components: {
-    ApertureToFclux,
-    FcluxToAperture,
-  },
   data: function () {
     return {
       isFclux: false,
       isAperture: true,
-      btnText: "Switch to: Aperture &mdash;&gt; FC/LUX",
+      btnText: "Switch to: Aperture —> FC/LUX",
     }
   },
   methods: {
@@ -48,8 +42,8 @@ export default {
       this.isFclux = !this.isFclux
       this.isAperture = !this.isAperture
       this.btnText = this.isAperture
-        ? "Switch to: Aperture &mdash;&gt; FC/LUX"
-        : "Switch to: FC/LUX &mdash;&gt; Aperture"
+                ? "Switch to: Aperture —> FC/LUX"
+                : "Switch to: FC/LUX —> Aperture"
     },
   },
 }

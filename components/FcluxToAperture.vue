@@ -63,7 +63,7 @@
       </div>
       <div class="d-block mt-2">
         <p>We are using 180 degree shutter.</p>
-        <span v-html="output" />
+        <p><strong :class="outputClass">{{ outputText }}</strong></p>
       </div>
     </form>
   </div>
@@ -76,45 +76,47 @@ export default {
   name: "FcluxToAperture",
   data: function () {
     return {
-      output: "",
+      outputClass: "",
+      outputText: "",
     }
   },
   methods: {
     calculate: function () {
-      let fc = $("#fc_1").val()
-      let lux = $("#lux_1").val()
-      let iso = $("#iso_1").val()
-      let fps = $("#fps_1").val()
+      const fc = parseInt($("#fc_1").val(), 10)
+      const lux = Number($("#lux_1").val())
+      const iso = parseInt($("#iso_1").val(), 10)
+      const fps = parseInt($("#fps_1").val(), 10)
       let fpsConst
       // validate FC and Lux
-      if (fc == "" && lux == "") {
-        this.output =
-          '<strong class="text-danger">Please fill the footcandle OR lux</strong>'
+      if (!fc && !lux) {
+        this.outputClass = 'text-danger'
+        this.outputText = 'Please fill the footcandle OR lux'
       } else {
+        let intensity
         // Checking what did they input
-        if (fc == "" && lux != "") {
-          fc = lux / 10.764
+        if (!fc && lux) {
+            intensity = lux / 10.764
+        } else if (fc && !lux) {
+            intensity = fc
+        } else if (fc && lux) {
+            intensity = fc // we will just use footcandle
         }
-
         // Checking the fps
-        if (fps == "24" || fps == "48" || fps == "96") {
-          fpsConst = 0.009696
-        } else if (fps == "25" || fps == "50" || fps == "100") {
-          fpsConst = 0.0099
-        } else if (fps == "30" || fps == "60" || fps == "120") {
-          fpsConst = 0.01086
+        if (fps === 24 || fps === 48 || fps === 96) {
+            fpsConst = 0.009696
+        } else if (fps === 25 || fps === 50 || fps === 100) {
+            fpsConst = 0.0099
+        } else if (fps === 30 || fps === 60 || fps === 120) {
+            fpsConst = 0.01086
         }
-
         // Now we calculate hard!
-        if (fc != "") {
-          let result = (1 / (2 * fps)) * fc * fpsConst * iso
-          this.output =
-            '<strong class="text-success">Your aperture needs to be: f/' +
-            parseFloat(Math.round(result * 100) / 100).toFixed(2) +
-            "</strong>"
+        if (intensity) {
+            let result = (1 / (2 * fps)) * intensity * fpsConst * iso
+            this.outputClass = 'text-success'
+            this.outputText = 'Your aperture needs to be: f/' + parseFloat(Math.round(result * 100) / 100).toFixed(2)
         } else {
-          this.output =
-            "<strong class='text-warning'>Some error happened.</strong>"
+          this.outputClass = 'text-warning'
+          this.outputText = 'Some error happened.'
         }
       }
     },

@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="d-block mt-2">
-          <span v-html="output" />
+          <strong :class="outputClass">{{ outputText }}</strong>
         </div>
       </form>
     </div>
@@ -79,34 +79,24 @@
 </template>
 
 <script>
-import axios from "axios"
 import _ from "lodash"
 import $ from "jquery"
 
 export default {
   components: {},
-  data: function () {
-    return {
-      CameraList: [],
-      CameraDataList: [],
-      output: "",
-    }
-  },
-  async created() {
-    const config = {
+  async asyncData({ $axios }) {
+    try {
+      const response = await $axios.get(
+        `https://api.npoint.io/5c6005c5820933adf98e/SensorSize`,
+        {
       headers: {
         Accept: "application/json",
       },
     }
-
-    try {
-      const response = await axios.get(
-        `https://api.npoint.io/5c6005c5820933adf98e/SensorSize`,
-        config
       )
       // https://api.jsonbin.io/b/5ec4209e18c8475bf16c4b0f <-- alternative, but limited usage
       // https://api.npoint.io/5c6005c5820933adf98e  <-- current use
-      this.CameraList = _.chain(response.data)
+      const CameraList = _.chain(response.data)
         .map((camera) =>
           _.omit(camera, [
             "sensor_width",
@@ -119,9 +109,18 @@ export default {
           ])
         )
         .value()
-      this.CameraDataList = _.chain(response.data).value()
+      const CameraDataList = _.chain(response.data).value()
+      return { CameraList, CameraDataList}
     } catch (error) {
       console.log("Error during axios: " + error)
+    }
+  },
+  data: function () {
+    return {
+      CameraList: [],
+      CameraDataList: [],
+      outputText: "",
+      outputClass: "",
     }
   },
   methods: {
@@ -132,10 +131,10 @@ export default {
       let aspectRatio = $("#aspectratio").val()
 
       // Check if they actually input some number to focal length
-      if (focalLength == "") {
-        this.output =
-          '<strong class="text-warning">Please fill in focal length number</strong>'
-      } else if (focalLength !== "") {
+      if (!focalLength) {
+        this.outputClass = 'text-warning'
+        this.outputText = 'Please fill in focal length number'
+      } else {
         // Find the dataof fromCamera and toCamera first with lodash
         let fromCameraData = _.chain(this.CameraDataList)
           .map((o) =>
@@ -170,12 +169,10 @@ export default {
           ((focalLength * fromCameraData["crop_factor"]) /
             toCameraData["crop_factor"]) *
           aspectRatio
-        this.output =
-          `<strong class="text-success">Equivalent focal length for ${toCamera}: ` +
-          parseFloat(Math.round(result * 100) / 100).toFixed(0) +
-          "mm.</strong>"
-      } else {
-        this.output = '<strong class="text-danger">Some error happened</strong>'
+        this.outputClass = 'text-success'
+        this.outputText = `Equivalent focal length for ${toCamera}: ` +
+            parseFloat(Math.round(result * 100) / 100).toFixed(0) +
+            `mm.`
       }
     },
   },

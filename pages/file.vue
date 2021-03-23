@@ -91,7 +91,7 @@
         </div>
         <div class="row">
           <div class="d-block mt-2">
-            <span v-html="output" />
+            <strong>{{ output }}</strong>
           </div>
         </div>
       </form>
@@ -100,11 +100,26 @@
 </template>
 
 <script>
-import axios from "axios"
 import _ from "lodash"
 import $ from "jquery"
 
 export default {
+  async asyncData({ $axios }) {
+    try {
+      const response = await $axios.get(
+        "https://api.npoint.io/5c6005c5820933adf98e/FileSize",
+        {
+          headers: {
+            Accept: "appllication/json",
+          },
+        }
+      )
+      const FileSizeData = response.data
+      return { FileSizeData }
+    } catch (err) {
+      console.error(`Error during axios request: ${err}`)
+    }
+  },
   data() {
     return {
       FileSizeData: [],
@@ -124,22 +139,6 @@ export default {
       output: "",
     }
   },
-  async created() {
-    const config = {
-      headers: {
-        Accept: "appllication/json",
-      },
-    }
-    try {
-      const response = await axios.get(
-        "https://api.npoint.io/5c6005c5820933adf98e/FileSize",
-        config
-      )
-      this.FileSizeData = response.data
-    } catch (err) {
-      console.error(`Error during axios request: ${err}`)
-    }
-  },
   methods: {
     CalculateFileSize() {
       // Get value from forms
@@ -150,13 +149,13 @@ export default {
       let durationOption = $("#durationoption").val()
       let FormatData, FPSConst, Calculation
 
-      if (duration == null || duration == "") {
+      if (!duration) {
         this.output = `Please fill the duration input`
       } else {
         // Convert time to seconds
-        if (durationOption == "h") {
+        if (durationOption === "h") {
           duration = duration * 3600
-        } else if (durationOption == "m") {
+        } else if (durationOption === "m") {
           duration = duration * 60
         }
 
@@ -172,13 +171,13 @@ export default {
         if (Calculation < 1000) {
           // MB
           Calculation = (Math.round(Calculation * 100) / 100).toFixed(2)
-          this.output = `The file size should be <strong>${Calculation} MB</strong>`
+          this.output = `The file size should be ${Calculation} MB`
         } else if (Calculation <= 1000000) {
           // GB
           let CalculationGB = (
             Math.round((Calculation / 1000) * 100) / 100
           ).toFixed(2)
-          this.output = `The file size should be <strong>${Calculation} MB / ${CalculationGB} GB</strong>`
+          this.output = `The file size should be ${Calculation} MB / ${CalculationGB} GB`
         } else if (Calculation > 1000000) {
           // TB
           let CalculationGB = (
@@ -187,7 +186,7 @@ export default {
           let CalculationTB = (
             Math.round((Calculation / 1000000) * 100) / 100
           ).toFixed(2)
-          this.output = `The file size should be <strong>${CalculationGB} GB / ${CalculationTB} TB</strong>`
+          this.output = `The file size should be ${CalculationGB} GB / ${CalculationTB} TB`
         }
       }
     },

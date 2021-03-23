@@ -1,43 +1,43 @@
-# For most projects, this workflow file will not need changing; you simply need
-# to commit it to your repository.
-#
-# You may wish to alter this file to override the set of languages analyzed,
-# or to provide custom queries or build logic.
-#
-# ******** NOTE ********
-# We have attempted to detect the languages in your repository. Please check
-# the `language` matrix defined below to confirm you have the correct set of
-# supported CodeQL languages.
-#
 name: "CodeQL"
 
 on:
   push:
     branches: [ "*" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "*" ]
 
 jobs:
   analyze:
     name: Analyze
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os }}
 
     strategy:
       fail-fast: false
       matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: [12, 14]
         language: [ 'javascript' ]
        
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
     - name: Setup Node
-      uses: actions/setup-node@v2.1.2
+      uses: actions/setup-node@v2.1.4
       with:
-        node-version: '>=14'
-    - name: Install dependencies, lint, build
+        node-version: ${{ matrix.node }}
+    - name: cache node_modules
+      uses: actions/cache@v1
+      with:
+        path: node_modules
+        key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/package-lock.json')) }}
+    - name: Installling dependencies
+      if: steps.cache.outputs.cache-hit != 'true'
+      run: npm install
+    - name: Lint
+      run: npm run lintfix
+    - name: build
       run: |
-        npm install
-        npm run lintfix
+        npm run build
         npm run generate
 
     - name: Initialize CodeQL

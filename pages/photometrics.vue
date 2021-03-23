@@ -36,7 +36,7 @@
         </div>
         <div class="row">
           <div class="col-4 mt-2">
-            Object distance (in meter):
+            Object distance (in meters):
           </div>
           <div class="col-8 mt-2">
             <input
@@ -48,7 +48,7 @@
           </div>
         </div>
         <div class="d-block mt-2">
-          <span v-html="output" />
+          <strong :class="outputClass">{{ outputText }}</strong>
         </div>
       </form>
       <div class="row mt-3">
@@ -56,12 +56,28 @@
           class="btn btn-block btn-outline-primary"
           type="button"
           @click="toggleLightDetail"
-          v-html="textLightDetail"
-        />
+        >
+          {{ textLightDetail }}
+        </button>
       </div>
       <div class="row mt-3" :class="{ 'd-none': isLightDetail }">
         <div class="card bg-light p-3 d-block lightdetail">
-          <span v-html="LightDetail" />
+          <div v-show="!LightDetailStatus" :key="LightDetailStatus">
+            <p>Please put some number in object distance</p>
+          </div>
+          <div v-show="LightDetailStatus" :key="LightDetailStatus">
+            <ul>
+              <li>Light name: {{ LightDetail.name }}</li>
+              <li>Light style: {{ LightDetail.style }}</li>
+              <li>Color temperature: {{ LightDetail.colorTemp }} ({{ LightDetail.colorStyle }})</li>
+              <li>Watts: {{ LightDetail.watts }} ({{ LightDetail.amps }} amps)</li>
+              <li>Battery plate: {{ LightDetail.battery }}</li>
+              <li>Dimmable: {{ LightDetail.dimmable }}</li>
+              <li>CRI: {{ LightDetail.cri }}</li>
+              <li>TLCI: {{ LightDetail.tlci }}</li>
+              <li>Weight: {{ LightDetail.wKilo }} kg / {{ LightDetail.wPounds }} pounds</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
@@ -69,39 +85,51 @@
 </template>
 
 <script>
-import axios from "axios"
 import _ from "lodash"
 import $ from "jquery"
 
 export default {
-  components: {},
-  data: function () {
-    return {
-      LightNameList: [],
-      LightDataList: [],
-      output: "",
-      textLightDetail: `Click here if you're interested on the light's detail`,
-      isLightDetail: true,
-      LightDetail: "",
-    }
-  },
-  async created() {
-    const config = {
+  async asyncData({ $axios }) {
+    try {
+      const response = await $axios.get(
+        `https://api.npoint.io/5c6005c5820933adf98e/Photometrics`,
+        {
       headers: {
         Accept: "application/json",
       },
     }
-    //
-    try {
-      const response = await axios.get(
-        `https://api.npoint.io/5c6005c5820933adf98e/Photometrics`,
-        config
       )
       // https://api.jsonbin.io/b/5ec4209e18c8475bf16c4b0f <-- alternative, but limited usage
       // https://api.npoint.io/5c6005c5820933adf98e  <-- current use
-      this.LightDataList = response.data
+      const LightDataList = response.data
+      return { LightDataList }
     } catch (err) {
       console.log(`Error during axios request: ${err}`)
+    }
+  },
+  data: function () {
+    return {
+      LightNameList: [],
+      LightDataList: [],
+      outputClass: "",
+      outputText: "",
+      textLightDetail: `Click here if you're interested on the light's detail`,
+      isLightDetail: true,
+      LightDetailStatus: false,
+      LightDetail: {
+                  name: null,
+                  style: null,
+                  colorTemp: null,
+                  colorStyle: null,
+                  watts: null,
+                  amps: null,
+                  battery: null,
+                  dimmable: null,
+                  cri: null,
+                  tlci: null,
+                  wKilo: null,
+                  wPounds: null
+                }
     }
   },
   methods: {
@@ -146,15 +174,17 @@ export default {
       let LightName = $("#lightname").val()
 
       // Check if object distance input is true
-      if (distance == "" || distance == null || distance == undefined) {
-        this.output = `<strong class="text-warning">Please fill object distance number</strong>`
-        this.LightDetail = `<p>Please put some number in object distance</p>`
-      } else if (distance != "") {
+      if (!distance) {
+        this.outputClass = 'text-warning'
+        this.outputText = 'Please fill object distance number'
+        this.LightDetail = `Please put some number in object distance`
+        this.LightDetailStatus = false
+      } else {
         // Find the LightData via lodash
         let LightData = _.chain(this.LightDataList)
           .find(["Light_Name", LightName])
           .value()
-        let LightColorTemp = ""
+        let LightColorTemp
         if (LightData.Tungsten[0].FC === "n/a") {
           // Daylight only
           LightColorTemp = "Daylight only"
@@ -165,12 +195,8 @@ export default {
           LightDaylight = parseFloat(
             Math.round(LightDaylight * 100) / 100
           ).toFixed(0)
-          this.output =
-            `<strong class="text-success">You will get ${LightDaylight} footcandle or ` +
-            parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
-              0
-            ) +
-            ` lux.</strong>`
+          this.outputClass = 'text-success'
+          this.outputText = `You will get ${LightDaylight} footcandle or ${parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(0)} lux.`
         } else if (LightData.Daylight[0].FC === "n/a") {
           // Tungsten only
           LightColorTemp = "Tungsten only"
@@ -181,12 +207,12 @@ export default {
           LightTungsten = parseFloat(
             Math.round(LightTungsten * 100) / 100
           ).toFixed(0)
-          this.output =
-            `<strong class="text-success">You will get ${LightTungsten} footcandle or ` +
-            parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(
-              0
-            ) +
-            ` lux.</strong>`
+          this.outputClass = 'text-success'
+          this.outputText = `You will get ${LightTungsten} footcandle or ` +
+              parseFloat(
+                  Math.round(LightTungsten * 10.764 * 100) / 100
+              ).toFixed(0) +
+              ` lux.`
         } else {
           // Both daylight and tungsten
           LightColorTemp = "Bicolor"
@@ -204,32 +230,35 @@ export default {
           LightTungsten = parseFloat(
             Math.round(LightTungsten * 100) / 100
           ).toFixed(0)
-          this.output =
-            `<strong class="text-success">You will get ${LightDaylight} footcandle or ` +
-            parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
-              0
-            ) +
-            ` lux for daylight color temperature.
-                                <br>and ${LightTungsten} footcandle or ` +
-            parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(
-              0
-            ) +
-            ` lux for tungsten color temperature.</strong>`
+          this.outputClass = 'text-success'
+          this.outputText =
+              `You will get ${LightDaylight} footcandle or ` +
+              parseFloat(
+                  Math.round(LightDaylight * 10.764 * 100) / 100
+              ).toFixed(0) +
+              ` lux for daylight color temperature and ${LightTungsten} footcandle or ` +
+              parseFloat(
+                  Math.round(LightTungsten * 10.764 * 100) / 100
+              ).toFixed(0) +
+              ` lux for tungsten color temperature.`
         }
 
         // Light Detail for nerds
-        this.LightDetail = `<ul><li>Light name: ${LightData.Light_Name}</li>
-                                <li>Light style: ${LightData.Style}</li>
-                                <li>Color temperature: ${LightData.Color_Temp} (${LightColorTemp})</li>
-                                <li>Watts: ${LightData.Watts} (${LightData.Amps[0]["120V"]} amps)</li>
-                                <li>Battery plate: ${LightData.Battery_Plate}</li>
-                                <li>Dimmable: ${LightData.Dimmable}</li>
-                                <li>CRI: ${LightData.CRI}</li>
-                                <li>TLCI: ${LightData.TLCI}</li>
-                                <li>Weight: ${LightData.Metric_Measurement[0].Weight} kg / ${LightData.Imperial_Measurement[0].Weight} pounds</li>
-                                </ul>`
-      } else {
-        this.output = `<strong class="text-danger>Some error happened for the calculation</strong>`
+        this.LightDetail = {
+          name: LightData.Light_Name,
+          style: LightData.Style,
+          colorTemp: LightData.Color_Temp,
+          colorStyle: LightColorTemp,
+          watts: LightData.Watts,
+          amps: LightData.Amps[0]["120V"],
+          battery: LightData.Battery_Plate,
+          dimmable: LightData.Dimmable,
+          cri: LightData.CRI,
+          tlci: LightData.TCLI,
+          wKilo: LightData.Metric_Measurement[0].Weight,
+          wPounds: LightData.Imperial_Measurement[0].Weight
+        }
+        this.LightDetailStatus = true
       }
     },
   },

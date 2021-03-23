@@ -49,7 +49,7 @@
       </div>
       <div class="mt-2 d-block">
         <p>We are using 180 degree shutter.</p>
-        <span v-html="output">Your ISO needs to be: </span>
+        <p><strong :class="outputClass">{{ outputText }}</strong></p>
       </div>
     </form>
   </div>
@@ -62,43 +62,40 @@ export default {
   name: "ApertureToFclux",
   data: function () {
     return {
-      output: "",
+      outputClass: "",
+      outputText: "",
     }
   },
   methods: {
     calculate: function () {
-      let fc = $("#fc_2").val()
-      let iso = $("#iso_2").val()
-      let aperture = $("#aperture_2").val()
-      let fps = $("#fps_2").val()
+      const iso = parseInt($("#iso_2").val(), 10)
+      const aperture = parseInt($("#aperture_2").val(), 10)
+      const fps = parseInt($("#fps_2").val(), 10)
       let fpsConst
       // validate FC and Lux
-      if (iso == "" && aperture == "") {
-        this.output =
-          '<strong class="text-danger">Please fill the ISO and Aperture number</strong>'
+      if (!iso && !aperture) {
+        this.outputClass = 'text-danger'
+        this.outputText = 'Please fill the ISO and Aperture number'
       } else {
         // Checking the fps
-        if (fps == "24" || fps == "48" || fps == "96") {
+        if (fps === 24 || fps === 48 || fps === 96) {
           fpsConst = 0.009696
-        } else if (fps == "25" || fps == "50" || fps == "100") {
+        } else if (fps === 25 || fps === 50 || fps === 100) {
           fpsConst = 0.0099
-        } else if (fps == "30" || fps == "60" || fps == "120") {
+        } else if (fps === 30 || fps === 60 || fps === 120) {
           fpsConst = 0.01086
         }
 
         // Now we calculate hard!
-        if (fc != "") {
-          let fc = aperture / ((1 / (2 * fps)) * iso * fpsConst)
-          let lux = fc * 10.764
-          this.output =
-            '<strong class="text-success">You need: ' +
-            parseFloat(Math.round(fc * 100) / 100).toFixed(2) +
-            " footcandle and " +
-            parseFloat(Math.round(lux * 100) / 100).toFixed(2) +
-            " lux.</strong>"
-        } else {
-          this.output =
-            "<strong class='text-warning'>Some error happened.</strong>"
+        if (fpsConst) {
+          const fc = aperture / ((1 / (2 * fps)) * iso * fpsConst)
+          const lux = fc * 10.764
+          this.outputClass = 'text-success'
+          this.outputText = 'You need: ' +
+              parseFloat(Math.round(fc * 100) / 100).toFixed(2) +
+              " footcandle and " +
+              parseFloat(Math.round(lux * 100) / 100).toFixed(2) +
+              " lux."
         }
       }
     },

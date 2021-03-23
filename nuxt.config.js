@@ -79,6 +79,7 @@ export default {
     ],
     script: [],
   },
+  components: true,
   /*
    ** Customize the progress-bar color
    */
@@ -101,6 +102,7 @@ export default {
   modules: [
     // Doc: https://bootstrap-vue.js.org
     "bootstrap-vue/nuxt",
+    "@nuxtjs/axios",
   ],
   /*
    ** Build configuration
