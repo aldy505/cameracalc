@@ -79,104 +79,97 @@
 </template>
 
 <script>
-import _ from "lodash"
-import $ from "jquery"
+import _ from 'lodash';
+import $ from 'jquery';
 
 export default {
   components: {},
   async asyncData({ $axios }) {
     try {
       const response = await $axios.get(
-        `https://api.npoint.io/5c6005c5820933adf98e/SensorSize`,
+        'https://api.npoint.io/5c6005c5820933adf98e/SensorSize',
         {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-      )
+          headers: {
+            Accept: 'application/json',
+          },
+        },
+      );
       // https://api.jsonbin.io/b/5ec4209e18c8475bf16c4b0f <-- alternative, but limited usage
       // https://api.npoint.io/5c6005c5820933adf98e  <-- current use
       const CameraList = _.chain(response.data)
-        .map((camera) =>
-          _.omit(camera, [
-            "sensor_width",
-            "sensor_height",
-            "sensor_diagonal",
-            "aspectratio_opengate",
-            "aspectratio_178",
-            "active_sensor_height_178",
-            "crop_factor",
-          ])
-        )
-        .value()
-      const CameraDataList = _.chain(response.data).value()
-      return { CameraList, CameraDataList}
+        .map((camera) => _.omit(camera, [
+          'sensor_width',
+          'sensor_height',
+          'sensor_diagonal',
+          'aspectratio_opengate',
+          'aspectratio_178',
+          'active_sensor_height_178',
+          'crop_factor',
+        ]))
+        .value();
+      const CameraDataList = _.chain(response.data).value();
+      return { CameraList, CameraDataList };
     } catch (error) {
-      console.log("Error during axios: " + error)
+      console.log(`Error during axios: ${error}`);
     }
   },
-  data: function () {
+  data() {
     return {
       CameraList: [],
       CameraDataList: [],
-      outputText: "",
-      outputClass: "",
-    }
+      outputText: '',
+      outputClass: '',
+    };
   },
   methods: {
-    CalculateSensor: function () {
-      let fromCamera = $("#fromcamera").val()
-      let toCamera = $("#tocamera").val()
-      let focalLength = $("#focallength").val()
-      let aspectRatio = $("#aspectratio").val()
+    CalculateSensor() {
+      const fromCamera = $('#fromcamera').val();
+      const toCamera = $('#tocamera').val();
+      const focalLength = $('#focallength').val();
+      const aspectRatio = $('#aspectratio').val();
 
       // Check if they actually input some number to focal length
       if (!focalLength) {
-        this.outputClass = 'text-warning'
-        this.outputText = 'Please fill in focal length number'
+        this.outputClass = 'text-warning';
+        this.outputText = 'Please fill in focal length number';
       } else {
         // Find the dataof fromCamera and toCamera first with lodash
-        let fromCameraData = _.chain(this.CameraDataList)
-          .map((o) =>
-            _.omit(o, [
-              "sensor_width",
-              "sensor_height",
-              "sensor_diagonal",
-              "aspectratio_opengate",
-              "aspectratio_178",
-              "active_sensor_height_178",
-            ])
-          )
-          .find(["camera", fromCamera])
-          //.map(o => _.omit(o, ['id', 'camera']))
-          .value()
-        let toCameraData = _.chain(this.CameraDataList)
-          .map((o) =>
-            _.omit(o, [
-              "sensor_width",
-              "sensor_height",
-              "sensor_diagonal",
-              "aspectratio_opengate",
-              "aspectratio_178",
-              "active_sensor_height_178",
-            ])
-          )
-          .find(["camera", toCamera])
-          //.map(o => _.omit(o, ['id', 'camera']))
-          .value()
+        const fromCameraData = _.chain(this.CameraDataList)
+          .map((o) => _.omit(o, [
+            'sensor_width',
+            'sensor_height',
+            'sensor_diagonal',
+            'aspectratio_opengate',
+            'aspectratio_178',
+            'active_sensor_height_178',
+          ]))
+          .find(['camera', fromCamera])
+          // .map(o => _.omit(o, ['id', 'camera']))
+          .value();
+        const toCameraData = _.chain(this.CameraDataList)
+          .map((o) => _.omit(o, [
+            'sensor_width',
+            'sensor_height',
+            'sensor_diagonal',
+            'aspectratio_opengate',
+            'aspectratio_178',
+            'active_sensor_height_178',
+          ]))
+          .find(['camera', toCamera])
+          // .map(o => _.omit(o, ['id', 'camera']))
+          .value();
 
-        let result =
-          ((focalLength * fromCameraData["crop_factor"]) /
-            toCameraData["crop_factor"]) *
-          aspectRatio
-        this.outputClass = 'text-success'
-        this.outputText = `Equivalent focal length for ${toCamera}: ` +
-            parseFloat(Math.round(result * 100) / 100).toFixed(0) +
-            `mm.`
+        const result = ((focalLength * fromCameraData.crop_factor)
+            / toCameraData.crop_factor)
+          * aspectRatio;
+        this.outputClass = 'text-success';
+        this.outputText = `Equivalent focal length for ${toCamera}: ${
+          parseFloat(Math.round(result * 100) / 100).toFixed(0)
+        }mm.`;
       }
     },
   },
-}
+};
 </script>
 
 <style lang="stylus"></style>

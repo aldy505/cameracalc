@@ -100,96 +100,96 @@
 </template>
 
 <script>
-import _ from "lodash"
-import $ from "jquery"
+import _ from 'lodash';
+import $ from 'jquery';
 
 export default {
   async asyncData({ $axios }) {
     try {
       const response = await $axios.get(
-        "https://api.npoint.io/5c6005c5820933adf98e/FileSize",
+        'https://api.npoint.io/5c6005c5820933adf98e/FileSize',
         {
           headers: {
-            Accept: "appllication/json",
+            Accept: 'appllication/json',
           },
-        }
-      )
-      const FileSizeData = response.data
-      return { FileSizeData }
+        },
+      );
+      const FileSizeData = response.data;
+      return { FileSizeData };
     } catch (err) {
-      console.error(`Error during axios request: ${err}`)
+      console.error(`Error during axios request: ${err}`);
     }
   },
   data() {
     return {
       FileSizeData: [],
       resolutions: [
-        { id: 1, text: "Full HD (1920 × 1080)", value: "1" },
-        { id: 2, text: "2K 16:9 (2048 × 1152)", value: "1.1377" },
-        { id: 3, text: "Ultra HD (3840 × 2160)", value: "4" },
-        { id: 4, text: "Retina 5K (5120 × 2880)", value: "7.1111" },
-        { id: 5, text: "6K (6144 × 3456)", value: "10.24" },
-        { id: 6, text: "8K (7680 × 4320)", value: "16" },
+        { id: 1, text: 'Full HD (1920 × 1080)', value: '1' },
+        { id: 2, text: '2K 16:9 (2048 × 1152)', value: '1.1377' },
+        { id: 3, text: 'Ultra HD (3840 × 2160)', value: '4' },
+        { id: 4, text: 'Retina 5K (5120 × 2880)', value: '7.1111' },
+        { id: 5, text: '6K (6144 × 3456)', value: '10.24' },
+        { id: 6, text: '8K (7680 × 4320)', value: '16' },
       ],
       durations: [
-        { id: 1, text: "Hours", value: "h" },
-        { id: 2, text: "Minutes", value: "m" },
-        { id: 3, text: "Seconds", value: "s" },
+        { id: 1, text: 'Hours', value: 'h' },
+        { id: 2, text: 'Minutes', value: 'm' },
+        { id: 3, text: 'Seconds', value: 's' },
       ],
-      output: "",
-    }
+      output: '',
+    };
   },
   methods: {
     CalculateFileSize() {
       // Get value from forms
-      let format = $("#format").val()
-      let fps = $("#fps").val()
-      let resolution = $("#resolution").val()
-      let duration = $("#duration").val()
-      let durationOption = $("#durationoption").val()
-      let FormatData, FPSConst, Calculation
+      const format = $('#format').val();
+      const fps = $('#fps').val();
+      const resolution = $('#resolution').val();
+      let duration = $('#duration').val();
+      const durationOption = $('#durationoption').val();
+      let FormatData; let FPSConst; let
+        Calculation;
 
       if (!duration) {
-        this.output = `Please fill the duration input`
+        this.output = 'Please fill the duration input';
       } else {
         // Convert time to seconds
-        if (durationOption === "h") {
-          duration = duration * 3600
-        } else if (durationOption === "m") {
-          duration = duration * 60
+        if (durationOption === 'h') {
+          duration *= 3600;
+        } else if (durationOption === 'm') {
+          duration *= 60;
         }
 
-        FPSConst = fps / 24
+        FPSConst = fps / 24;
 
         // Search specific format data
-        FormatData = _.find(this.FileSizeData, ["Format", format])
+        FormatData = _.find(this.FileSizeData, ['Format', format]);
 
         // File size = (Bitrate / FPS) * Time
-        Calculation =
-          (FormatData["24-1080"] * resolution * FPSConst * duration) / 8
-        console.log(Calculation)
+        Calculation = (FormatData['24-1080'] * resolution * FPSConst * duration) / 8;
+        console.log(Calculation);
         if (Calculation < 1000) {
           // MB
-          Calculation = (Math.round(Calculation * 100) / 100).toFixed(2)
-          this.output = `The file size should be ${Calculation} MB`
+          Calculation = (Math.round(Calculation * 100) / 100).toFixed(2);
+          this.output = `The file size should be ${Calculation} MB`;
         } else if (Calculation <= 1000000) {
           // GB
-          let CalculationGB = (
+          const CalculationGB = (
             Math.round((Calculation / 1000) * 100) / 100
-          ).toFixed(2)
-          this.output = `The file size should be ${Calculation} MB / ${CalculationGB} GB`
+          ).toFixed(2);
+          this.output = `The file size should be ${Calculation} MB / ${CalculationGB} GB`;
         } else if (Calculation > 1000000) {
           // TB
-          let CalculationGB = (
+          const CalculationGB = (
             Math.round((Calculation / 1000) * 100) / 100
-          ).toFixed(2)
-          let CalculationTB = (
+          ).toFixed(2);
+          const CalculationTB = (
             Math.round((Calculation / 1000000) * 100) / 100
-          ).toFixed(2)
-          this.output = `The file size should be ${CalculationGB} GB / ${CalculationTB} TB`
+          ).toFixed(2);
+          this.output = `The file size should be ${CalculationGB} GB / ${CalculationTB} TB`;
         }
       }
     },
   },
-}
+};
 </script>

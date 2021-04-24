@@ -70,56 +70,56 @@
 </template>
 
 <script>
-import $ from "jquery"
+import $ from 'jquery';
 
 export default {
-  name: "FcluxToAperture",
-  data: function () {
+  name: 'FcluxToAperture',
+  data() {
     return {
-      outputClass: "",
-      outputText: "",
-    }
+      outputClass: '',
+      outputText: '',
+    };
   },
   methods: {
-    calculate: function () {
-      const fc = parseInt($("#fc_1").val(), 10)
-      const lux = Number($("#lux_1").val())
-      const iso = parseInt($("#iso_1").val(), 10)
-      const fps = parseInt($("#fps_1").val(), 10)
-      let fpsConst
+    calculate() {
+      const fc = parseInt($('#fc_1').val(), 10);
+      const lux = Number($('#lux_1').val());
+      const iso = parseInt($('#iso_1').val(), 10);
+      const fps = parseInt($('#fps_1').val(), 10);
+      let fpsConst;
       // validate FC and Lux
       if (!fc && !lux) {
-        this.outputClass = 'text-danger'
-        this.outputText = 'Please fill the footcandle OR lux'
+        this.outputClass = 'text-danger';
+        this.outputText = 'Please fill the footcandle OR lux';
       } else {
-        let intensity
+        let intensity;
         // Checking what did they input
         if (!fc && lux) {
-            intensity = lux / 10.764
+          intensity = lux / 10.764;
         } else if (fc && !lux) {
-            intensity = fc
+          intensity = fc;
         } else if (fc && lux) {
-            intensity = fc // we will just use footcandle
+          intensity = fc; // we will just use footcandle
         }
         // Checking the fps
         if (fps === 24 || fps === 48 || fps === 96) {
-            fpsConst = 0.009696
+          fpsConst = 0.009696;
         } else if (fps === 25 || fps === 50 || fps === 100) {
-            fpsConst = 0.0099
+          fpsConst = 0.0099;
         } else if (fps === 30 || fps === 60 || fps === 120) {
-            fpsConst = 0.01086
+          fpsConst = 0.01086;
         }
         // Now we calculate hard!
         if (intensity) {
-            let result = (1 / (2 * fps)) * intensity * fpsConst * iso
-            this.outputClass = 'text-success'
-            this.outputText = 'Your aperture needs to be: f/' + parseFloat(Math.round(result * 100) / 100).toFixed(2)
+          const result = (1 / (2 * fps)) * intensity * fpsConst * iso;
+          this.outputClass = 'text-success';
+          this.outputText = `Your aperture needs to be: f/${parseFloat(Math.round(result * 100) / 100).toFixed(2)}`;
         } else {
-          this.outputClass = 'text-warning'
-          this.outputText = 'Some error happened.'
+          this.outputClass = 'text-warning';
+          this.outputText = 'Some error happened.';
         }
       }
     },
   },
-}
+};
 </script>

@@ -85,162 +85,159 @@
 </template>
 
 <script>
-import _ from "lodash"
-import $ from "jquery"
+import _ from 'lodash';
+import $ from 'jquery';
 
 export default {
   async asyncData({ $axios }) {
     try {
       const response = await $axios.get(
-        `https://api.npoint.io/5c6005c5820933adf98e/Photometrics`,
+        'https://api.npoint.io/5c6005c5820933adf98e/Photometrics',
         {
-      headers: {
-        Accept: "application/json",
-      },
-    }
-      )
+          headers: {
+            Accept: 'application/json',
+          },
+        },
+      );
       // https://api.jsonbin.io/b/5ec4209e18c8475bf16c4b0f <-- alternative, but limited usage
       // https://api.npoint.io/5c6005c5820933adf98e  <-- current use
-      const LightDataList = response.data
-      return { LightDataList }
+      const LightDataList = response.data;
+      return { LightDataList };
     } catch (err) {
-      console.log(`Error during axios request: ${err}`)
+      console.log(`Error during axios request: ${err}`);
     }
   },
-  data: function () {
+  data() {
     return {
       LightNameList: [],
       LightDataList: [],
-      outputClass: "",
-      outputText: "",
-      textLightDetail: `Click here if you're interested on the light's detail`,
+      outputClass: '',
+      outputText: '',
+      textLightDetail: 'Click here if you\'re interested on the light\'s detail',
       isLightDetail: true,
       LightDetailStatus: false,
       LightDetail: {
-                  name: null,
-                  style: null,
-                  colorTemp: null,
-                  colorStyle: null,
-                  watts: null,
-                  amps: null,
-                  battery: null,
-                  dimmable: null,
-                  cri: null,
-                  tlci: null,
-                  wKilo: null,
-                  wPounds: null
-                }
-    }
+        name: null,
+        style: null,
+        colorTemp: null,
+        colorStyle: null,
+        watts: null,
+        amps: null,
+        battery: null,
+        dimmable: null,
+        cri: null,
+        tlci: null,
+        wKilo: null,
+        wPounds: null,
+      },
+    };
   },
   methods: {
-    toggleLightDetail: function () {
-      this.isLightDetail = !this.isLightDetail
+    toggleLightDetail() {
+      this.isLightDetail = !this.isLightDetail;
       this.textLightDetail = this.isLightDetail
-        ? `Click here if you're interested on the light's detail`
-        : `Click here to hide the details`
+        ? 'Click here if you\'re interested on the light\'s detail'
+        : 'Click here to hide the details';
     },
-    lightsUpdate: function () {
-      let LightType = $("#type").val()
+    lightsUpdate() {
+      const LightType = $('#type').val();
       // Find light name from existing data in LightDataList
       this.LightNameList = _.chain(this.LightDataList)
-        .filter(["Type", LightType])
-        .map((Lights) =>
-          _.omit(Lights, [
-            "Type",
-            "Style",
-            "Color_Temp",
-            "Beam_Angle",
-            "Tungsten",
-            "Daylight",
-            "Spot_Diameter",
-            "Watts",
-            "Battery_Plate",
-            "Dimmable",
-            "CRI",
-            "TLCI",
-            "Voltage",
-            "Amps",
-            "Imperial_Measurement",
-            "Metric_Measurement",
-            "Flicker_Free",
-            "Ballast",
-            "Remote_Control",
-          ])
-        )
-        .value()
+        .filter(['Type', LightType])
+        .map((Lights) => _.omit(Lights, [
+          'Type',
+          'Style',
+          'Color_Temp',
+          'Beam_Angle',
+          'Tungsten',
+          'Daylight',
+          'Spot_Diameter',
+          'Watts',
+          'Battery_Plate',
+          'Dimmable',
+          'CRI',
+          'TLCI',
+          'Voltage',
+          'Amps',
+          'Imperial_Measurement',
+          'Metric_Measurement',
+          'Flicker_Free',
+          'Ballast',
+          'Remote_Control',
+        ]))
+        .value();
     },
-    CalculatePhotometrics: function () {
-      let distance = parseInt($("#distance").val()) * 3.281
-      let LightName = $("#lightname").val()
+    CalculatePhotometrics() {
+      const distance = parseInt($('#distance').val()) * 3.281;
+      const LightName = $('#lightname').val();
 
       // Check if object distance input is true
       if (!distance) {
-        this.outputClass = 'text-warning'
-        this.outputText = 'Please fill object distance number'
-        this.LightDetail = `Please put some number in object distance`
-        this.LightDetailStatus = false
+        this.outputClass = 'text-warning';
+        this.outputText = 'Please fill object distance number';
+        this.LightDetail = 'Please put some number in object distance';
+        this.LightDetailStatus = false;
       } else {
         // Find the LightData via lodash
-        let LightData = _.chain(this.LightDataList)
-          .find(["Light_Name", LightName])
-          .value()
-        let LightColorTemp
-        if (LightData.Tungsten[0].FC === "n/a") {
+        const LightData = _.chain(this.LightDataList)
+          .find(['Light_Name', LightName])
+          .value();
+        let LightColorTemp;
+        if (LightData.Tungsten[0].FC === 'n/a') {
           // Daylight only
-          LightColorTemp = "Daylight only"
-          let DaylightFC = isNaN(LightData.Daylight[0].FC)
-            ? LightData.Daylight[0].FC.replace(/,/g, "")
-            : LightData.Daylight[0].FC
-          let LightDaylight = (DaylightFC * 25) / distance ** 2
+          LightColorTemp = 'Daylight only';
+          const DaylightFC = isNaN(LightData.Daylight[0].FC)
+            ? LightData.Daylight[0].FC.replace(/,/g, '')
+            : LightData.Daylight[0].FC;
+          let LightDaylight = (DaylightFC * 25) / distance ** 2;
           LightDaylight = parseFloat(
-            Math.round(LightDaylight * 100) / 100
-          ).toFixed(0)
-          this.outputClass = 'text-success'
-          this.outputText = `You will get ${LightDaylight} footcandle or ${parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(0)} lux.`
-        } else if (LightData.Daylight[0].FC === "n/a") {
+            Math.round(LightDaylight * 100) / 100,
+          ).toFixed(0);
+          this.outputClass = 'text-success';
+          this.outputText = `You will get ${LightDaylight} footcandle or ${parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(0)} lux.`;
+        } else if (LightData.Daylight[0].FC === 'n/a') {
           // Tungsten only
-          LightColorTemp = "Tungsten only"
-          let TungstenFC = isNaN(LightData.Tungsten[0].FC)
-            ? LightData.Tungsten[0].FC.replace(/,/g, "")
-            : LightData.Tungsten[0].FC
-          let LightTungsten = (TungstenFC * 25) / distance ** 2
+          LightColorTemp = 'Tungsten only';
+          const TungstenFC = isNaN(LightData.Tungsten[0].FC)
+            ? LightData.Tungsten[0].FC.replace(/,/g, '')
+            : LightData.Tungsten[0].FC;
+          let LightTungsten = (TungstenFC * 25) / distance ** 2;
           LightTungsten = parseFloat(
-            Math.round(LightTungsten * 100) / 100
-          ).toFixed(0)
-          this.outputClass = 'text-success'
-          this.outputText = `You will get ${LightTungsten} footcandle or ` +
-              parseFloat(
-                  Math.round(LightTungsten * 10.764 * 100) / 100
-              ).toFixed(0) +
-              ` lux.`
+            Math.round(LightTungsten * 100) / 100,
+          ).toFixed(0);
+          this.outputClass = 'text-success';
+          this.outputText = `You will get ${LightTungsten} footcandle or ${
+            parseFloat(
+              Math.round(LightTungsten * 10.764 * 100) / 100,
+            ).toFixed(0)
+          } lux.`;
         } else {
           // Both daylight and tungsten
-          LightColorTemp = "Bicolor"
-          let DaylightFC = isNaN(LightData.Daylight[0].FC)
-            ? LightData.Daylight[0].FC.replace(/,/g, "")
-            : LightData.Daylight[0].FC
-          let LightDaylight = (DaylightFC * 25) / distance ** 2
+          LightColorTemp = 'Bicolor';
+          const DaylightFC = isNaN(LightData.Daylight[0].FC)
+            ? LightData.Daylight[0].FC.replace(/,/g, '')
+            : LightData.Daylight[0].FC;
+          let LightDaylight = (DaylightFC * 25) / distance ** 2;
           LightDaylight = parseFloat(
-            Math.round(LightDaylight * 100) / 100
-          ).toFixed(0)
-          let TungstenFC = isNaN(LightData.Tungsten[0].FC)
-            ? LightData.Tungsten[0].FC.replace(/,/g, "")
-            : LightData.Tungsten[0].FC
-          let LightTungsten = (TungstenFC * 25) / distance ** 2
+            Math.round(LightDaylight * 100) / 100,
+          ).toFixed(0);
+          const TungstenFC = isNaN(LightData.Tungsten[0].FC)
+            ? LightData.Tungsten[0].FC.replace(/,/g, '')
+            : LightData.Tungsten[0].FC;
+          let LightTungsten = (TungstenFC * 25) / distance ** 2;
           LightTungsten = parseFloat(
-            Math.round(LightTungsten * 100) / 100
-          ).toFixed(0)
-          this.outputClass = 'text-success'
-          this.outputText =
-              `You will get ${LightDaylight} footcandle or ` +
-              parseFloat(
-                  Math.round(LightDaylight * 10.764 * 100) / 100
-              ).toFixed(0) +
-              ` lux for daylight color temperature and ${LightTungsten} footcandle or ` +
-              parseFloat(
-                  Math.round(LightTungsten * 10.764 * 100) / 100
-              ).toFixed(0) +
-              ` lux for tungsten color temperature.`
+            Math.round(LightTungsten * 100) / 100,
+          ).toFixed(0);
+          this.outputClass = 'text-success';
+          this.outputText = `You will get ${LightDaylight} footcandle or ${
+            parseFloat(
+              Math.round(LightDaylight * 10.764 * 100) / 100,
+            ).toFixed(0)
+          } lux for daylight color temperature and ${LightTungsten} footcandle or ${
+            parseFloat(
+              Math.round(LightTungsten * 10.764 * 100) / 100,
+            ).toFixed(0)
+          } lux for tungsten color temperature.`;
         }
 
         // Light Detail for nerds
@@ -250,19 +247,19 @@ export default {
           colorTemp: LightData.Color_Temp,
           colorStyle: LightColorTemp,
           watts: LightData.Watts,
-          amps: LightData.Amps[0]["120V"],
+          amps: LightData.Amps[0]['120V'],
           battery: LightData.Battery_Plate,
           dimmable: LightData.Dimmable,
           cri: LightData.CRI,
           tlci: LightData.TCLI,
           wKilo: LightData.Metric_Measurement[0].Weight,
-          wPounds: LightData.Imperial_Measurement[0].Weight
-        }
-        this.LightDetailStatus = true
+          wPounds: LightData.Imperial_Measurement[0].Weight,
+        };
+        this.LightDetailStatus = true;
       }
     },
   },
-}
+};
 </script>
 
 <style lang="stylus">

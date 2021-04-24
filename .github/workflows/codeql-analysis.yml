@@ -1,4 +1,4 @@
-name: "CodeQL"
+name: Analyze
 
 on:
   push:
@@ -19,25 +19,30 @@ jobs:
         language: [ 'javascript' ]
        
     steps:
+    
     - name: Checkout repository
       uses: actions/checkout@v2
+
     - name: Setup Node
       uses: actions/setup-node@v2.1.4
       with:
         node-version: ${{ matrix.node }}
+
     - name: cache node_modules
       uses: actions/cache@v1
       with:
         path: node_modules
         key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/package-lock.json')) }}
+    
     - name: Installling dependencies
       if: steps.cache.outputs.cache-hit != 'true'
       run: npm install
+
     - name: Lint
-      run: npm run lintfix
-    - name: build
+      run: npm run lint:fix
+
+    - name: Build
       run: |
-        npm run build
         npm run generate
 
     - name: Initialize CodeQL

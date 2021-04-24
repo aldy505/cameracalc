@@ -30,21 +30,21 @@
 
 <script>
 export default {
-  data: function () {
+  data() {
     return {
       isFclux: false,
       isAperture: true,
-      btnText: "Switch to: Aperture —> FC/LUX",
-    }
+      btnText: 'Switch to: Aperture —> FC/LUX',
+    };
   },
   methods: {
-    toggleclass: function () {
-      this.isFclux = !this.isFclux
-      this.isAperture = !this.isAperture
+    toggleclass() {
+      this.isFclux = !this.isFclux;
+      this.isAperture = !this.isAperture;
       this.btnText = this.isAperture
-                ? "Switch to: Aperture —> FC/LUX"
-                : "Switch to: FC/LUX —> Aperture"
+        ? 'Switch to: Aperture —> FC/LUX'
+        : 'Switch to: FC/LUX —> Aperture';
     },
   },
-}
+};
 </script>

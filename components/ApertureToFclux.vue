@@ -56,49 +56,49 @@
 </template>
 
 <script>
-import $ from "jquery"
+import $ from 'jquery';
 
 export default {
-  name: "ApertureToFclux",
-  data: function () {
+  name: 'ApertureToFclux',
+  data() {
     return {
-      outputClass: "",
-      outputText: "",
-    }
+      outputClass: '',
+      outputText: '',
+    };
   },
   methods: {
-    calculate: function () {
-      const iso = parseInt($("#iso_2").val(), 10)
-      const aperture = parseInt($("#aperture_2").val(), 10)
-      const fps = parseInt($("#fps_2").val(), 10)
-      let fpsConst
+    calculate() {
+      const iso = parseInt($('#iso_2').val(), 10);
+      const aperture = parseInt($('#aperture_2').val(), 10);
+      const fps = parseInt($('#fps_2').val(), 10);
+      let fpsConst;
       // validate FC and Lux
       if (!iso && !aperture) {
-        this.outputClass = 'text-danger'
-        this.outputText = 'Please fill the ISO and Aperture number'
+        this.outputClass = 'text-danger';
+        this.outputText = 'Please fill the ISO and Aperture number';
       } else {
         // Checking the fps
         if (fps === 24 || fps === 48 || fps === 96) {
-          fpsConst = 0.009696
+          fpsConst = 0.009696;
         } else if (fps === 25 || fps === 50 || fps === 100) {
-          fpsConst = 0.0099
+          fpsConst = 0.0099;
         } else if (fps === 30 || fps === 60 || fps === 120) {
-          fpsConst = 0.01086
+          fpsConst = 0.01086;
         }
 
         // Now we calculate hard!
         if (fpsConst) {
-          const fc = aperture / ((1 / (2 * fps)) * iso * fpsConst)
-          const lux = fc * 10.764
-          this.outputClass = 'text-success'
-          this.outputText = 'You need: ' +
-              parseFloat(Math.round(fc * 100) / 100).toFixed(2) +
-              " footcandle and " +
-              parseFloat(Math.round(lux * 100) / 100).toFixed(2) +
-              " lux."
+          const fc = aperture / ((1 / (2 * fps)) * iso * fpsConst);
+          const lux = fc * 10.764;
+          this.outputClass = 'text-success';
+          this.outputText = `You need: ${
+            parseFloat(Math.round(fc * 100) / 100).toFixed(2)
+          } footcandle and ${
+            parseFloat(Math.round(lux * 100) / 100).toFixed(2)
+          } lux.`;
         }
       }
     },
   },
-}
+};
 </script>
