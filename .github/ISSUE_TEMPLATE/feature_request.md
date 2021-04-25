@@ -2,19 +2,30 @@
 name: Feature request
 about: Suggest an idea for this project
 title: ''
-labels: ''
-assignees: ''
+labels: 'enhancement'
+assignees: 'aldy505'
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+## *Who* is the bug affecting?
+<!-- Ex. All supervisors, Sally Supervisor, Level 1 CCs -->
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+## *What* is affected by this bug?
+<!-- Ex. supervision, sending messages, texter profiles -->
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+## *When* does this occur?
+<!-- Ex. After ending a conversation, every night at 3pm, when I sign off -->
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+## *Where* on the platform does it happen?
+<!-- Ex. In the a Supervisor chat box, on the conversation profile page, on the two-factor screen -->
+
+
+## *How* do we replicate the issue?
+<!-- Please be specific as possible. Use dashes (-) or numbers (1.) to create a list of steps -->
+
+
+## Expected behavior (i.e. solution)
+<!-- What should have happened? -->
+
+
+## Other Comments

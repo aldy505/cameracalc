@@ -46,13 +46,11 @@ Voila. You did it. Go to the `/dist` folder that was automatically created, then
 
 ## Development
 
-I want to add some other features, but either I don't know what that is or I don't know how to implement it yet.
-
-Please feel free to put any request on [issues](https://github.com/aldy505/cameracalc/issues). Pull Requests is always open.
+Please feel free to put any request on [issues](https://github.com/aldy505/cameracalc/issues). If you can code and want to add new feature yourself, Pull Requests are always open.
 
 ## Changelog
 
-Please refer to the [changelog](https://github.com/aldy505/cameracalc/blob/master/CHANGELOG.md) for detailed information.
+Please refer to the [Release](https://github.com/aldy505/cameracalc/releases) page.
 
 ## License
 
