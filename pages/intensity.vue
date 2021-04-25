@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="body container">
-      <div class="fclux" :class="{ 'd-none': isFclux }">
+      <div :class="{ 'hidden': isFclux }">
         <FcluxToAperture />
       </div>
-      <div class="aperture" :class="{ 'd-none': isAperture }">
+      <div :class="{ 'hidden': isAperture }">
         <ApertureToFclux />
       </div>
     </div>
@@ -14,10 +14,7 @@
           <button
             class="btn btn-block"
             type="button"
-            :class="{
-              'btn-outline-info': isAperture,
-              'btn-outline-warning': isFclux,
-            }"
+            :class="{ 'btn-outline-info': isAperture, 'btn-outline-warning': isFclux }"
             @click="toggleclass"
           >
             {{ btnText }}
@@ -34,16 +31,14 @@ export default {
     return {
       isFclux: false,
       isAperture: true,
-      btnText: 'Switch to: Aperture —> FC/LUX',
+      buttonText: 'Switch to: Aperture —> FC/LUX',
     };
   },
   methods: {
     toggleclass() {
       this.isFclux = !this.isFclux;
       this.isAperture = !this.isAperture;
-      this.btnText = this.isAperture
-        ? 'Switch to: Aperture —> FC/LUX'
-        : 'Switch to: FC/LUX —> Aperture';
+      this.buttonText = (this.isAperture) ? 'Switch to: Aperture —> FC/LUX' : 'Switch to: FC/LUX —> Aperture';
     },
   },
 };

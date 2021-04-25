@@ -106,10 +106,8 @@ export default {
    ** Nuxt.js modules
    */
   modules: [
-    '@nuxtjs/axios',
     'nuxt-webfontloader',
     '@nuxtjs/sitemap',
-    '@nuxtjs/sentry',
   ],
   webfontloader: {
     google: {
@@ -122,9 +120,5 @@ export default {
     exclude: [
       '/_nuxt/**',
     ],
-  },
-  sentry: {
-    dsn: process.env.SENTRY_DSN || '',
-    disabled: process.env.NODE_ENV === 'development',
   },
 };

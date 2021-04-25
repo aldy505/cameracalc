@@ -10,18 +10,17 @@
         </div>
         <div class="col-7 col-md-3 d-block mt-2">
           <input
-            id="aperture_2"
+            v-model="input.aperture"
             class="inp form-control"
             type="number"
             required="required"
-            @change="calculate"
           >
         </div>
         <div class="col-5 col-md-3 mt-2">
           FPS:&nbsp;
         </div>
         <div class="col-7 col-md-3 d-block mt-2">
-          <select id="fps_2" class="inp form-control" @change="calculate">
+          <select v-model="input.fps" class="inp form-control">
             <option>24</option>
             <option>25</option>
             <option>30</option>
@@ -40,62 +39,68 @@
         </div>
         <div class="col-7 col-md-3 d-block mt-2">
           <input
-            id="iso_2"
+            v-model="input.iso"
             class="inp form-control"
             type="number"
-            @change="calculate"
           >
         </div>
       </div>
       <div class="mt-2 d-block">
         <p>We are using 180 degree shutter.</p>
-        <p><strong :class="outputClass">{{ outputText }}</strong></p>
+        <p><strong :class="output.class">{{ output.text }}</strong></p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import $ from 'jquery';
-
 export default {
-  name: 'ApertureToFclux',
   data() {
     return {
-      outputClass: '',
-      outputText: '',
+      output: {
+        class: '',
+        text: '',
+      },
+      input: {
+        iso: '',
+        aperture: '',
+        fps: '',
+      },
     };
+  },
+  watch: {
+    input: {
+      handler() {
+        this.calculate();
+      },
+      deep: true,
+    },
   },
   methods: {
     calculate() {
-      const iso = parseInt($('#iso_2').val(), 10);
-      const aperture = parseInt($('#aperture_2').val(), 10);
-      const fps = parseInt($('#fps_2').val(), 10);
+      const { iso, aperture, fps } = this.input;
       let fpsConst;
       // validate FC and Lux
       if (!iso && !aperture) {
-        this.outputClass = 'text-danger';
-        this.outputText = 'Please fill the ISO and Aperture number';
+        this.output.class = 'text-danger';
+        this.output.text = 'Please fill the ISO and Aperture number';
       } else {
         // Checking the fps
-        if (fps === 24 || fps === 48 || fps === 96) {
+        if (fps === '24' || fps === '48' || fps === '96') {
           fpsConst = 0.009696;
-        } else if (fps === 25 || fps === 50 || fps === 100) {
+        } else if (fps === '25' || fps === '50' || fps === '100') {
           fpsConst = 0.0099;
-        } else if (fps === 30 || fps === 60 || fps === 120) {
+        } else if (fps === '30' || fps === '60' || fps === '120') {
           fpsConst = 0.01086;
         }
 
         // Now we calculate hard!
         if (fpsConst) {
-          const fc = aperture / ((1 / (2 * fps)) * iso * fpsConst);
+          const fc = Number(aperture.replaceAll(',', '.')) / ((1 / (2 * Number(fps))) * Number(iso.replaceAll(',', '.')) * fpsConst);
           const lux = fc * 10.764;
-          this.outputClass = 'text-success';
-          this.outputText = `You need: ${
-            parseFloat(Math.round(fc * 100) / 100).toFixed(2)
-          } footcandle and ${
-            parseFloat(Math.round(lux * 100) / 100).toFixed(2)
-          } lux.`;
+          this.output.class = 'text-success';
+          this.output.text = `You need: ${parseFloat(Math.round(fc * 100) / 100).toFixed(2)} footcandle `
+          + `and ${parseFloat(Math.round(lux * 100) / 100).toFixed(2)} lux.`;
         }
       }
     },

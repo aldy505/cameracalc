@@ -1,5 +1,4 @@
 <template>
-  <div class="body">
     <div class="container">
       <div class="row">
         <h2>File size from certain format</h2>
@@ -11,7 +10,7 @@
           </div>
           <div class="col-8 mt-2">
             <select
-              id="format"
+              v-model="input.format"
               class="inp6 form-control"
               @change="CalculateFileSize"
             >
@@ -27,9 +26,8 @@
           </div>
           <div class="col-8 col-md-4 mt-2">
             <select
-              id="fps"
+              v-model="input.fps"
               class="inp6 form-control"
-              @change="CalculateFileSize"
             >
               <option>24</option>
               <option>25</option>
@@ -47,9 +45,8 @@
           </div>
           <div class="col-8 col-md-4 mt-2">
             <select
-              id="resolution"
+              v-model="input.resolution"
               class="inp6 form-control"
-              @change="CalculateFileSize"
             >
               <option
                 v-for="resolution in resolutions"
@@ -67,17 +64,15 @@
           </div>
           <div class="col-4 mt-2">
             <input
-              id="duration"
+              v-model="input.duration"
               class="inp6 form-control"
               type="number"
-              @change="CalculateFileSize"
             >
           </div>
           <div class="col-4 mt-2">
             <select
-              id="durationoption"
+              v-model="input.unit"
               class="inp6 form-control"
-              @change="CalculateFileSize"
             >
               <option
                 v-for="duration in durations"
@@ -96,33 +91,19 @@
         </div>
       </form>
     </div>
-  </div>
 </template>
 
 <script>
-import _ from 'lodash';
-import $ from 'jquery';
+// eslint-disable-next-line import/no-unresolved
+import file from '~/assets/file.json';
 
 export default {
-  async asyncData({ $axios }) {
-    try {
-      const response = await $axios.get(
-        'https://api.npoint.io/5c6005c5820933adf98e/FileSize',
-        {
-          headers: {
-            Accept: 'appllication/json',
-          },
-        },
-      );
-      const FileSizeData = response.data;
-      return { FileSizeData };
-    } catch (err) {
-      console.error(`Error during axios request: ${err}`);
-    }
+  asyncData() {
+    const dataList = file;
+    return { dataList };
   },
   data() {
     return {
-      FileSizeData: [],
       resolutions: [
         { id: 1, text: 'Full HD (1920 × 1080)', value: '1' },
         { id: 2, text: '2K 16:9 (2048 × 1152)', value: '1.1377' },
@@ -137,56 +118,62 @@ export default {
         { id: 3, text: 'Seconds', value: 's' },
       ],
       output: '',
+      input: {
+        format: '',
+        fps: '',
+        resolution: '',
+        duration: '',
+        unit: '',
+      },
     };
+  },
+  watch: {
+    input: {
+      handler() {
+        this.CalculateFileSize();
+      },
+      deep: true,
+    },
   },
   methods: {
     CalculateFileSize() {
       // Get value from forms
-      const format = $('#format').val();
-      const fps = $('#fps').val();
-      const resolution = $('#resolution').val();
-      let duration = $('#duration').val();
-      const durationOption = $('#durationoption').val();
-      let FormatData; let FPSConst; let
-        Calculation;
+      const {
+        format, fps, resolution, duration, unit,
+      } = this.input;
+      let durationInSecond = Number(duration.replaceAll(',', '.'));
 
       if (!duration) {
         this.output = 'Please fill the duration input';
       } else {
         // Convert time to seconds
-        if (durationOption === 'h') {
-          duration *= 3600;
-        } else if (durationOption === 'm') {
-          duration *= 60;
+        if (unit === 'h') {
+          durationInSecond *= 3600;
+        } else if (unit === 'm') {
+          durationInSecond *= 60;
         }
 
-        FPSConst = fps / 24;
+        const FPSConst = fps / 24;
 
         // Search specific format data
-        FormatData = _.find(this.FileSizeData, ['Format', format]);
+        const FormatData = this.dataList.filter((o) => o.Format === format);
 
         // File size = (Bitrate / FPS) * Time
-        Calculation = (FormatData['24-1080'] * resolution * FPSConst * duration) / 8;
-        console.log(Calculation);
+        const Calculation = (FormatData['24-1080'] * resolution * FPSConst * durationInSecond) / 8;
+
         if (Calculation < 1000) {
           // MB
-          Calculation = (Math.round(Calculation * 100) / 100).toFixed(2);
-          this.output = `The file size should be ${Calculation} MB`;
+          const sizeInMB = (Math.round(Calculation * 100) / 100).toFixed(2);
+          this.output = `The file size should be ${sizeInMB} MB`;
         } else if (Calculation <= 1000000) {
           // GB
-          const CalculationGB = (
-            Math.round((Calculation / 1000) * 100) / 100
-          ).toFixed(2);
-          this.output = `The file size should be ${Calculation} MB / ${CalculationGB} GB`;
+          const sizeInGB = (Math.round((Calculation / 1000) * 100) / 100).toFixed(2);
+          this.output = `The file size should be ${Calculation} MB / ${sizeInGB} GB`;
         } else if (Calculation > 1000000) {
           // TB
-          const CalculationGB = (
-            Math.round((Calculation / 1000) * 100) / 100
-          ).toFixed(2);
-          const CalculationTB = (
-            Math.round((Calculation / 1000000) * 100) / 100
-          ).toFixed(2);
-          this.output = `The file size should be ${CalculationGB} GB / ${CalculationTB} TB`;
+          const sizeInGB = (Math.round((Calculation / 1000) * 100) / 100).toFixed(2);
+          const sizeInTB = (Math.round((Calculation / 1000000) * 100) / 100).toFixed(2);
+          this.output = `The file size should be ${sizeInGB} GB / ${sizeInTB} TB`;
         }
       }
     },

@@ -1,0 +1,371 @@
+[{
+  "id": 1,
+  "camera": "IMAX 70 mm Film",
+  "crop_factor": 0.51,
+  "sensor_width": 70.41,
+  "sensor_height": 52.63,
+  "aspectratio_178": 70.41,
+  "sensor_diagonal": 87.91,
+  "aspectratio_opengate": 1.34,
+  "active_sensor_height_178": 39.6
+}, {
+  "id": 2,
+  "camera": "Medium Format",
+  "crop_factor": 0.67,
+  "sensor_width": 53.7,
+  "sensor_height": 40.2,
+  "aspectratio_178": 53.7,
+  "sensor_diagonal": 67.08,
+  "aspectratio_opengate": 1.34,
+  "active_sensor_height_178": 30.21
+}, {
+  "id": 3,
+  "camera": "Vision Research Phantom 65",
+  "crop_factor": 0.69,
+  "sensor_width": 52.1,
+  "sensor_height": 30.5,
+  "aspectratio_178": 52.1,
+  "sensor_diagonal": 60.37,
+  "aspectratio_opengate": 1.71,
+  "active_sensor_height_178": 29.31
+}, {
+  "id": 4,
+  "camera": "Alexa 65",
+  "crop_factor": 0.79,
+  "sensor_width": 54.12,
+  "sensor_height": 25.59,
+  "aspectratio_178": 45.49,
+  "sensor_diagonal": 59.87,
+  "aspectratio_opengate": 2.11,
+  "active_sensor_height_178": 25.59
+}, {
+  "id": 5,
+  "camera": "65mm Film Frame",
+  "crop_factor": 0.88,
+  "sensor_width": 52.48,
+  "sensor_height": 23.01,
+  "aspectratio_178": 40.9,
+  "sensor_diagonal": 57.3,
+  "aspectratio_opengate": 2.28,
+  "active_sensor_height_178": 23.01
+}, {
+  "id": 6,
+  "camera": "Red Monstro VV 8K",
+  "crop_factor": 0.94,
+  "sensor_width": 40.96,
+  "sensor_height": 21.6,
+  "aspectratio_178": 38.4,
+  "sensor_diagonal": 46.31,
+  "aspectratio_opengate": 1.9,
+  "active_sensor_height_178": 21.6
+}, {
+  "id": 7,
+  "camera": "Arri Alexa LF",
+  "crop_factor": 0.98,
+  "sensor_width": 36.7,
+  "sensor_height": 25.54,
+  "aspectratio_178": 36.7,
+  "sensor_diagonal": 44.71,
+  "aspectratio_opengate": 1.44,
+  "active_sensor_height_178": 20.64
+}, {
+  "id": 8,
+  "camera": "Sony Venice",
+  "crop_factor": 1,
+  "sensor_width": 36,
+  "sensor_height": 24,
+  "aspectratio_178": 36,
+  "sensor_diagonal": 43.27,
+  "aspectratio_opengate": 1.5,
+  "active_sensor_height_178": 20.25
+}, {
+  "id": 9,
+  "camera": "Sony α7S II",
+  "crop_factor": 1.01,
+  "sensor_width": 35.6,
+  "sensor_height": 23.8,
+  "aspectratio_178": 35.6,
+  "sensor_diagonal": 42.82,
+  "aspectratio_opengate": 1.5,
+  "active_sensor_height_178": 20.03
+}, {
+  "id": 10,
+  "camera": "Red GEMINI 5K S35",
+  "crop_factor": 1.13,
+  "sensor_width": 30.72,
+  "sensor_height": 18,
+  "aspectratio_178": 32,
+  "sensor_diagonal": 35.61,
+  "aspectratio_opengate": 1.71,
+  "active_sensor_height_178": 18
+}, {
+  "id": 11,
+  "camera": "Alexa LF",
+  "crop_factor": 1.14,
+  "sensor_width": 36.7,
+  "sensor_height": 25.54,
+  "aspectratio_178": 31.68,
+  "sensor_diagonal": 44.71,
+  "aspectratio_opengate": 1.44,
+  "active_sensor_height_178": 17.82
+}, {
+  "id": 12,
+  "camera": "Red Helium 8K S35",
+  "crop_factor": 1.28,
+  "sensor_width": 29.9,
+  "sensor_height": 15.77,
+  "aspectratio_178": 28.03,
+  "sensor_diagonal": 33.8,
+  "aspectratio_opengate": 1.9,
+  "active_sensor_height_178": 15.77
+}, {
+  "id": 13,
+  "camera": "Vision Research Phantom Flex4K",
+  "crop_factor": 1.3,
+  "sensor_width": 27.6,
+  "sensor_height": 15.5,
+  "aspectratio_178": 27.6,
+  "sensor_diagonal": 31.65,
+  "aspectratio_opengate": 1.78,
+  "active_sensor_height_178": 15.5
+}, {
+  "id": 14,
+  "camera": "Alexa SXT W",
+  "crop_factor": 1.38,
+  "sensor_width": 28.25,
+  "sensor_height": 18.17,
+  "aspectratio_178": 26.14,
+  "sensor_diagonal": 33.59,
+  "aspectratio_opengate": 1.55,
+  "active_sensor_height_178": 14.7
+}, {
+  "id": 15,
+  "camera": "Blackmagic URSA Mini 4.6K EF",
+  "crop_factor": 1.42,
+  "sensor_width": 25.34,
+  "sensor_height": 14.25,
+  "aspectratio_178": 25.34,
+  "sensor_diagonal": 29.07,
+  "aspectratio_opengate": 1.78,
+  "active_sensor_height_178": 14.25
+}, {
+  "id": 16,
+  "camera": "Blackmagic URSA Mini Pro",
+  "crop_factor": 1.42,
+  "sensor_width": 25.34,
+  "sensor_height": 14.25,
+  "aspectratio_178": 25.34,
+  "sensor_diagonal": 29.07,
+  "aspectratio_opengate": 1.78,
+  "active_sensor_height_178": 14.25
+}, {
+  "id": 17,
+  "camera": "Canon C100",
+  "crop_factor": 1.46,
+  "sensor_width": 24.6,
+  "sensor_height": 13.8,
+  "aspectratio_178": 24.6,
+  "sensor_diagonal": 28.21,
+  "aspectratio_opengate": 1.78,
+  "active_sensor_height_178": 13.8
+}, {
+  "id": 18,
+  "camera": "Canon C200",
+  "crop_factor": 1.47,
+  "sensor_width": 26.2,
+  "sensor_height": 13.8,
+  "aspectratio_178": 24.53,
+  "sensor_diagonal": 29.61,
+  "aspectratio_opengate": 1.9,
+  "active_sensor_height_178": 13.8
+}, {
+  "id": 19,
+  "camera": "Canon C300",
+  "crop_factor": 1.47,
+  "sensor_width": 26.2,
+  "sensor_height": 13.8,
+  "aspectratio_178": 24.53,
+  "sensor_diagonal": 29.61,
+  "aspectratio_opengate": 1.9,
+  "active_sensor_height_178": 13.8
+}, {
+  "id": 20,
+  "camera": "Canon C500",
+  "crop_factor": 1.47,
+  "sensor_width": 26.2,
+  "sensor_height": 13.8,
+  "aspectratio_178": 24.53,
+  "sensor_diagonal": 29.61,
+  "aspectratio_opengate": 1.9,
+  "active_sensor_height_178": 13.8
+}, {
+  "id": 21,
+  "camera": "Red DRAGON-X 5K S35",
+  "crop_factor": 1.5,
+  "sensor_width": 25.6,
+  "sensor_height": 13.5,
+  "aspectratio_178": 24,
+  "sensor_diagonal": 28.94,
+  "aspectratio_opengate": 1.9,
+  "active_sensor_height_178": 13.5
+}, {
+  "id": 22,
+  "camera": "Arri Alexa Mini",
+  "crop_factor": 1.52,
+  "sensor_width": 28.25,
+  "sensor_height": 18.17,
+  "aspectratio_178": 23.76,
+  "sensor_diagonal": 33.59,
+  "aspectratio_opengate": 1.55,
+  "active_sensor_height_178": 13.37
+}, {
+  "id": 23,
+  "camera": "Arri Amira",
+  "crop_factor": 1.52,
+  "sensor_width": 28.25,
+  "sensor_height": 18.17,
+  "aspectratio_178": 23.76,
+  "sensor_diagonal": 33.59,
+  "aspectratio_opengate": 1.55,
+  "active_sensor_height_178": 13.37
+}, {
+  "id": 24,
+  "camera": "Sony α6500",
+  "crop_factor": 1.53,
+  "sensor_width": 23.5,
+  "sensor_height": 15.6,
+  "aspectratio_178": 23.5,
+  "sensor_diagonal": 28.21,
+  "aspectratio_opengate": 1.51,
+  "active_sensor_height_178": 13.22
+}, {
+  "id": 25,
+  "camera": "Blackmagic Pocket Cinema Camera 6K",
+  "crop_factor": 1.56,
+  "sensor_width": 23.11,
+  "sensor_height": 12.99,
+  "aspectratio_178": 23.11,
+  "sensor_diagonal": 26.51,
+  "aspectratio_opengate": 1.78,
+  "active_sensor_height_178": 12.99
+}, {
+  "id": 26,
+  "camera": "35mm Film Frame",
+  "crop_factor": 1.64,
+  "sensor_width": 22,
+  "sensor_height": 16,
+  "aspectratio_178": 22,
+  "sensor_diagonal": 27.2,
+  "aspectratio_opengate": 1.38,
+  "active_sensor_height_178": 12.38
+}, {
+  "id": 27,
+  "camera": "Blackmagic Pocket Cinema Camera 4K",
+  "crop_factor": 2.03,
+  "sensor_width": 18.96,
+  "sensor_height": 10,
+  "aspectratio_178": 17.78,
+  "sensor_diagonal": 21.44,
+  "aspectratio_opengate": 1.9,
+  "active_sensor_height_178": 10
+}, {
+  "id": 28,
+  "camera": "Panasonic GH5s",
+  "crop_factor": 2.08,
+  "sensor_width": 17.3,
+  "sensor_height": 13,
+  "aspectratio_178": 17.3,
+  "sensor_diagonal": 21.64,
+  "aspectratio_opengate": 1.33,
+  "active_sensor_height_178": 9.73
+}, {
+  "id": 29,
+  "camera": "Digital Bolex D16",
+  "crop_factor": 2.73,
+  "sensor_width": 12.52,
+  "sensor_height": 7.41,
+  "aspectratio_178": 13.17,
+  "sensor_diagonal": 14.55,
+  "aspectratio_opengate": 1.69,
+  "active_sensor_height_178": 7.41
+}, {
+  "id": 30,
+  "camera": "Super 16mm Film Frame",
+  "crop_factor": 2.88,
+  "sensor_width": 12.52,
+  "sensor_height": 7.41,
+  "aspectratio_178": 12.52,
+  "sensor_diagonal": 14.55,
+  "aspectratio_opengate": 1.69,
+  "active_sensor_height_178": 7.04
+}, {
+  "id": 31,
+  "camera": "Blackmagic Micro Cinema Camera",
+  "crop_factor": 2.88,
+  "sensor_width": 12.48,
+  "sensor_height": 7.02,
+  "aspectratio_178": 12.48,
+  "sensor_diagonal": 14.32,
+  "aspectratio_opengate": 1.78,
+  "active_sensor_height_178": 7.02
+}, {
+  "id": 32,
+  "camera": "16mm Film Frame",
+  "crop_factor": 3.51,
+  "sensor_width": 10.26,
+  "sensor_height": 7.49,
+  "aspectratio_178": 10.26,
+  "sensor_diagonal": 12.7,
+  "aspectratio_opengate": 1.37,
+  "active_sensor_height_178": 5.77
+}, {
+  "id": 33,
+  "camera": "GoPro HERO 5 Black",
+  "crop_factor": 5.83,
+  "sensor_width": 6.17,
+  "sensor_height": 3.47,
+  "aspectratio_178": 6.17,
+  "sensor_diagonal": 7.08,
+  "aspectratio_opengate": 1.78,
+  "active_sensor_height_178": 3.47
+}, {
+  "id": 34,
+  "camera": "GoPro HERO 7 Black",
+  "crop_factor": 5.83,
+  "sensor_width": 6.17,
+  "sensor_height": 4.63,
+  "aspectratio_178": 6.17,
+  "sensor_diagonal": 7.71,
+  "aspectratio_opengate": 1.33,
+  "active_sensor_height_178": 3.47
+}, {
+  "id": 35,
+  "camera": "GoPro HERO4 Black",
+  "crop_factor": 5.83,
+  "sensor_width": 6.17,
+  "sensor_height": 4.55,
+  "aspectratio_178": 6.17,
+  "sensor_diagonal": 7.67,
+  "aspectratio_opengate": 1.36,
+  "active_sensor_height_178": 3.47
+}, {
+  "id": 36,
+  "camera": "Super 8mm Film Frame",
+  "crop_factor": 6.22,
+  "sensor_width": 5.79,
+  "sensor_height": 4.01,
+  "aspectratio_178": 5.79,
+  "sensor_diagonal": 7.04,
+  "aspectratio_opengate": 1.44,
+  "active_sensor_height_178": 3.26
+}, {
+  "id": 37,
+  "camera": "8mm Film Frame",
+  "crop_factor": 7.5,
+  "sensor_width": 4.8,
+  "sensor_height": 3.5,
+  "aspectratio_178": 4.8,
+  "sensor_diagonal": 5.94,
+  "aspectratio_opengate": 1.37,
+  "active_sensor_height_178": 2.7
+}]

@@ -10,19 +10,18 @@
         </div>
         <div class="col-7 col-md-3 d-block mt-2">
           <input
-            id="iso_1"
+            v-model="input.iso"
             class="inp form-control"
             type="number"
             required="required"
             value=""
-            @change="calculate"
           >
         </div>
         <div class="col-5 col-md-3 mt-2">
           FPS:&nbsp;
         </div>
         <div class="col-7 col-md-3 d-block mt-2">
-          <select id="fps_1" class="inp form-control" @change="calculate">
+          <select v-model="input.fps" class="inp form-control">
             <option>24</option>
             <option>25</option>
             <option>30</option>
@@ -41,11 +40,10 @@
         </div>
         <div class="col-7 col-md-3 d-block mt-2">
           <input
-            id="fc_1"
+            v-model="input.fc"
             class="inp form-control"
             type="number"
             value=""
-            @change="calculate"
           >
         </div>
         <div class="col-5 col-md-3 mt-2">
@@ -53,70 +51,82 @@
         </div>
         <div class="col-7 col-md-3 d-block mt-2">
           <input
-            id="lux_1"
+            v-model="input.lux"
             class="inp form-control"
             type="number"
             value=""
-            @change="calculate"
           >
         </div>
       </div>
       <div class="d-block mt-2">
         <p>We are using 180 degree shutter.</p>
-        <p><strong :class="outputClass">{{ outputText }}</strong></p>
+        <p><strong :class="output.class">{{ output.text }}</strong></p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import $ from 'jquery';
 
 export default {
-  name: 'FcluxToAperture',
   data() {
     return {
-      outputClass: '',
-      outputText: '',
+      output: {
+        class: '',
+        text: '',
+      },
+      input: {
+        fps: '',
+        iso: '',
+        fc: '',
+        lux: '',
+      },
     };
+  },
+  watch: {
+    input: {
+      handler() {
+        this.calculate();
+      },
+      deep: true,
+    },
   },
   methods: {
     calculate() {
-      const fc = parseInt($('#fc_1').val(), 10);
-      const lux = Number($('#lux_1').val());
-      const iso = parseInt($('#iso_1').val(), 10);
-      const fps = parseInt($('#fps_1').val(), 10);
+      const {
+        fps, iso, fc, lux,
+      } = this.input;
       let fpsConst;
       // validate FC and Lux
       if (!fc && !lux) {
-        this.outputClass = 'text-danger';
-        this.outputText = 'Please fill the footcandle OR lux';
+        this.output.class = 'text-danger';
+        this.output.text = 'Please fill the footcandle OR lux';
       } else {
         let intensity;
-        // Checking what did they input
+        // Checking the user input
         if (!fc && lux) {
-          intensity = lux / 10.764;
+          intensity = Number(lux.replaceAll(',', '.')) / 10.764;
         } else if (fc && !lux) {
-          intensity = fc;
+          intensity = Number(fc.replaceAll(',', '.'));
         } else if (fc && lux) {
-          intensity = fc; // we will just use footcandle
+          intensity = Number(fc.replaceAll(',', '.'));
         }
         // Checking the fps
-        if (fps === 24 || fps === 48 || fps === 96) {
+        if (fps === '24' || fps === '48' || fps === '96') {
           fpsConst = 0.009696;
-        } else if (fps === 25 || fps === 50 || fps === 100) {
+        } else if (fps === '25' || fps === '50' || fps === '100') {
           fpsConst = 0.0099;
-        } else if (fps === 30 || fps === 60 || fps === 120) {
+        } else if (fps === '30' || fps === '60' || fps === '120') {
           fpsConst = 0.01086;
         }
         // Now we calculate hard!
         if (intensity) {
-          const result = (1 / (2 * fps)) * intensity * fpsConst * iso;
-          this.outputClass = 'text-success';
-          this.outputText = `Your aperture needs to be: f/${parseFloat(Math.round(result * 100) / 100).toFixed(2)}`;
+          const result = (1 / (2 * Number(fps))) * intensity * fpsConst * Number(iso.replaceAll(',', '.'));
+          this.output.class = 'text-success';
+          this.output.text = `Your aperture needs to be: f/${parseFloat(Math.round(result * 100) / 100).toFixed(2)}`;
         } else {
-          this.outputClass = 'text-warning';
-          this.outputText = 'Some error happened.';
+          this.output.class = 'text-warning';
+          this.output.text = 'Some error happened.';
         }
       }
     },

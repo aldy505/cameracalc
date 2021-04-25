@@ -11,9 +11,8 @@
           </div>
           <div class="col-8 mt-2">
             <select
-              id="fromcamera"
+              v-model="input.from"
               class="inp4 form-control"
-              @change="CalculateSensor"
             >
               <option v-for="item in CameraList" :key="item.camera">
                 {{ item.camera }}
@@ -27,11 +26,10 @@
           </div>
           <div class="col-8 mt-2">
             <select
-              id="tocamera"
+              v-model="input.to"
               class="inp4 form-control"
-              @change="CalculateSensor"
             >
-              <option v-for="item in CameraList" :key="item.camera">
+              <option v-for="item in dataList" :key="item.id">
                 {{ item.camera }}
               </option>
             </select>
@@ -43,10 +41,9 @@
           </div>
           <div class="col-8 col-md-4 mt-2">
             <input
-              id="focallength"
+              v-model="input.focal"
               class="form-control inp4"
               type="number"
-              @change="CalculateSensor"
             >
           </div>
           <div class="col-4 col-md-2 mt-2">
@@ -54,9 +51,8 @@
           </div>
           <div class="col-8 col-md-4 mt-2">
             <select
-              id="aspectratio"
+              v-model="input.aspectRatio"
               class="inp4 form-control"
-              @change="CalculateSensor"
             >
               <option value="1">
                 16:9
@@ -71,7 +67,7 @@
           </div>
         </div>
         <div class="d-block mt-2">
-          <strong :class="outputClass">{{ outputText }}</strong>
+          <strong :class="output.class">{{ output.text }}</strong>
         </div>
       </form>
     </div>
@@ -79,97 +75,60 @@
 </template>
 
 <script>
-import _ from 'lodash';
-import $ from 'jquery';
+// eslint-disable-next-line import/no-unresolved
+import sensor from '~/assets/sensor.json';
 
 export default {
-  components: {},
-  async asyncData({ $axios }) {
-    try {
-      const response = await $axios.get(
-        'https://api.npoint.io/5c6005c5820933adf98e/SensorSize',
-        {
-          headers: {
-            Accept: 'application/json',
-          },
-        },
-      );
-      // https://api.jsonbin.io/b/5ec4209e18c8475bf16c4b0f <-- alternative, but limited usage
-      // https://api.npoint.io/5c6005c5820933adf98e  <-- current use
-      const CameraList = _.chain(response.data)
-        .map((camera) => _.omit(camera, [
-          'sensor_width',
-          'sensor_height',
-          'sensor_diagonal',
-          'aspectratio_opengate',
-          'aspectratio_178',
-          'active_sensor_height_178',
-          'crop_factor',
-        ]))
-        .value();
-      const CameraDataList = _.chain(response.data).value();
-      return { CameraList, CameraDataList };
-    } catch (error) {
-      console.log(`Error during axios: ${error}`);
-    }
+  asyncData() {
+    const dataList = sensor;
+    return { dataList };
   },
   data() {
     return {
-      CameraList: [],
-      CameraDataList: [],
-      outputText: '',
-      outputClass: '',
+      output: {
+        text: '',
+        class: '',
+      },
+      input: {
+        from: '',
+        to: '',
+        focal: '',
+        aspectRatio: '',
+      },
     };
+  },
+  watch: {
+    input: {
+      handler() {
+        this.CalculateSensor();
+      },
+      deep: true,
+    },
   },
   methods: {
     CalculateSensor() {
-      const fromCamera = $('#fromcamera').val();
-      const toCamera = $('#tocamera').val();
-      const focalLength = $('#focallength').val();
-      const aspectRatio = $('#aspectratio').val();
+      const {
+        from, to, focal, aspectRatio,
+      } = this.input;
 
-      // Check if they actually input some number to focal length
-      if (!focalLength) {
-        this.outputClass = 'text-warning';
-        this.outputText = 'Please fill in focal length number';
+      // Check if user actually input some number to focal length
+      if (!focal) {
+        this.output.class = 'text-warning';
+        this.output.text = 'Please fill in focal length number';
       } else {
-        // Find the dataof fromCamera and toCamera first with lodash
-        const fromCameraData = _.chain(this.CameraDataList)
-          .map((o) => _.omit(o, [
-            'sensor_width',
-            'sensor_height',
-            'sensor_diagonal',
-            'aspectratio_opengate',
-            'aspectratio_178',
-            'active_sensor_height_178',
-          ]))
-          .find(['camera', fromCamera])
-          // .map(o => _.omit(o, ['id', 'camera']))
-          .value();
-        const toCameraData = _.chain(this.CameraDataList)
-          .map((o) => _.omit(o, [
-            'sensor_width',
-            'sensor_height',
-            'sensor_diagonal',
-            'aspectratio_opengate',
-            'aspectratio_178',
-            'active_sensor_height_178',
-          ]))
-          .find(['camera', toCamera])
-          // .map(o => _.omit(o, ['id', 'camera']))
-          .value();
+        const fromData = this.dataList.filter((o) => o.camera === from);
+        const toData = this.dataList.filter((o) => o.camera === to);
 
-        const result = ((focalLength * fromCameraData.crop_factor)
-            / toCameraData.crop_factor)
-          * aspectRatio;
-        this.outputClass = 'text-success';
-        this.outputText = `Equivalent focal length for ${toCamera}: ${
-          parseFloat(Math.round(result * 100) / 100).toFixed(0)
-        }mm.`;
+        const parsedFocal = Number(focal.replaceAll(',', '.'));
+        const parsedAR = Number(aspectRatio.replaceAll(',', '.'));
+
+        const result = ((parsedFocal * fromData.crop_factor) / toData.crop_factor) * parsedAR;
+
+        this.output.class = 'text-success';
+        this.output.text = `Equivalent focal length for ${to}: `
+        + `${parseFloat(Math.round(result * 100) / 100).toFixed(0)}mm.`;
       }
     },
   },
 };
 </script>
-
-<style lang="stylus"></style>
