@@ -155,34 +155,39 @@ export default {
 
         if (Calculation < 1000) {
           // MB
-          const sizeInMB = Number.parseFloat(Math.round(Calculation * 100) / 100).toFixed(2);
+          const sizeInMB = Number
+            .parseFloat(Math.round(Calculation * 100) / 100)
+            .toFixed(2);
           this.output.text = `The file size should be ${sizeInMB} MB`;
           this.output.class = 'text-emerald-600';
         } else if (Calculation < 1000000) {
           // GB
-          const sizeInGB = Number.parseFloat(Math.round((Calculation / 1000) * 100) / 100).toFixed(
-            2
-          );
-          this.output.text = `The file size should be ${Calculation} MB / ${sizeInGB} GB`;
+          const sizeInMB = Number
+            .parseFloat(Math.round(Calculation * 100) / 100)
+            .toFixed(2);
+          const sizeInGB = Number
+            .parseFloat(Math.round((Calculation / 1000) * 100) / 100)
+            .toFixed(2);
+          this.output.text = `The file size should be ${sizeInMB} MB / ${sizeInGB} GB`;
           this.output.class = 'text-emerald-600';
         } else if (Calculation < 1000000000) {
           // TB
-          const sizeInGB = Number.parseFloat(Math.round((Calculation / 1000) * 100) / 100).toFixed(
-            2
-          );
-          const sizeInTB = Number.parseFloat(
-            Math.round((Calculation / 1000000) * 100) / 100
-          ).toFixed(2);
+          const sizeInGB = Number
+            .parseFloat(Math.round((Calculation / 1000) * 100) / 100)
+            .toFixed(2);
+          const sizeInTB = Number
+            .parseFloat(Math.round((Calculation / 1000000) * 100) / 100)
+            .toFixed(2);
           this.output.text = `The file size should be ${sizeInGB} GB / ${sizeInTB} TB`;
           this.output.class = 'text-emerald-600';
         } else if (Calculation >= 1000000000) {
           // PB
-          const sizeInPB = Number.parseFloat(
-            Math.round((Calculation / 1000000000) * 100) / 100
-          ).toFixed(2);
-          const sizeInTB = Number.parseFloat(
-            Math.round((Calculation / 1000000) * 100) / 100
-          ).toFixed(2);
+          const sizeInPB = Number
+            .parseFloat(Math.round((Calculation / 1000000000) * 100) / 100)
+            .toFixed(2);
+          const sizeInTB = Number
+            .parseFloat(Math.round((Calculation / 1000000) * 100) / 100)
+            .toFixed(2);
           this.output.text = `The file size should be ${sizeInTB} TB / ${sizeInPB} PB`;
           this.output.class = 'text-emerald-600';
         }
