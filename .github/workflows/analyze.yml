@@ -38,12 +38,14 @@ jobs:
       if: steps.cache.outputs.cache-hit != 'true'
       run: npm install
 
-    - name: Lint
-      run: npm run lint
+    - name: Eslint / Code linting
+      run: npm run lint:check
+
+    - name: Prettier / Code style
+      run: npm run prettier:check
 
     - name: Build
-      run: |
-        npm run generate
+      run: npm run generate
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
