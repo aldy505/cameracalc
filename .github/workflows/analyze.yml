@@ -14,7 +14,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, macos-latest, windows-latest]
+        os: [ubuntu-latest]
         node: [14, 16]
         language: [ 'javascript' ]
        
@@ -28,11 +28,19 @@ jobs:
       with:
         node-version: ${{ matrix.node }}
 
+    - name: Get npm cache directory
+      id: npm-cache
+      run: |
+        echo "::set-output name=dir::$(npm config get cache)"
+
     - name: cache node_modules
-      uses: actions/cache@v1
+      uses: actions/cache@v2
+      id: npm-cache
       with:
-        path: node_modules
-        key: ${{ matrix.os }}-node-v${{ matrix.node }}-deps-${{ hashFiles(format('{0}{1}', github.workspace, '/package-lock.json')) }}
+        path: ${{ steps.npm-cache-dir.outputs.dir }}
+        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
     
     - name: Installling dependencies
       if: steps.cache.outputs.cache-hit != 'true'
