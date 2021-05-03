@@ -6,9 +6,7 @@
       </div>
       <form>
         <div class="flex flex-col md:flex-row items-center py-2">
-          <div class="flex-1">
-            Select category:
-          </div>
+          <div class="flex-1">Select category:</div>
           <div class="flex-2 w-full">
             <select
               v-model="lightType"
@@ -23,9 +21,7 @@
           </div>
         </div>
         <div class="flex flex-col md:flex-row items-center py-2">
-          <div class="flex-1">
-            Select lights:
-          </div>
+          <div class="flex-1">Select lights:</div>
           <div class="flex-2 w-full">
             <select
               v-model="input.lightName"
@@ -38,15 +34,13 @@
           </div>
         </div>
         <div class="flex flex-col md:flex-row items-center py-2">
-          <div class="flex-1">
-            Object distance (in meters):
-          </div>
+          <div class="flex-1">Object distance (in meters):</div>
           <div class="flex-2 w-dull">
             <input
               v-model="input.distance"
               class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
               type="number"
-            >
+            />
           </div>
         </div>
         <div class="my-2 block">
@@ -62,7 +56,7 @@
           {{ lightDetail.text }}
         </button>
       </div>
-      <div class="block my-2" :class="{ 'hidden': lightDetail.toggle }">
+      <div class="block my-2" :class="{hidden: lightDetail.toggle}">
         <div class="block py-3">
           <div v-show="!lightDetail.status" :key="input.distance">
             <p>Please put some number in object distance</p>
@@ -71,15 +65,19 @@
             <ul>
               <li>Light name: {{ lightDetail.data.name }}</li>
               <li>Light style: {{ lightDetail.data.style }}</li>
-              <li>Color temperature: {{ lightDetail.data.colorTemp }}
-                ({{ lightDetail.data.colorStyle }})</li>
+              <li>
+                Color temperature: {{ lightDetail.data.colorTemp }} ({{
+                  lightDetail.data.colorStyle
+                }})
+              </li>
               <li>Watts: {{ lightDetail.data.watts }} ({{ lightDetail.data.amps }} amps)</li>
               <li>Battery plate: {{ lightDetail.data.battery }}</li>
               <li>Dimmable: {{ lightDetail.data.dimmable }}</li>
               <li>CRI: {{ lightDetail.data.cri }}</li>
               <li>TLCI: {{ lightDetail.data.tlci }}</li>
-              <li>Weight: {{ lightDetail.data.wKilo }} kg /
-                {{ lightDetail.data.wPounds }} pounds</li>
+              <li>
+                Weight: {{ lightDetail.data.wKilo }} kg / {{ lightDetail.data.wPounds }} pounds
+              </li>
             </ul>
           </div>
         </div>
@@ -95,7 +93,7 @@ import photometrics from '~/assets/photometrics.json';
 export default {
   asyncData() {
     const dataList = photometrics;
-    return { dataList };
+    return {dataList};
   },
   data() {
     return {
@@ -128,7 +126,7 @@ export default {
         },
         status: false,
         toggle: true,
-        text: 'Click here if you\'re interested on the light\'s detail',
+        text: "Click here if you're interested on the light's detail",
       },
     };
   },
@@ -143,15 +141,15 @@ export default {
   methods: {
     toggleLightDetail() {
       this.lightDetail.toggle = !this.lightDetail.toggle;
-      this.lightDetail.text = (this.lightDetail.toggle)
-        ? 'Click here if you\'re interested on the light\'s detail'
+      this.lightDetail.text = this.lightDetail.toggle
+        ? "Click here if you're interested on the light's detail"
         : 'Click here to hide the details';
     },
     lightsUpdate() {
-      const { lightType } = this;
+      const {lightType} = this;
       this.content.lightName = this.dataList
-        .filter((o) => o.Type === lightType)
-        .map((o) => ({ Light_Name: o.Light_Name, id: o.id }));
+        .filter(o => o.Type === lightType)
+        .map(o => ({Light_Name: o.Light_Name, id: o.id}));
     },
     getCurrentLightData(lightName) {
       for (let i = 0; i < this.dataList.length; i += 1) {
@@ -163,7 +161,7 @@ export default {
       return null;
     },
     CalculatePhotometrics() {
-      const { distance, lightName } = this.input;
+      const {distance, lightName} = this.input;
 
       // Check if object distance input is true
       if (!distance) {
@@ -180,54 +178,67 @@ export default {
           // Daylight only
           LightColorTemp = 'Daylight only';
 
-          const DaylightFC = (typeof LightData.Daylight.FC !== 'number')
-            ? Number(LightData.Daylight.FC.replaceAll(',', ''))
-            : LightData.Daylight.FC;
+          const DaylightFC =
+            typeof LightData.Daylight.FC !== 'number'
+              ? Number(LightData.Daylight.FC.replaceAll(',', ''))
+              : LightData.Daylight.FC;
 
           let LightDaylight = (Number(DaylightFC) * 25) / parsedDistance ** 2;
           LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
 
           this.output.class = 'text-emerald-600';
-          this.output.text = `You will get ${LightDaylight} footcandle `
-            + `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(0)} lux.`;
+          this.output.text =
+            `You will get ${LightDaylight} footcandle ` +
+            `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
+              0
+            )} lux.`;
         } else if (LightData.Daylight.FC === 'n/a') {
           // Tungsten only
           LightColorTemp = 'Tungsten only';
 
-          const TungstenFC = (typeof LightData.Tungsten.FC !== 'number')
-            ? Number(LightData.Tungsten.FC.replaceAll(',', ''))
-            : LightData.Tungsten.FC;
+          const TungstenFC =
+            typeof LightData.Tungsten.FC !== 'number'
+              ? Number(LightData.Tungsten.FC.replaceAll(',', ''))
+              : LightData.Tungsten.FC;
 
           let LightTungsten = (TungstenFC * 25) / parsedDistance ** 2;
           LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
 
           this.output.class = 'text-emerald-600';
-          this.output.text = `You will get ${LightTungsten} footcandle `
-            + `or ${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(0)} lux.`;
+          this.output.text =
+            `You will get ${LightTungsten} footcandle ` +
+            `or ${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(
+              0
+            )} lux.`;
         } else {
           // Both daylight and tungsten
           LightColorTemp = 'Bicolor';
 
-          const DaylightFC = (typeof LightData.Daylight.FC !== 'number')
-            ? Number(LightData.Daylight.FC.replaceAll(',', ''))
-            : LightData.Daylight.FC;
+          const DaylightFC =
+            typeof LightData.Daylight.FC !== 'number'
+              ? Number(LightData.Daylight.FC.replaceAll(',', ''))
+              : LightData.Daylight.FC;
 
           let LightDaylight = (DaylightFC * 25) / parsedDistance ** 2;
           LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
 
-          const TungstenFC = (typeof LightData.Tungsten.FC !== 'number')
-            ? Number(LightData.Tungsten.FC.replaceAll(',', ''))
-            : LightData.Tungsten.FC;
+          const TungstenFC =
+            typeof LightData.Tungsten.FC !== 'number'
+              ? Number(LightData.Tungsten.FC.replaceAll(',', ''))
+              : LightData.Tungsten.FC;
           let LightTungsten = (TungstenFC * 25) / parsedDistance ** 2;
           LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
 
           this.output.class = 'text-emerald-600';
-          this.output.text = `You will get ${LightDaylight} footcandle `
-            + `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(0)} lux `
-            + 'for daylight color temperature and '
-            + `${LightTungsten} footcandle or `
-            + `${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(0)} lux `
-            + 'for tungsten color temperature.';
+          this.output.text =
+            `You will get ${LightDaylight} footcandle ` +
+            `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
+              0
+            )} lux ` +
+            'for daylight color temperature and ' +
+            `${LightTungsten} footcandle or ` +
+            `${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(0)} lux ` +
+            'for tungsten color temperature.';
         }
 
         // Light Detail for nerds

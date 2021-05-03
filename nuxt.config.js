@@ -3,10 +3,7 @@ export default {
   target: 'static',
   head: {
     title: 'Camera Calculator – Free Calculator for Film Camera Department',
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    ],
+    meta: [{charset: 'utf-8'}, {name: 'viewport', content: 'width=device-width, initial-scale=1'}],
     link: [
       {
         rel: 'icon',
@@ -40,16 +37,13 @@ export default {
 
   components: true,
 
-  loading: { color: '#fff' },
+  loading: {color: '#fff'},
 
   css: [],
 
   plugins: [],
 
-  buildModules: [
-    '@nuxtjs/tailwindcss',
-    '@nuxtjs/color-mode',
-  ],
+  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode'],
   tailwindcss: {
     jit: true,
     viewer: false,
@@ -58,11 +52,7 @@ export default {
     classSuffix: '',
   },
 
-  modules: [
-    'nuxt-webfontloader',
-    '@nuxtjs/sitemap',
-    '@nuxtjs/google-gtag',
-  ],
+  modules: ['nuxt-webfontloader', '@nuxtjs/sitemap', '@nuxtjs/google-gtag'],
   webfontloader: {
     google: {
       families: ['Inter:300,400,700'],
@@ -71,16 +61,13 @@ export default {
   sitemap: {
     hostname: 'https://cameracalc.reinaldyrafli.com',
     gzip: true,
-    exclude: [
-      '/_nuxt/**',
-    ],
+    exclude: ['/_nuxt/**'],
   },
   'google-gtag': {
     id: process.env.GTAG_ID || '',
     config: {
       anonymize_ip: true,
       send_page_view: false,
-
     },
   },
 };

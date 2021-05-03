@@ -23,7 +23,9 @@
     "generate": "nuxt generate",
     "lint:check": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "lint": "npm run lint:fix"
+    "prettier:check": "prettier --check --ignore-path .gitignore \"**/**{.js,.json,.vue}\"",
+    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/**{.js,.json,.vue}\"",
+    "precommit": "npm run lint:fix && npm run prettier:check"
   },
   "dependencies": {
     "@nuxtjs/google-gtag": "^1.0.4",
@@ -36,9 +38,12 @@
     "@nuxtjs/tailwindcss": "^4.0.3",
     "eslint": "^7.25.0",
     "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-loader": "4.0.2",
     "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.9.0",
-    "postcss": "^8.2.12"
+    "postcss": "^8.2.12",
+    "prettier": "^2.2.1"
   }
 }

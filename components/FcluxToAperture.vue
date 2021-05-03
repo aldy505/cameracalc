@@ -5,9 +5,7 @@
     </div>
     <form>
       <div class="flex flex-col md:flex-row items-center py-2">
-        <div class="flex-1">
-          ISO:&nbsp;
-        </div>
+        <div class="flex-1">ISO:&nbsp;</div>
         <div class="flex-2 mx-4">
           <input
             v-model="input.iso"
@@ -15,13 +13,14 @@
             type="number"
             required
             value=""
-          >
+          />
         </div>
-        <div class="flex-1">
-          FPS:&nbsp;
-        </div>
+        <div class="flex-1">FPS:&nbsp;</div>
         <div class="flex-2 mx-4">
-          <select v-model="input.fps" class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2">
+          <select
+            v-model="input.fps"
+            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+          >
             <option>24</option>
             <option>25</option>
             <option>30</option>
@@ -35,39 +34,36 @@
         </div>
       </div>
       <div class="flex flex-col md:flex-row py-2 items-center">
-        <div class="flex-1">
-          Footcandle:
-        </div>
+        <div class="flex-1">Footcandle:</div>
         <div class="flex-2 mx-4">
           <input
             v-model="input.fc"
             class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
             value=""
-          >
+          />
         </div>
-        <div class="flex-1">
-          Lux:
-        </div>
+        <div class="flex-1">Lux:</div>
         <div class="flex-2 mx-4">
           <input
             v-model="input.lux"
             class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
             value=""
-          >
+          />
         </div>
       </div>
       <div class="my-2 block">
         <p>We are using 180 degree shutter.</p>
-        <p><strong :class="output.class">{{ output.text }}</strong></p>
+        <p>
+          <strong :class="output.class">{{ output.text }}</strong>
+        </p>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -93,9 +89,7 @@ export default {
   },
   methods: {
     calculate() {
-      const {
-        fps, iso, fc, lux,
-      } = this.input;
+      const {fps, iso, fc, lux} = this.input;
       let fpsConst;
       // validate FC and Lux
       if (!fc && !lux) {
@@ -121,9 +115,12 @@ export default {
         }
         // Now we calculate hard!
         if (intensity) {
-          const result = (1 / (2 * Number(fps))) * intensity * fpsConst * Number(iso.replaceAll(',', '.'));
+          const result =
+            (1 / (2 * Number(fps))) * intensity * fpsConst * Number(iso.replaceAll(',', '.'));
           this.output.class = 'text-success';
-          this.output.text = `Your aperture needs to be: f/${parseFloat(Math.round(result * 100) / 100).toFixed(2)}`;
+          this.output.text = `Your aperture needs to be: f/${parseFloat(
+            Math.round(result * 100) / 100
+          ).toFixed(2)}`;
         } else {
           this.output.class = 'text-warning';
           this.output.text = 'Some error happened.';

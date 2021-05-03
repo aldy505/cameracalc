@@ -10,7 +10,17 @@ module.exports = {
     },
     extend: {
       fontFamily: {
-        inter: ['Inter', 'San\\ Francisco', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Helvetica\\ Neue', 'Arial', 'sans-serif'],
+        inter: [
+          'Inter',
+          'San\\ Francisco',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'BlinkMacSystemFont',
+          'Helvetica\\ Neue',
+          'Arial',
+          'sans-serif',
+        ],
       },
       flex: {
         2: '2 2 0%',
