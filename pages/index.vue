@@ -10,6 +10,7 @@
       <a
         class="hover:underline text-indigo-600"
         target="_blank"
+        rel="noopener noreferrer"
         href="https://opensource.com/resources/what-open-source"
         >open source</a
       >
