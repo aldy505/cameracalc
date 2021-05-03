@@ -1,61 +1,11 @@
 export default {
-  ssr: true,
+  ssr: false,
   target: 'static',
-  /*
-   ** Headers of the page
-   */
   head: {
     title: 'Camera Calculator – Free Calculator for Film Camera Department',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      {
-        hid: 'description',
-        name: 'description',
-        content:
-          'Calculate things like photometrics, focal length equivalent, and more..',
-      },
-      {
-        hid: 'title',
-        name: 'title',
-        content:
-          'Camera Calculator – Free Calculator for Film Camera Department',
-      },
-      {
-        hid: 'keywords',
-        name: 'keywords',
-        content: 'camera, department, film, production, calculator, free',
-      },
-      { hid: 'author', name: 'author', content: 'Reinaldy Rafli' },
-      { name: 'robots', content: 'index, follow' },
-      { name: 'revisit-after', content: '5 days' },
-      { name: 'language', content: 'English' },
-      { property: 'og:type', content: 'website' },
-      { property: 'og:url', content: '' },
-      {
-        property: 'og:title',
-        content:
-          'Camera Calculator – Free Calculator for Film Camera Department',
-      },
-      {
-        property: 'og:description',
-        content:
-          'Calculate things like photometrics, focal length equivalent, and more..',
-      },
-      { property: 'og:image', content: 'head-icon.png' },
-      { property: 'twitter:card', content: 'summary_large_image' },
-      { property: 'twitter:url', content: '' },
-      {
-        property: 'twitter:title',
-        content:
-          'Camera Calculator – Free Calculator for Film Camera Department',
-      },
-      {
-        property: 'twitter:description',
-        content:
-          'Calculate things like photometrics, focal length equivalent, and more..',
-      },
-      { property: 'twitter:image', content: 'head-icon.png' },
     ],
     link: [
       {
@@ -77,37 +27,41 @@ export default {
         href: 'favicon-180.png',
       },
     ],
-    script: [],
   },
+
+  publicRuntimeConfig: {
+    baseUrl: 'https://cameracalc.reinaldyrafli.com',
+    author: 'Reinaldy Rafli',
+    title: 'Camera Calculator – Free Calculator for Film Camera Department',
+    description: 'Calculate things like photometrics, focal length equivalent, and more..',
+    language: 'English',
+    socialIcon: 'head-icon.png',
+  },
+
   components: true,
-  /*
-   ** Customize the progress-bar color
-   */
+
   loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
+
   css: [],
-  /*
-   ** Plugins to load before mounting the App
-   */
+
   plugins: [],
-  /*
-   ** Nuxt.js dev-modules
-   */
+
   buildModules: [
     '@nuxtjs/tailwindcss',
+    '@nuxtjs/color-mode',
   ],
   tailwindcss: {
     jit: true,
     viewer: false,
   },
-  /*
-   ** Nuxt.js modules
-   */
+  colorMode: {
+    classSuffix: '',
+  },
+
   modules: [
     'nuxt-webfontloader',
     '@nuxtjs/sitemap',
+    '@nuxtjs/google-gtag',
   ],
   webfontloader: {
     google: {
@@ -120,5 +74,13 @@ export default {
     exclude: [
       '/_nuxt/**',
     ],
+  },
+  'google-gtag': {
+    id: process.env.GTAG_ID || '',
+    config: {
+      anonymize_ip: true,
+      send_page_view: false,
+
+    },
   },
 };

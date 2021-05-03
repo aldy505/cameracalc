@@ -1,33 +1,32 @@
 <template>
-    <div class="container">
-      <div class="row">
-        <h2>File size from certain format</h2>
+    <div class="container mx-auto">
+      <div class="block">
+        <h2 class="text-3xl">File size from certain format</h2>
       </div>
       <form>
-        <div class="row">
-          <div class="col-4 mt-2">
+        <div class="flex flex-col md:flex-row items-center py-2">
+          <div class="flex-1">
             Select format:
           </div>
-          <div class="col-8 mt-2">
+          <div class="flex-2 mx-4 w-full">
             <select
               v-model="input.format"
-              class="inp6 form-control"
-              @change="CalculateFileSize"
+              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             >
-              <option v-for="item in FileSizeData" :key="item.Format">
+              <option v-for="item in dataList" :key="item.Format">
                 {{ item.Format }}
               </option>
             </select>
           </div>
         </div>
-        <div class="row">
-          <div class="col-4 col-md-2 mt-2">
+        <div class="flex flex-col md:flex-row items-center py-2">
+          <div class="flex-1">
             FPS:
           </div>
-          <div class="col-8 col-md-4 mt-2">
+          <div class="flex-2">
             <select
               v-model="input.fps"
-              class="inp6 form-control"
+              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             >
               <option>24</option>
               <option>25</option>
@@ -40,13 +39,13 @@
               <option>120</option>
             </select>
           </div>
-          <div class="col-4 col-md-2 mt-2">
+          <div class="flex-1 px-4">
             Resolution:
           </div>
-          <div class="col-8 col-md-4 mt-2">
+          <div class="flex-2 mx-4 w-full">
             <select
               v-model="input.resolution"
-              class="inp6 form-control"
+              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             >
               <option
                 v-for="resolution in resolutions"
@@ -58,21 +57,21 @@
             </select>
           </div>
         </div>
-        <div class="row">
-          <div class="col-4 mt-2">
+        <div class="flex flex-col md:flex-row items-center py-2">
+          <div class="flex-1">
             Duration:
           </div>
-          <div class="col-4 mt-2">
+          <div class="flex-2 mx-4 w-full">
             <input
               v-model="input.duration"
-              class="inp6 form-control"
+              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
               type="number"
             >
           </div>
-          <div class="col-4 mt-2">
+          <div class="flex-1 mx-4 w-full">
             <select
               v-model="input.unit"
-              class="inp6 form-control"
+              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             >
               <option
                 v-for="duration in durations"
@@ -84,10 +83,8 @@
             </select>
           </div>
         </div>
-        <div class="row">
-          <div class="d-block mt-2">
-            <strong>{{ output }}</strong>
-          </div>
+          <div class="block my-2">
+            <strong :class="output.class">{{ output.text }}</strong>
         </div>
       </form>
     </div>
@@ -117,7 +114,10 @@ export default {
         { id: 2, text: 'Minutes', value: 'm' },
         { id: 3, text: 'Seconds', value: 's' },
       ],
-      output: '',
+      output: {
+        class: '',
+        text: '',
+      },
       input: {
         format: '',
         fps: '',
@@ -144,7 +144,8 @@ export default {
       let durationInSecond = Number(duration.replaceAll(',', '.'));
 
       if (!duration) {
-        this.output = 'Please fill the duration input';
+        this.output.text = 'Please fill the duration input';
+        this.output.class = 'text-red-600';
       } else {
         // Convert time to seconds
         if (unit === 'h') {
@@ -153,27 +154,36 @@ export default {
           durationInSecond *= 60;
         }
 
-        const FPSConst = fps / 24;
+        const FPSConst = Number(fps) / 24;
 
         // Search specific format data
         const FormatData = this.dataList.filter((o) => o.Format === format);
 
         // File size = (Bitrate / FPS) * Time
-        const Calculation = (FormatData['24-1080'] * resolution * FPSConst * durationInSecond) / 8;
+        const Calculation = (Number(FormatData[0]['24-1080']) * Number(resolution || 1) * FPSConst * durationInSecond) / 8;
 
         if (Calculation < 1000) {
           // MB
-          const sizeInMB = (Math.round(Calculation * 100) / 100).toFixed(2);
-          this.output = `The file size should be ${sizeInMB} MB`;
-        } else if (Calculation <= 1000000) {
+          const sizeInMB = Number.parseFloat(Math.round(Calculation * 100) / 100).toFixed(2);
+          this.output.text = `The file size should be ${sizeInMB} MB`;
+          this.output.class = 'text-emerald-600';
+        } else if (Calculation < 1000000) {
           // GB
-          const sizeInGB = (Math.round((Calculation / 1000) * 100) / 100).toFixed(2);
-          this.output = `The file size should be ${Calculation} MB / ${sizeInGB} GB`;
-        } else if (Calculation > 1000000) {
+          const sizeInGB = Number.parseFloat(Math.round((Calculation / 1000) * 100) / 100).toFixed(2);
+          this.output.text = `The file size should be ${Calculation} MB / ${sizeInGB} GB`;
+          this.output.class = 'text-emerald-600';
+        } else if (Calculation < 1000000000) {
           // TB
-          const sizeInGB = (Math.round((Calculation / 1000) * 100) / 100).toFixed(2);
-          const sizeInTB = (Math.round((Calculation / 1000000) * 100) / 100).toFixed(2);
-          this.output = `The file size should be ${sizeInGB} GB / ${sizeInTB} TB`;
+          const sizeInGB = Number.parseFloat(Math.round((Calculation / 1000) * 100) / 100).toFixed(2);
+          const sizeInTB = Number.parseFloat(Math.round((Calculation / 1000000) * 100) / 100).toFixed(2);
+          this.output.text = `The file size should be ${sizeInGB} GB / ${sizeInTB} TB`;
+          this.output.class = 'text-emerald-600';
+        } else if (Calculation >= 1000000000) {
+          // PB
+          const sizeInPB = Number.parseFloat(Math.round((Calculation / 1000000000) * 100) / 100).toFixed(2);
+          const sizeInTB = Number.parseFloat(Math.round((Calculation / 1000000) * 100) / 100).toFixed(2);
+          this.output.text = `The file size should be ${sizeInTB} TB / ${sizeInPB} PB`;
+          this.output.class = 'text-emerald-600';
         }
       }
     },

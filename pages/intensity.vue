@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="body container">
+    <div class="container mx-auto">
       <div :class="{ 'hidden': isFclux }">
         <FcluxToAperture />
       </div>
@@ -8,18 +8,18 @@
         <ApertureToFclux />
       </div>
     </div>
-    <div class="footer mt-3">
-      <div class="row">
-        <div class="col-12 offset-md-3 col-md-6">
+    <div class="py-4">
+      <div class="block text-center w-1/2 mx-auto">
           <button
-            class="btn btn-block"
+            class="border rounded-lg w-full px-8 py-2"
             type="button"
-            :class="{ 'btn-outline-info': isAperture, 'btn-outline-warning': isFclux }"
+            :class="{
+              'border-amber-500 text-amber-700 hover:bg-amber-700 hover:text-white': isAperture,
+              'border-blue-500 text-blue-700 hover:bg-blue-700 hover:text-white': isFclux }"
             @click="toggleclass"
           >
-            {{ btnText }}
+            {{ buttonText }}
           </button>
-        </div>
       </div>
     </div>
   </div>

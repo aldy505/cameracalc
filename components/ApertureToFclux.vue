@@ -1,26 +1,26 @@
 <template>
   <div>
-    <div class="row">
-      <h3>Aperture &mdash;&gt; FC/LUX</h3>
+    <div class="block">
+      <h3 class="text-3xl">Aperture &mdash;&gt; FC/LUX</h3>
     </div>
     <form>
-      <div class="row">
-        <div class="col-5 col-md-3 mt-2">
+      <div class="flex flex-col md:flex-row items-center py-2">
+        <div class="flex-1">
           Aperture:&nbsp;
         </div>
-        <div class="col-7 col-md-3 d-block mt-2">
+        <div class="flex-2 mx-4">
           <input
             v-model="input.aperture"
-            class="inp form-control"
+            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
             required="required"
           >
         </div>
-        <div class="col-5 col-md-3 mt-2">
+        <div class="flex-1">
           FPS:&nbsp;
         </div>
-        <div class="col-7 col-md-3 d-block mt-2">
-          <select v-model="input.fps" class="inp form-control">
+        <div class="flex-2 mx-4">
+          <select v-model="input.fps" class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2">
             <option>24</option>
             <option>25</option>
             <option>30</option>
@@ -33,19 +33,19 @@
           </select>
         </div>
       </div>
-      <div class="row">
-        <div class="col-5 col-md-3 mt-2">
+      <div class="flex flex-col md:flex-row items-center md:w-1/2 py-2">
+        <div class="flex-1">
           ISO:
         </div>
-        <div class="col-7 col-md-3 d-block mt-2">
+        <div class="flex-2 mx-4">
           <input
             v-model="input.iso"
-            class="inp form-control"
+            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
           >
         </div>
       </div>
-      <div class="mt-2 d-block">
+      <div class="my-2 block">
         <p>We are using 180 degree shutter.</p>
         <p><strong :class="output.class">{{ output.text }}</strong></p>
       </div>

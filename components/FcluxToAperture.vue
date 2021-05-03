@@ -1,27 +1,27 @@
 <template>
   <div>
-    <div class="row">
-      <h3>FC/LUX &mdash;&gt; Aperture</h3>
+    <div class="block">
+      <h3 class="text-3xl">FC/LUX &mdash;&gt; Aperture</h3>
     </div>
     <form>
-      <div class="row">
-        <div class="col-5 col-md-3 mt-2">
+      <div class="flex flex-col md:flex-row items-center py-2">
+        <div class="flex-1">
           ISO:&nbsp;
         </div>
-        <div class="col-7 col-md-3 d-block mt-2">
+        <div class="flex-2 mx-4">
           <input
             v-model="input.iso"
-            class="inp form-control"
+            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
-            required="required"
+            required
             value=""
           >
         </div>
-        <div class="col-5 col-md-3 mt-2">
+        <div class="flex-1">
           FPS:&nbsp;
         </div>
-        <div class="col-7 col-md-3 d-block mt-2">
-          <select v-model="input.fps" class="inp form-control">
+        <div class="flex-2 mx-4">
+          <select v-model="input.fps" class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2">
             <option>24</option>
             <option>25</option>
             <option>30</option>
@@ -34,31 +34,31 @@
           </select>
         </div>
       </div>
-      <div class="row">
-        <div class="col-5 col-md-3 mt-2">
+      <div class="flex flex-col md:flex-row py-2 items-center">
+        <div class="flex-1">
           Footcandle:
         </div>
-        <div class="col-7 col-md-3 d-block mt-2">
+        <div class="flex-2 mx-4">
           <input
             v-model="input.fc"
-            class="inp form-control"
+            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
             value=""
           >
         </div>
-        <div class="col-5 col-md-3 mt-2">
+        <div class="flex-1">
           Lux:
         </div>
-        <div class="col-7 col-md-3 d-block mt-2">
+        <div class="flex-2 mx-4">
           <input
             v-model="input.lux"
-            class="inp form-control"
+            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
             value=""
           >
         </div>
       </div>
-      <div class="d-block mt-2">
+      <div class="my-2 block">
         <p>We are using 180 degree shutter.</p>
         <p><strong :class="output.class">{{ output.text }}</strong></p>
       </div>
