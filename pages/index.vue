@@ -10,7 +10,7 @@
     <p class="py-1">
       This is an
       <a
-        class="hover:underline text-indigo-600"
+        class="hover:underline text-indigo-600 dark:text-indigo-400"
         target="_blank"
         rel="noopener noreferrer"
         href="https://opensource.com/resources/what-open-source"
@@ -27,7 +27,7 @@
             src="github.png"
           ></a>
         </div>
-        <div class="flex-grow px-2 py-1 text-indigo-600 hover:underline no-underline">
+        <div class="flex-grow px-2 py-1 text-indigo-600 dark:text-indigo-400 hover:underline no-underline">
           <a href="https://github.com/aldy505/cameracalc">GitHub Repository</a>
         </div>
         <div class="flex-grow-0 px-2 py-1">
@@ -36,7 +36,7 @@
             src="mail.png"
           ></a>
         </div>
-        <div class="flex-grow px-2 py-1 text-indigo-600 hover:underline no-underline">
+        <div class="flex-grow px-2 py-1 text-indigo-600 dark:text-indigo-400 hover:underline no-underline">
           <a
             class=""
             href="mailto:reinaldyrfl@gmail.com"

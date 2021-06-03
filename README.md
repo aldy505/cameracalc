@@ -26,7 +26,7 @@ Open up your terminal (Command Prompt for Windows, [Terminal](https://en.wikiped
 # For Windows users it's:
 $ cd /D "C:/the/folder/path/here"
 
-# For Mac users, it's:
+# For Mac/Linux users, it's:
 $ cd /the/folder/path/here
 # But if the folder is on different directory, please refer to this link:
 # https://wp-mix.com/mac-terminal-change-directory-external-drive/
@@ -35,11 +35,14 @@ $ cd /the/folder/path/here
 # It should output the version number.
 $ node -v 
 
+# Install Yarn, better package manager for Node.js first
+$ npm install -g yarn
+
 # Let's install all the dependency needed.
-$ npm install
+$ yarn install
 
 # Let's generate the usable HTML files
-$ npm run generate
+$ yarn run generate
 ```
 
 Voila. You did it. Go to the `/dist` folder that was automatically created, then open the `index.html` file.

@@ -13,7 +13,7 @@
           <div class="flex-1 px-2 my-2 lg:my-0">
             <nuxt-link :to="{path: '/intensity'}">
               <button
-                class="w-full px-3 py-2 text-black hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
+                class="w-full px-3 py-2 hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
                 role="button"
               >
                 Light Intensity
@@ -23,7 +23,7 @@
           <div class="flex-1 px-2 my-2 lg:my-0">
             <nuxt-link :to="{path: '/sensor'}">
               <button
-                class="w-full px-3 py-2 text-black hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
+                class="w-full px-3 py-2 hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
                 role="button"
               >
                 Sensor Size
@@ -33,7 +33,7 @@
           <div class="flex-1 px-2 my-2 lg:my-0">
             <nuxt-link :to="{path: '/photometrics'}">
               <button
-                class="w-full px-3 py-2 text-black hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
+                class="w-full px-3 py-2 hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
                 role="button"
               >
                 Light Photometrics
@@ -43,7 +43,7 @@
           <div class="flex-1 px-2 my-2 lg:my-0">
             <nuxt-link :to="{path: '/file'}">
               <button
-                class="w-full px-3 py-2 text-black hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
+                class="w-full px-3 py-2 hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
                 role="button"
               >
                 File Size

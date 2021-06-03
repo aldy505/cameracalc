@@ -14,8 +14,8 @@
           class="border rounded-lg w-full px-8 py-2"
           type="button"
           :class="{
-            'border-amber-500 text-amber-700 hover:bg-amber-700 hover:text-white': isAperture,
-            'border-blue-500 text-blue-700 hover:bg-blue-700 hover:text-white': isFclux,
+            'border-amber-500 text-amber-700 hover:bg-amber-700 dark:border-amber-400 dark:text-amber-500 dark:hover:bg-amber-600 hover:text-white': isAperture,
+            'border-blue-500 text-blue-700 hover:bg-blue-700 dark:border-blue-400 dark:text-blue-500 dark:hover:bg-blue-600 hover:text-white': isFclux,
           }"
           @click="toggleclass"
         >

@@ -1,8 +1,8 @@
 import {defineConfig} from 'windicss/helpers';
 import colors from 'windicss/colors';
+import form from 'windicss/plugin/forms';
 
 export default defineConfig({
-  purge: [],
   darkMode: 'media',
   theme: {
     colors: {
@@ -27,8 +27,7 @@ export default defineConfig({
       }
     }
   },
-  variants: {
-    extend: {}
-  },
-  plugins: []
+  plugins: [
+    form
+  ]
 });

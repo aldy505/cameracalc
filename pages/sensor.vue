@@ -14,7 +14,7 @@
           <div class="flex-2">
             <select
               v-model="input.from"
-              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+              class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             >
               <option
                 v-for="item in dataList"
@@ -32,7 +32,7 @@
           <div class="flex-2">
             <select
               v-model="input.to"
-              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+              class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
             >
               <option
                 v-for="item in dataList"
@@ -50,7 +50,7 @@
           <div class="flex-2 mx-4 w-full">
             <input
               v-model="input.focal"
-              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+              class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
               type="number"
             >
           </div>
@@ -60,7 +60,7 @@
           <div class="flex-2 w-full">
             <select
               v-model="input.aspectRatio"
-              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+              class="w-full rounded-lg border-2 form-select dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
             >
               <option value="1">
                 16:9

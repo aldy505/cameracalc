@@ -14,7 +14,7 @@
           <div class="flex-2 w-full">
             <select
               v-model="lightType"
-              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+              class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
               @change="lightsUpdate()"
             >
               <option value="LED">
@@ -39,7 +39,7 @@
           <div class="flex-2 w-full">
             <select
               v-model="input.lightName"
-              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+              class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
             >
               <option
                 v-for="item in content.lightName"
@@ -57,7 +57,7 @@
           <div class="flex-2 w-dull">
             <input
               v-model="input.distance"
-              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+              class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
               type="number"
             >
           </div>
@@ -68,7 +68,7 @@
       </form>
       <div class="row mt-3">
         <button
-          class="border rounded-lg w-full px-8 py-2 border-blue-500 text-blue-700 hover:bg-blue-700 hover:text-white"
+          class="border rounded-lg w-full px-8 py-2 border-blue-500 text-blue-700 hover:bg-blue-700 dark:focus:border-indigo-400 dark:ring-indigo-400 dark:hover:bg-blue-600 hover:text-white"
           type="button"
           @click="toggleLightDetail()"
         >

@@ -13,7 +13,7 @@
         <div class="flex-2 mx-4">
           <input
             v-model="input.iso"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2 dark:bg-gray-800"
             type="number"
             required
             value=""
@@ -25,7 +25,7 @@
         <div class="flex-2 mx-4">
           <select
             v-model="input.fps"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2 dark:bg-gray-800"
           >
             <option>24</option>
             <option>25</option>
@@ -46,7 +46,7 @@
         <div class="flex-2 mx-4">
           <input
             v-model="input.fc"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2 dark:bg-gray-800"
             type="number"
             value=""
           >
@@ -57,7 +57,7 @@
         <div class="flex-2 mx-4">
           <input
             v-model="input.lux"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2 dark:bg-gray-800"
             type="number"
             value=""
           >

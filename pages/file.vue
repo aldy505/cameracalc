@@ -13,7 +13,7 @@
         <div class="flex-2 mx-4 w-full">
           <select
             v-model="input.format"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 dark:focus:border-indigo-400 ring-0 focus:ring-1 ring-indigo-600 dark:ring-indigo-400 px-4 py-2"
           >
             <option
               v-for="item in dataList"
@@ -31,7 +31,7 @@
         <div class="flex-2">
           <select
             v-model="input.fps"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 dark:focus:border-indigo-400 ring-0 focus:ring-1 ring-indigo-600 dark:ring-indigo-400 px-4 py-2"
           >
             <option>24</option>
             <option>25</option>
@@ -50,7 +50,7 @@
         <div class="flex-2 mx-4 w-full">
           <select
             v-model="input.resolution"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 dark:focus:border-indigo-400 ring-0 focus:ring-1 ring-indigo-600 dark:ring-indigo-400 px-4 py-2"
           >
             <option
               v-for="resolution in resolutions"
@@ -69,14 +69,14 @@
         <div class="flex-2 mx-4 w-full">
           <input
             v-model="input.duration"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 dark:focus:border-indigo-400 ring-0 focus:ring-1 ring-indigo-600 dark:ring-indigo-400 px-4 py-2"
             type="number"
           >
         </div>
         <div class="flex-1 mx-4 w-full">
           <select
             v-model="input.unit"
-            class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 dark:focus:border-indigo-400 ring-0 focus:ring-1 ring-indigo-600 dark:ring-indigo-400 px-4 py-2"
           >
             <option
               v-for="duration in durations"

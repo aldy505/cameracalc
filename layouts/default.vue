@@ -1,19 +1,21 @@
 <template>
-  <div class="container mx-auto font-inter min-h-full">
-    <div class="flex flex-col">
-      <Navbar class="flex-1" />
-      <main class="flex-2">
-        <Nuxt class="px-8 md:px-10 lg:px-24 py-6 lg:py-16" />
-      </main>
-      <footer class="w-full flex-shrink-0">
-        <div class="py-4 px-8 md:px-10 lg:px-24 text-sm h-12">
-          Made with <img
-            src="love.svg"
-            alt="Love"
-            class="w-4 h-auto inline"
-          > in Indonesia
-        </div>
-      </footer>
+  <div class="min-h-screen h-full w-full bg-white dark:bg-gray-900 text-black dark:text-gray-100">
+    <div class="container mx-auto font-inter">
+      <div class="flex flex-col">
+        <Navbar class="flex-1" />
+        <main class="flex-2">
+          <Nuxt class="px-8 md:px-10 lg:px-24 py-6 lg:py-16" />
+        </main>
+        <footer class="w-full flex-shrink-0">
+          <div class="py-4 px-8 md:px-10 lg:px-24 text-sm h-12">
+            Made with <img
+              src="love.svg"
+              alt="Love"
+              class="w-4 h-auto inline"
+            > in Indonesia
+          </div>
+        </footer>
+      </div>
     </div>
   </div>
 </template>
