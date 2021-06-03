@@ -2,7 +2,9 @@
   <header class="py-8 w-full">
     <div class="py-3 block">
       <nuxt-link :to="{path: '/'}">
-        <h1 class="w-full text-center text-5xl">Camera Calculator</h1>
+        <h1 class="w-full text-center text-5xl">
+          Camera Calculator
+        </h1>
       </nuxt-link>
     </div>
     <nav class="py-2">

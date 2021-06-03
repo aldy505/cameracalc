@@ -23,27 +23,21 @@
     "generate": "nuxt generate",
     "lint:check": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "lint:fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-    "prettier:check": "prettier --check --ignore-path .gitignore \"**/**{.js,.json,.vue}\"",
-    "prettier:fix": "prettier --write --ignore-path .gitignore \"**/**{.js,.json,.vue}\"",
-    "precommit": "npm run lint:fix && npm run prettier:fix"
+    "precommit": "yarn run lint:fix",
+    "commit": "cz"
   },
   "dependencies": {
     "@nuxtjs/google-gtag": "^1.0.4",
+    "@nuxtjs/robots": "^2.5.0",
     "@nuxtjs/sitemap": "^2.4.0",
-    "nuxt": "2.15.4",
+    "core-js": "^3.13.1",
+    "nuxt": "2.15.6",
     "nuxt-webfontloader": "^1.1.0"
   },
   "devDependencies": {
-    "@nuxtjs/color-mode": "^2.0.5",
-    "@nuxtjs/tailwindcss": "^4.0.3",
-    "eslint": "^7.25.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-loader": "4.0.2",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-prettier": "^3.4.0",
-    "eslint-plugin-vue": "^7.9.0",
-    "postcss": "^8.2.12",
-    "prettier": "^2.2.1"
+    "eslint": "^7.27.0",
+    "eslint-config-xo-space": "^0.27.0",
+    "eslint-plugin-vue": "^7.10.0",
+    "nuxt-windicss": "^0.8.3"
   }
 }

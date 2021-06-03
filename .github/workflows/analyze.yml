@@ -9,56 +9,47 @@ on:
 jobs:
   analyze:
     name: Analyze
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
-      matrix:
-        os: [ubuntu-latest]
-        node: [14, 16]
-        language: [ 'javascript' ]
        
     steps:
     
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout code
+        uses: actions/checkout@master
 
-    - name: Setup Node
-      uses: actions/setup-node@v2.1.4
-      with:
-        node-version: ${{ matrix.node }}
+      - name: Setup nodejs
+        uses: actions/setup-node@v2.1.4
+        with:
+          node-version: 14
 
-    - name: Get npm cache directory
-      id: npm-cache-dir
-      run: |
-        echo "::set-output name=dir::$(npm config get cache)"
+      - name: Get yarn cache directory path 🛠
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
 
-    - name: cache node_modules
-      uses: actions/cache@v2
-      id: npm-cache
-      with:
-        path: ${{ steps.npm-cache-dir.outputs.dir }}
-        key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    
-    - name: Installling dependencies
-      if: steps.cache.outputs.cache-hit != 'true'
-      run: npm install
+      - name: Cache node_modules 📦
+        uses: actions/cache@v2
+        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+        with:
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: Installling dependencies
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: yarn 
 
-    - name: Eslint / Code linting
-      run: npm run lint:check
-
-    - name: Prettier / Code style
-      run: npm run prettier:check
-
-    - name: Build
-      run: npm run generate
+      - name: Lint
+        run: yarn run lint
+      
+      - name: Build
+        run: yarn run generate
 
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v1
       with:
-        languages: ${{ matrix.language }}
+        languages: javascript
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1

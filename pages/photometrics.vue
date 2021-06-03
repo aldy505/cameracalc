@@ -2,45 +2,64 @@
   <div>
     <div class="container mx-auto">
       <div class="block">
-        <h2 class="text-3xl">Footcandle/Lux within distance</h2>
+        <h2 class="text-3xl">
+          Footcandle/Lux within distance
+        </h2>
       </div>
       <form>
         <div class="flex flex-col md:flex-row items-center py-2">
-          <div class="flex-1">Select category:</div>
+          <div class="flex-1">
+            Select category:
+          </div>
           <div class="flex-2 w-full">
             <select
               v-model="lightType"
               class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
               @change="lightsUpdate()"
             >
-              <option value="LED">LED</option>
-              <option value="HMI">HMI</option>
-              <option value="Tungsten">Tungsten</option>
-              <option value="Fluorescent">Fluorescent</option>
-            </select>
-          </div>
-        </div>
-        <div class="flex flex-col md:flex-row items-center py-2">
-          <div class="flex-1">Select lights:</div>
-          <div class="flex-2 w-full">
-            <select
-              v-model="input.lightName"
-              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
-            >
-              <option v-for="item in content.lightName" :key="item.id">
-                {{ item.Light_Name }}
+              <option value="LED">
+                LED
+              </option>
+              <option value="HMI">
+                HMI
+              </option>
+              <option value="Tungsten">
+                Tungsten
+              </option>
+              <option value="Fluorescent">
+                Fluorescent
               </option>
             </select>
           </div>
         </div>
         <div class="flex flex-col md:flex-row items-center py-2">
-          <div class="flex-1">Object distance (in meters):</div>
+          <div class="flex-1">
+            Select lights:
+          </div>
+          <div class="flex-2 w-full">
+            <select
+              v-model="input.lightName"
+              class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
+            >
+              <option
+                v-for="item in content.lightName"
+                :key="item.id"
+              >
+                {{ item.lightName }}
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="flex flex-col md:flex-row items-center py-2">
+          <div class="flex-1">
+            Object distance (in meters):
+          </div>
           <div class="flex-2 w-dull">
             <input
               v-model="input.distance"
               class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
               type="number"
-            />
+            >
           </div>
         </div>
         <div class="my-2 block">
@@ -56,9 +75,15 @@
           {{ lightDetail.text }}
         </button>
       </div>
-      <div class="block my-2" :class="{hidden: lightDetail.toggle}">
+      <div
+        class="block my-2"
+        :class="{hidden: lightDetail.toggle}"
+      >
         <div class="block py-3">
-          <div v-show="!lightDetail.status" :key="input.distance">
+          <div
+            v-show="!lightDetail.status"
+            :key="input.distance"
+          >
             <p>Please put some number in object distance</p>
           </div>
           <div v-show="lightDetail.status">
@@ -87,7 +112,6 @@
 </template>
 
 <script>
-// eslint-disable-next-line import/no-unresolved
 import photometrics from '~/assets/photometrics.json';
 
 export default {
@@ -100,14 +124,14 @@ export default {
       lightType: '',
       input: {
         lightName: '',
-        distance: '',
+        distance: ''
       },
       content: {
-        lightName: [],
+        lightName: []
       },
       output: {
         class: '',
-        text: '',
+        text: ''
       },
       lightDetail: {
         data: {
@@ -122,34 +146,34 @@ export default {
           cri: null,
           tlci: null,
           wKilo: null,
-          wPounds: null,
+          wPounds: null
         },
         status: false,
         toggle: true,
-        text: "Click here if you're interested on the light's detail",
-      },
+        text: 'Click here if you\'re interested on the light\'s detail'
+      }
     };
   },
   watch: {
     input: {
       handler() {
-        this.CalculatePhotometrics();
+        this.calculatePhotometrics();
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   methods: {
     toggleLightDetail() {
       this.lightDetail.toggle = !this.lightDetail.toggle;
-      this.lightDetail.text = this.lightDetail.toggle
-        ? "Click here if you're interested on the light's detail"
-        : 'Click here to hide the details';
+      this.lightDetail.text = this.lightDetail.toggle ?
+        'Click here if you\'re interested on the light\'s detail' :
+        'Click here to hide the details';
     },
     lightsUpdate() {
       const {lightType} = this;
       this.content.lightName = this.dataList
         .filter(o => o.Type === lightType)
-        .map(o => ({Light_Name: o.Light_Name, id: o.id}));
+        .map(o => ({lightName: o.Light_Name, id: o.id}));
     },
     getCurrentLightData(lightName) {
       for (let i = 0; i < this.dataList.length; i += 1) {
@@ -158,9 +182,10 @@ export default {
           return this.dataList[i];
         }
       }
+
       return null;
     },
-    CalculatePhotometrics() {
+    calculatePhotometrics() {
       const {distance, lightName} = this.input;
 
       // Check if object distance input is true
@@ -169,68 +194,55 @@ export default {
         this.output.text = 'Please fill object distance number';
         this.LightDetail = 'Please put some number in object distance';
         this.lightDetail.status = false;
-      } else {
-        const LightData = this.getCurrentLightData(lightName);
-        const parsedDistance = Number(distance.replaceAll(',', '.'));
-        let LightColorTemp;
+      }
 
-        if (LightData.Tungsten.FC === 'n/a') {
-          // Daylight only
-          LightColorTemp = 'Daylight only';
+      const LightData = this.getCurrentLightData(lightName);
+      const parsedDistance = Number(distance.replaceAll(',', '.'));
+      let LightColorTemp;
 
-          const DaylightFC =
-            typeof LightData.Daylight.FC !== 'number'
-              ? Number(LightData.Daylight.FC.replaceAll(',', ''))
-              : LightData.Daylight.FC;
+      if (LightData.Tungsten.FC === 'n/a') {
+        // Daylight only
+        LightColorTemp = 'Daylight only';
 
-          let LightDaylight = (Number(DaylightFC) * 25) / parsedDistance ** 2;
-          LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
+        const DaylightFC = this.parseStringToNumber(LightData.Daylight.FC);
 
-          this.output.class = 'text-emerald-600';
-          this.output.text =
+        let LightDaylight = ((Number(DaylightFC) * 25) / parsedDistance) ** 2;
+        LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
+
+        this.output.class = 'text-emerald-600';
+        this.output.text =
             `You will get ${LightDaylight} footcandle ` +
             `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
               0
             )} lux.`;
-        } else if (LightData.Daylight.FC === 'n/a') {
-          // Tungsten only
-          LightColorTemp = 'Tungsten only';
+      } else if (LightData.Daylight.FC === 'n/a') {
+        // Tungsten only
+        LightColorTemp = 'Tungsten only';
 
-          const TungstenFC =
-            typeof LightData.Tungsten.FC !== 'number'
-              ? Number(LightData.Tungsten.FC.replaceAll(',', ''))
-              : LightData.Tungsten.FC;
+        const TungstenFC = this.parseStringToNumber(LightData.Tungsten.FC);
+        let LightTungsten = ((TungstenFC * 25) / parsedDistance) ** 2;
+        LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
 
-          let LightTungsten = (TungstenFC * 25) / parsedDistance ** 2;
-          LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
-
-          this.output.class = 'text-emerald-600';
-          this.output.text =
+        this.output.class = 'text-emerald-600';
+        this.output.text =
             `You will get ${LightTungsten} footcandle ` +
             `or ${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(
               0
             )} lux.`;
-        } else {
-          // Both daylight and tungsten
-          LightColorTemp = 'Bicolor';
+      } else {
+        // Both daylight and tungsten
+        LightColorTemp = 'Bicolor';
 
-          const DaylightFC =
-            typeof LightData.Daylight.FC !== 'number'
-              ? Number(LightData.Daylight.FC.replaceAll(',', ''))
-              : LightData.Daylight.FC;
+        const DaylightFC = this.parseStringToNumber(LightData.Daylight.FC);
+        let LightDaylight = ((DaylightFC * 25) / parsedDistance) ** 2;
+        LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
 
-          let LightDaylight = (DaylightFC * 25) / parsedDistance ** 2;
-          LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
+        const TungstenFC = this.parseStringToNumber(LightData.Tungsten.FC);
+        let LightTungsten = ((TungstenFC * 25) / parsedDistance) ** 2;
+        LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
 
-          const TungstenFC =
-            typeof LightData.Tungsten.FC !== 'number'
-              ? Number(LightData.Tungsten.FC.replaceAll(',', ''))
-              : LightData.Tungsten.FC;
-          let LightTungsten = (TungstenFC * 25) / parsedDistance ** 2;
-          LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
-
-          this.output.class = 'text-emerald-600';
-          this.output.text =
+        this.output.class = 'text-emerald-600';
+        this.output.text =
             `You will get ${LightDaylight} footcandle ` +
             `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
               0
@@ -239,26 +251,34 @@ export default {
             `${LightTungsten} footcandle or ` +
             `${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(0)} lux ` +
             'for tungsten color temperature.';
-        }
-
-        // Light Detail for nerds
-        this.lightDetail.data = {
-          name: LightData.Light_Name,
-          style: LightData.Style,
-          colorTemp: LightData.Color_Temp,
-          colorStyle: LightColorTemp,
-          watts: LightData.Watts,
-          amps: LightData.Amps['120V'],
-          battery: LightData.Battery_Plate || 'n/a',
-          dimmable: LightData.Dimmable || 'n/a',
-          cri: LightData.CRI || 'n/a',
-          tlci: LightData.TLCI || 'n/a',
-          wKilo: LightData.Metric_Measurement.Weight,
-          wPounds: LightData.Imperial_Measurement.Weight,
-        };
-        this.lightDetail.status = true;
       }
+
+      // Light Detail for nerds
+      this.lightDetail.data = {
+        name: LightData.Light_Name,
+        style: LightData.Style,
+        colorTemp: LightData.Color_Temp,
+        colorStyle: LightColorTemp,
+        watts: LightData.Watts,
+        amps: LightData.Amps['120V'],
+        battery: LightData.Battery_Plate || 'n/a',
+        dimmable: LightData.Dimmable || 'n/a',
+        cri: LightData.CRI || 'n/a',
+        tlci: LightData.TLCI || 'n/a',
+        wKilo: LightData.Metric_Measurement.Weight,
+        wPounds: LightData.Imperial_Measurement.Weight
+      };
+      this.lightDetail.status = true;
     },
-  },
+    parseStringToNumber(payload) {
+      switch (typeof payload) {
+        case 'string':
+          return Number(payload.replaceAll(',', ''));
+        default:
+          return payload;
+      }
+    }
+  }
+
 };
 </script>

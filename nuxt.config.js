@@ -9,21 +9,21 @@ export default {
         rel: 'icon',
         type: 'image/png',
         sizes: '192x192',
-        href: 'favicon-192.png',
+        href: 'favicon-192.png'
       },
       {
         rel: 'icon',
         type: 'image/png',
         sizes: '32x32',
-        href: 'favicon-32.png',
+        href: 'favicon-32.png'
       },
       {
         rel: 'apple-touch-icon',
         type: 'image/png',
         sizes: '180x180',
-        href: 'favicon-180.png',
-      },
-    ],
+        href: 'favicon-180.png'
+      }
+    ]
   },
 
   publicRuntimeConfig: {
@@ -32,7 +32,7 @@ export default {
     title: 'Camera Calculator – Free Calculator for Film Camera Department',
     description: 'Calculate things like photometrics, focal length equivalent, and more..',
     language: 'English',
-    socialIcon: 'head-icon.png',
+    socialIcon: 'head-icon.png'
   },
 
   components: true,
@@ -43,31 +43,20 @@ export default {
 
   plugins: [],
 
-  buildModules: ['@nuxtjs/tailwindcss', '@nuxtjs/color-mode'],
-  tailwindcss: {
-    jit: true,
-    viewer: false,
-  },
-  colorMode: {
-    classSuffix: '',
-  },
+  buildModules: ['nuxt-windicss'],
 
-  modules: ['nuxt-webfontloader', '@nuxtjs/sitemap', '@nuxtjs/google-gtag'],
+  modules: ['nuxt-webfontloader', '@nuxtjs/sitemap', '@nuxtjs/google-gtag', '@nuxtjs/robots'],
   webfontloader: {
     google: {
-      families: ['Inter:300,400,700'],
-    },
+      families: ['Inter:300,400,700']
+    }
   },
   sitemap: {
     hostname: 'https://cameracalc.reinaldyrafli.com',
     gzip: true,
-    exclude: ['/_nuxt/**'],
+    exclude: ['/_nuxt/**']
   },
   'google-gtag': {
-    id: process.env.GTAG_ID || '',
-    config: {
-      anonymize_ip: true,
-      send_page_view: false,
-    },
-  },
+    id: process.env.GTAG_ID || ''
+  }
 };

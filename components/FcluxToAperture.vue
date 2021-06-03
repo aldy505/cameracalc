@@ -1,11 +1,15 @@
 <template>
   <div>
     <div class="block">
-      <h3 class="text-3xl">FC/LUX &mdash;&gt; Aperture</h3>
+      <h3 class="text-3xl">
+        FC/LUX &mdash;&gt; Aperture
+      </h3>
     </div>
     <form>
       <div class="flex flex-col md:flex-row items-center py-2">
-        <div class="flex-1">ISO:&nbsp;</div>
+        <div class="flex-1">
+          ISO:&nbsp;
+        </div>
         <div class="flex-2 mx-4">
           <input
             v-model="input.iso"
@@ -13,9 +17,11 @@
             type="number"
             required
             value=""
-          />
+          >
         </div>
-        <div class="flex-1">FPS:&nbsp;</div>
+        <div class="flex-1">
+          FPS:&nbsp;
+        </div>
         <div class="flex-2 mx-4">
           <select
             v-model="input.fps"
@@ -34,23 +40,27 @@
         </div>
       </div>
       <div class="flex flex-col md:flex-row py-2 items-center">
-        <div class="flex-1">Footcandle:</div>
+        <div class="flex-1">
+          Footcandle:
+        </div>
         <div class="flex-2 mx-4">
           <input
             v-model="input.fc"
             class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
             value=""
-          />
+          >
         </div>
-        <div class="flex-1">Lux:</div>
+        <div class="flex-1">
+          Lux:
+        </div>
         <div class="flex-2 mx-4">
           <input
             v-model="input.lux"
             class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
             value=""
-          />
+          >
         </div>
       </div>
       <div class="my-2 block">
@@ -69,14 +79,14 @@ export default {
     return {
       output: {
         class: '',
-        text: '',
+        text: ''
       },
       input: {
         fps: '',
         iso: '',
         fc: '',
-        lux: '',
-      },
+        lux: ''
+      }
     };
   },
   watch: {
@@ -84,14 +94,14 @@ export default {
       handler() {
         this.calculate();
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   methods: {
     calculate() {
       const {fps, iso, fc, lux} = this.input;
       let fpsConst;
-      // validate FC and Lux
+      // Validate FC and Lux
       if (!fc && !lux) {
         this.output.class = 'text-danger';
         this.output.text = 'Please fill the footcandle OR lux';
@@ -105,6 +115,7 @@ export default {
         } else if (fc && lux) {
           intensity = Number(fc.replaceAll(',', '.'));
         }
+
         // Checking the fps
         if (fps === '24' || fps === '48' || fps === '96') {
           fpsConst = 0.009696;
@@ -113,6 +124,7 @@ export default {
         } else if (fps === '30' || fps === '60' || fps === '120') {
           fpsConst = 0.01086;
         }
+
         // Now we calculate hard!
         if (intensity) {
           const result =
@@ -126,7 +138,7 @@ export default {
           this.output.text = 'Some error happened.';
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>

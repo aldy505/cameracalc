@@ -1,12 +1,12 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
-const colors = require('tailwindcss/colors');
+import {defineConfig} from 'windicss/helpers';
+import colors from 'windicss/colors';
 
-module.exports = {
+export default defineConfig({
   purge: [],
-  darkMode: 'class', // or 'media' or 'class'
+  darkMode: 'media',
   theme: {
     colors: {
-      ...colors,
+      ...colors
     },
     extend: {
       fontFamily: {
@@ -19,16 +19,16 @@ module.exports = {
           'BlinkMacSystemFont',
           'Helvetica\\ Neue',
           'Arial',
-          'sans-serif',
-        ],
+          'sans-serif'
+        ]
       },
       flex: {
-        2: '2 2 0%',
-      },
-    },
+        2: '2 2 0%'
+      }
+    }
   },
   variants: {
-    extend: {},
+    extend: {}
   },
-  plugins: [],
-};
+  plugins: []
+});

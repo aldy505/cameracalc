@@ -1,20 +1,26 @@
 <template>
   <div>
     <div class="block">
-      <h3 class="text-3xl">Aperture &mdash;&gt; FC/LUX</h3>
+      <h3 class="text-3xl">
+        Aperture &mdash;&gt; FC/LUX
+      </h3>
     </div>
     <form>
       <div class="flex flex-col md:flex-row items-center py-2">
-        <div class="flex-1">Aperture:&nbsp;</div>
+        <div class="flex-1">
+          Aperture:&nbsp;
+        </div>
         <div class="flex-2 mx-4">
           <input
             v-model="input.aperture"
             class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
             required="required"
-          />
+          >
         </div>
-        <div class="flex-1">FPS:&nbsp;</div>
+        <div class="flex-1">
+          FPS:&nbsp;
+        </div>
         <div class="flex-2 mx-4">
           <select
             v-model="input.fps"
@@ -33,13 +39,15 @@
         </div>
       </div>
       <div class="flex flex-col md:flex-row items-center md:w-1/2 py-2">
-        <div class="flex-1">ISO:</div>
+        <div class="flex-1">
+          ISO:
+        </div>
         <div class="flex-2 mx-4">
           <input
             v-model="input.iso"
             class="w-full rounded-lg border-2 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 px-4 py-2"
             type="number"
-          />
+          >
         </div>
       </div>
       <div class="my-2 block">
@@ -58,13 +66,13 @@ export default {
     return {
       output: {
         class: '',
-        text: '',
+        text: ''
       },
       input: {
         iso: '',
         aperture: '',
-        fps: '',
-      },
+        fps: ''
+      }
     };
   },
   watch: {
@@ -72,14 +80,14 @@ export default {
       handler() {
         this.calculate();
       },
-      deep: true,
-    },
+      deep: true
+    }
   },
   methods: {
     calculate() {
       const {iso, aperture, fps} = this.input;
       let fpsConst;
-      // validate FC and Lux
+      // Validate FC and Lux
       if (!iso && !aperture) {
         this.output.class = 'text-danger';
         this.output.text = 'Please fill the ISO and Aperture number';
@@ -105,7 +113,7 @@ export default {
             `and ${parseFloat(Math.round(lux * 100) / 100).toFixed(2)} lux.`;
         }
       }
-    },
-  },
+    }
+  }
 };
 </script>
