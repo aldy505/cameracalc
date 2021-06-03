@@ -105,40 +105,50 @@ export default {
       if (!fc && !lux) {
         this.output.class = 'text-danger';
         this.output.text = 'Please fill the footcandle OR lux';
+        return;
+      }
+
+      if (!fps) {
+        this.output.class = 'text-danger';
+        this.output.text = 'Please pick the FPS number';
+        return;
+      }
+
+      let intensity;
+      // Checking the user input
+      if (!fc && lux) {
+        intensity = Number(lux.replaceAll(',', '.')) / 10.764;
+      } else if (fc && !lux) {
+        intensity = Number(fc.replaceAll(',', '.'));
+      } else if (fc && lux) {
+        intensity = Number(fc.replaceAll(',', '.'));
+      }
+
+      // Checking the fps
+      if (fps === '24' || fps === '48' || fps === '96') {
+        fpsConst = 0.009696;
+      } else if (fps === '25' || fps === '50' || fps === '100') {
+        fpsConst = 0.0099;
+      } else if (fps === '30' || fps === '60' || fps === '120') {
+        fpsConst = 0.01086;
       } else {
-        let intensity;
-        // Checking the user input
-        if (!fc && lux) {
-          intensity = Number(lux.replaceAll(',', '.')) / 10.764;
-        } else if (fc && !lux) {
-          intensity = Number(fc.replaceAll(',', '.'));
-        } else if (fc && lux) {
-          intensity = Number(fc.replaceAll(',', '.'));
-        }
+        fpsConst = 0.009696;
+      }
 
-        // Checking the fps
-        if (fps === '24' || fps === '48' || fps === '96') {
-          fpsConst = 0.009696;
-        } else if (fps === '25' || fps === '50' || fps === '100') {
-          fpsConst = 0.0099;
-        } else if (fps === '30' || fps === '60' || fps === '120') {
-          fpsConst = 0.01086;
-        }
-
-        // Now we calculate hard!
-        if (intensity) {
-          const result =
+      // Now we calculate hard!
+      if (intensity) {
+        const result =
             (1 / (2 * Number(fps))) * intensity * fpsConst * Number(iso.replaceAll(',', '.'));
-          this.output.class = 'text-success';
-          this.output.text = `Your aperture needs to be: f/${parseFloat(
-            Math.round(result * 100) / 100
-          ).toFixed(2)}`;
-        } else {
-          this.output.class = 'text-warning';
-          this.output.text = 'Some error happened.';
-        }
+        this.output.class = 'text-success';
+        this.output.text = `Your aperture needs to be: f/${parseFloat(
+          Math.round(result * 100) / 100
+        ).toFixed(2)}`;
+      } else {
+        this.output.class = 'text-warning';
+        this.output.text = 'Some error happened.';
       }
     }
+
   }
 };
 </script>

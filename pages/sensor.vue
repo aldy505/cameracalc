@@ -116,10 +116,23 @@ export default {
     calculateSensor() {
       const {from, to, focal, aspectRatio} = this.input;
 
+      if (!from) {
+        this.output.class = 'text-red-600';
+        this.output.text = 'Please pick source camera';
+        return;
+      }
+
+      if (!to) {
+        this.output.class = 'text-red-600';
+        this.output.text = 'Please pick destination camera';
+        return;
+      }
+
       // Check if user actually input some number to focal length
       if (!focal) {
         this.output.class = 'text-red-600';
         this.output.text = 'Please fill in focal length number';
+        return;
       }
 
       const fromData = this.dataList.filter(o => o.camera === from)[0];

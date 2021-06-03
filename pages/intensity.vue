@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="container mx-auto">
-      <div :class="{hidden: isFclux}">
+      <div :class="{'hidden': isFclux}">
         <FcluxToAperture />
       </div>
-      <div :class="{hidden: isAperture}">
+      <div :class="{'hidden': isAperture}">
         <ApertureToFclux />
       </div>
     </div>

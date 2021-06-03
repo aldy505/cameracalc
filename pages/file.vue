@@ -145,9 +145,34 @@ export default {
       const {format, fps, resolution, duration, unit} = this.input;
       let durationInSecond = Number(duration.replaceAll(',', '.'));
 
+      if (!format) {
+        this.output.text = 'Please fill the format input';
+        this.output.class = 'text-red-600';
+        return;
+      }
+
+      if (!fps) {
+        this.output.text = 'Please fill the FPS input';
+        this.output.class = 'text-red-600';
+        return;
+      }
+
+      if (!resolution) {
+        this.output.text = 'Please fill the resolution input';
+        this.output.class = 'text-red-600';
+        return;
+      }
+
       if (!duration) {
         this.output.text = 'Please fill the duration input';
         this.output.class = 'text-red-600';
+        return;
+      }
+
+      if (!unit) {
+        this.output.text = 'Please fill the duration unit';
+        this.output.class = 'text-red-600';
+        return;
       }
 
       // Convert time to seconds

@@ -91,27 +91,34 @@ export default {
       if (!iso && !aperture) {
         this.output.class = 'text-danger';
         this.output.text = 'Please fill the ISO and Aperture number';
-      } else {
-        // Checking the fps
-        if (fps === '24' || fps === '48' || fps === '96') {
-          fpsConst = 0.009696;
-        } else if (fps === '25' || fps === '50' || fps === '100') {
-          fpsConst = 0.0099;
-        } else if (fps === '30' || fps === '60' || fps === '120') {
-          fpsConst = 0.01086;
-        }
+        return;
+      }
 
-        // Now we calculate hard!
-        if (fpsConst) {
-          const fc =
+      if (!fps) {
+        this.output.class = 'text-danger';
+        this.output.text = 'Please pick the FPS number';
+        return;
+      }
+
+      // Checking the fps
+      if (fps === '24' || fps === '48' || fps === '96') {
+        fpsConst = 0.009696;
+      } else if (fps === '25' || fps === '50' || fps === '100') {
+        fpsConst = 0.0099;
+      } else if (fps === '30' || fps === '60' || fps === '120') {
+        fpsConst = 0.01086;
+      }
+
+      // Now we calculate hard!
+      if (fpsConst) {
+        const fc =
             Number(aperture.replaceAll(',', '.')) /
             ((1 / (2 * Number(fps))) * Number(iso.replaceAll(',', '.')) * fpsConst);
-          const lux = fc * 10.764;
-          this.output.class = 'text-success';
-          this.output.text =
+        const lux = fc * 10.764;
+        this.output.class = 'text-success';
+        this.output.text =
             `You need: ${parseFloat(Math.round(fc * 100) / 100).toFixed(2)} footcandle ` +
             `and ${parseFloat(Math.round(lux * 100) / 100).toFixed(2)} lux.`;
-        }
       }
     }
   }

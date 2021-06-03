@@ -76,7 +76,7 @@
         </button>
       </div>
       <div
-        class="block my-2"
+        class="my-2"
         :class="{hidden: lightDetail.toggle}"
       >
         <div class="block py-3">
@@ -188,12 +188,21 @@ export default {
     calculatePhotometrics() {
       const {distance, lightName} = this.input;
 
+      if (!lightName) {
+        this.output.class = 'text-yellow-600';
+        this.output.text = 'Please select a light';
+        this.LightDetail = 'Please select a light first';
+        this.lightDetail.status = false;
+        return;
+      }
+
       // Check if object distance input is true
       if (!distance) {
         this.output.class = 'text-red-600';
         this.output.text = 'Please fill object distance number';
         this.LightDetail = 'Please put some number in object distance';
         this.lightDetail.status = false;
+        return;
       }
 
       const LightData = this.getCurrentLightData(lightName);
@@ -206,7 +215,7 @@ export default {
 
         const DaylightFC = this.parseStringToNumber(LightData.Daylight.FC);
 
-        let LightDaylight = ((Number(DaylightFC) * 25) / parsedDistance) ** 2;
+        let LightDaylight = (Number(DaylightFC) * 25) / (parsedDistance ** 2);
         LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
 
         this.output.class = 'text-emerald-600';
@@ -220,7 +229,7 @@ export default {
         LightColorTemp = 'Tungsten only';
 
         const TungstenFC = this.parseStringToNumber(LightData.Tungsten.FC);
-        let LightTungsten = ((TungstenFC * 25) / parsedDistance) ** 2;
+        let LightTungsten = (TungstenFC * 25) / (parsedDistance ** 2);
         LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
 
         this.output.class = 'text-emerald-600';
@@ -234,11 +243,11 @@ export default {
         LightColorTemp = 'Bicolor';
 
         const DaylightFC = this.parseStringToNumber(LightData.Daylight.FC);
-        let LightDaylight = ((DaylightFC * 25) / parsedDistance) ** 2;
+        let LightDaylight = (DaylightFC * 25) / (parsedDistance ** 2);
         LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
 
         const TungstenFC = this.parseStringToNumber(LightData.Tungsten.FC);
-        let LightTungsten = ((TungstenFC * 25) / parsedDistance) ** 2;
+        let LightTungsten = (TungstenFC * 25) / (parsedDistance ** 2);
         LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
 
         this.output.class = 'text-emerald-600';
