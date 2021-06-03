@@ -24,7 +24,7 @@
             href="https://github.com/aldy505/cameracalc"
           ><img
             class="h-auto w-8"
-            src="github.png"
+            src="github.svg"
           ></a>
         </div>
         <div class="flex-grow px-2 py-1 text-indigo-600 dark:text-indigo-400 hover:underline no-underline">
@@ -33,7 +33,7 @@
         <div class="flex-grow-0 px-2 py-1">
           <a href="mailto:reinaldyrfl@gmail.com"><img
             class="h-auto w-8"
-            src="mail.png"
+            src="mail.svg"
           ></a>
         </div>
         <div class="flex-grow px-2 py-1 text-indigo-600 dark:text-indigo-400 hover:underline no-underline">
