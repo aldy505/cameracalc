@@ -42,7 +42,7 @@ jobs:
         run: yarn 
 
       - name: Lint
-        run: yarn run lint
+        run: yarn run lint:check
       
       - name: Build
         run: yarn run generate
