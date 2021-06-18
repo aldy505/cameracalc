@@ -10,43 +10,17 @@
     <nav class="py-2">
       <div class="px-8 mx-auto lg:w-2/3">
         <div class="flex flex-col lg:flex-row text-center content-center justify-center">
-          <div class="flex-1 px-2 my-2 lg:my-0">
-            <nuxt-link :to="{path: '/intensity'}">
+          <div
+            class="flex-1 px-2 my-2 lg:my-0"
+            v-for="nav in navigations"
+            :key="nav.id"
+          >
+            <nuxt-link :to="{path: nav.path}">
               <button
                 class="w-full px-3 py-2 hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
                 role="button"
               >
-                Light Intensity
-              </button>
-            </nuxt-link>
-          </div>
-          <div class="flex-1 px-2 my-2 lg:my-0">
-            <nuxt-link :to="{path: '/sensor'}">
-              <button
-                class="w-full px-3 py-2 hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
-                role="button"
-              >
-                Sensor Size
-              </button>
-            </nuxt-link>
-          </div>
-          <div class="flex-1 px-2 my-2 lg:my-0">
-            <nuxt-link :to="{path: '/photometrics'}">
-              <button
-                class="w-full px-3 py-2 hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
-                role="button"
-              >
-                Light Photometrics
-              </button>
-            </nuxt-link>
-          </div>
-          <div class="flex-1 px-2 my-2 lg:my-0">
-            <nuxt-link :to="{path: '/file'}">
-              <button
-                class="w-full px-3 py-2 hover:text-white hover:bg-indigo-800 rounded-lg border-2 border-indigo-800"
-                role="button"
-              >
-                File Size
+                {{ nav.name }}
               </button>
             </nuxt-link>
           </div>
@@ -55,3 +29,39 @@
     </nav>
   </header>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      navigations: [
+        {
+          id: 1,
+          path: '/intensity',
+          name: 'Light Intensity'
+        },
+        {
+          id: 2,
+          path: '/sensor',
+          name: 'Sensor Size'
+        },
+        {
+          id: 3,
+          path: '/photometrics',
+          name: 'Light Photometrics'
+        },
+        {
+          id: 4,
+          path: '/file',
+          name: 'File Size'
+        }
+        // {
+        //   id: 5,
+        //   path: '/view',
+        //   name: 'Field of View'
+        // }
+      ]
+    };
+  }
+};
+</script>

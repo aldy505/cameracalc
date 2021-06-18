@@ -100,7 +100,7 @@ export default {
         from: '',
         to: '',
         focal: '',
-        aspectRatio: ''
+        aspectRatio: 1
       }
     };
   },

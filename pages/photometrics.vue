@@ -52,14 +52,31 @@
         </div>
         <div class="flex flex-col md:flex-row items-center py-2">
           <div class="flex-1">
-            Object distance (in meters):
+            Object distance:
           </div>
           <div class="flex-2 w-dull">
-            <input
-              v-model="input.distance"
-              class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
-              type="number"
-            >
+            <div class="flex flex-col md:flex-row items-center">
+              <div class="flex-2">
+                <input
+                  v-model="input.distance"
+                  class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
+                  type="number"
+                >
+              </div>
+              <div class="flex-1 pl-4">
+                <select
+                  v-model="input.unit"
+                  class="w-full rounded-lg border-2 dark:bg-gray-800 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2"
+                >
+                  <option value="m">
+                    meters
+                  </option>
+                  <option value="f">
+                    feet
+                  </option>
+                </select>
+              </div>
+            </div>
           </div>
         </div>
         <div class="my-2 block">
@@ -124,7 +141,8 @@ export default {
       lightType: '',
       input: {
         lightName: '',
-        distance: ''
+        distance: '',
+        unit: 'm'
       },
       content: {
         lightName: []
@@ -206,7 +224,7 @@ export default {
       }
 
       const LightData = this.getCurrentLightData(lightName);
-      const parsedDistance = Number(distance.replaceAll(',', '.'));
+      const parsedDistance = (this.input.unit === 'm') ? Number(distance.replaceAll(',', '.')) * 3.28084 : Number(distance.replaceAll(',', '.'));
       let LightColorTemp;
 
       if (LightData.Tungsten.FC === 'n/a') {

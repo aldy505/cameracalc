@@ -124,10 +124,10 @@ export default {
       },
       input: {
         format: '',
-        fps: '',
-        resolution: '',
+        fps: 24,
+        resolution: 1,
         duration: '',
-        unit: ''
+        unit: 'h'
       }
     };
   },

@@ -71,7 +71,7 @@ export default {
       input: {
         iso: '',
         aperture: '',
-        fps: ''
+        fps: 24
       }
     };
   },
@@ -89,13 +89,13 @@ export default {
       let fpsConst;
       // Validate FC and Lux
       if (!iso && !aperture) {
-        this.output.class = 'text-danger';
+        this.output.class = 'text-red-600';
         this.output.text = 'Please fill the ISO and Aperture number';
         return;
       }
 
       if (!fps) {
-        this.output.class = 'text-danger';
+        this.output.class = 'text-red-600';
         this.output.text = 'Please pick the FPS number';
         return;
       }
@@ -115,7 +115,7 @@ export default {
             Number(aperture.replaceAll(',', '.')) /
             ((1 / (2 * Number(fps))) * Number(iso.replaceAll(',', '.')) * fpsConst);
         const lux = fc * 10.764;
-        this.output.class = 'text-success';
+        this.output.class = 'text-emerald-600';
         this.output.text =
             `You need: ${parseFloat(Math.round(fc * 100) / 100).toFixed(2)} footcandle ` +
             `and ${parseFloat(Math.round(lux * 100) / 100).toFixed(2)} lux.`;
