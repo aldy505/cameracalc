@@ -38,30 +38,30 @@ export default {
         {
           id: 1,
           path: '/intensity',
-          name: 'Light Intensity'
+          name: 'Light Intensity',
         },
         {
           id: 2,
           path: '/sensor',
-          name: 'Sensor Size'
+          name: 'Sensor Size',
         },
         {
           id: 3,
           path: '/photometrics',
-          name: 'Light Photometrics'
+          name: 'Light Photometrics',
         },
         {
           id: 4,
           path: '/file',
-          name: 'File Size'
-        }
+          name: 'File Size',
+        },
         // {
         //   id: 5,
         //   path: '/view',
         //   name: 'Field of View'
         // }
-      ]
+      ],
     };
-  }
+  },
 };
 </script>

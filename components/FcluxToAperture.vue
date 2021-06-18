@@ -79,14 +79,14 @@ export default {
     return {
       output: {
         class: '',
-        text: ''
+        text: '',
       },
       input: {
         fps: 24,
         iso: '',
         fc: '',
-        lux: ''
-      }
+        lux: '',
+      },
     };
   },
   watch: {
@@ -94,8 +94,8 @@ export default {
       handler() {
         this.calculate();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     calculate() {
@@ -137,18 +137,18 @@ export default {
 
       // Now we calculate hard!
       if (intensity) {
-        const result =
-            (1 / (2 * Number(fps))) * intensity * fpsConst * Number(iso.replaceAll(',', '.'));
+        const result
+            = (1 / (2 * Number(fps))) * intensity * fpsConst * Number(iso.replaceAll(',', '.'));
         this.output.class = 'text-emerald-600';
         this.output.text = `Your aperture needs to be: f/${parseFloat(
-          Math.round(result * 100) / 100
+          Math.round(result * 100) / 100,
         ).toFixed(2)}`;
       } else {
         this.output.class = 'text-yellow-600';
         this.output.text = 'Some error happened.';
       }
-    }
+    },
 
-  }
+  },
 };
 </script>

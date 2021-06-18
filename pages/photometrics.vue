@@ -142,14 +142,14 @@ export default {
       input: {
         lightName: '',
         distance: '',
-        unit: 'm'
+        unit: 'm',
       },
       content: {
-        lightName: []
+        lightName: [],
       },
       output: {
         class: '',
-        text: ''
+        text: '',
       },
       lightDetail: {
         data: {
@@ -164,12 +164,12 @@ export default {
           cri: null,
           tlci: null,
           wKilo: null,
-          wPounds: null
+          wPounds: null,
         },
         status: false,
         toggle: true,
-        text: 'Click here if you\'re interested on the light\'s detail'
-      }
+        text: 'Click here if you\'re interested on the light\'s detail',
+      },
     };
   },
   watch: {
@@ -177,15 +177,15 @@ export default {
       handler() {
         this.calculatePhotometrics();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     toggleLightDetail() {
       this.lightDetail.toggle = !this.lightDetail.toggle;
-      this.lightDetail.text = this.lightDetail.toggle ?
-        'Click here if you\'re interested on the light\'s detail' :
-        'Click here to hide the details';
+      this.lightDetail.text = this.lightDetail.toggle
+        ? 'Click here if you\'re interested on the light\'s detail'
+        : 'Click here to hide the details';
     },
     lightsUpdate() {
       const {lightType} = this;
@@ -237,10 +237,10 @@ export default {
         LightDaylight = Number.parseFloat(Math.round(LightDaylight * 100) / 100).toFixed(0);
 
         this.output.class = 'text-emerald-600';
-        this.output.text =
-            `You will get ${LightDaylight} footcandle ` +
-            `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
-              0
+        this.output.text
+            = `You will get ${LightDaylight} footcandle `
+            + `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
+              0,
             )} lux.`;
       } else if (LightData.Daylight.FC === 'n/a') {
         // Tungsten only
@@ -251,10 +251,10 @@ export default {
         LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
 
         this.output.class = 'text-emerald-600';
-        this.output.text =
-            `You will get ${LightTungsten} footcandle ` +
-            `or ${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(
-              0
+        this.output.text
+            = `You will get ${LightTungsten} footcandle `
+            + `or ${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(
+              0,
             )} lux.`;
       } else {
         // Both daylight and tungsten
@@ -269,15 +269,15 @@ export default {
         LightTungsten = Number.parseFloat(Math.round(LightTungsten * 100) / 100).toFixed(0);
 
         this.output.class = 'text-emerald-600';
-        this.output.text =
-            `You will get ${LightDaylight} footcandle ` +
-            `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
-              0
-            )} lux ` +
-            'for daylight color temperature and ' +
-            `${LightTungsten} footcandle or ` +
-            `${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(0)} lux ` +
-            'for tungsten color temperature.';
+        this.output.text
+            = `You will get ${LightDaylight} footcandle `
+            + `or ${Number.parseFloat(Math.round(LightDaylight * 10.764 * 100) / 100).toFixed(
+              0,
+            )} lux `
+            + 'for daylight color temperature and '
+            + `${LightTungsten} footcandle or `
+            + `${Number.parseFloat(Math.round(LightTungsten * 10.764 * 100) / 100).toFixed(0)} lux `
+            + 'for tungsten color temperature.';
       }
 
       // Light Detail for nerds
@@ -293,7 +293,7 @@ export default {
         cri: LightData.CRI || 'n/a',
         tlci: LightData.TLCI || 'n/a',
         wKilo: LightData.Metric_Measurement.Weight,
-        wPounds: LightData.Imperial_Measurement.Weight
+        wPounds: LightData.Imperial_Measurement.Weight,
       };
       this.lightDetail.status = true;
     },
@@ -304,8 +304,8 @@ export default {
         default:
           return payload;
       }
-    }
-  }
+    },
+  },
 
 };
 </script>

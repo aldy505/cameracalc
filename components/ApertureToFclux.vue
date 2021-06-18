@@ -66,13 +66,13 @@ export default {
     return {
       output: {
         class: '',
-        text: ''
+        text: '',
       },
       input: {
         iso: '',
         aperture: '',
-        fps: 24
-      }
+        fps: 24,
+      },
     };
   },
   watch: {
@@ -80,8 +80,8 @@ export default {
       handler() {
         this.calculate();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     calculate() {
@@ -111,16 +111,16 @@ export default {
 
       // Now we calculate hard!
       if (fpsConst) {
-        const fc =
-            Number(aperture.replaceAll(',', '.')) /
-            ((1 / (2 * Number(fps))) * Number(iso.replaceAll(',', '.')) * fpsConst);
+        const fc
+            = Number(aperture.replaceAll(',', '.'))
+            / ((1 / (2 * Number(fps))) * Number(iso.replaceAll(',', '.')) * fpsConst);
         const lux = fc * 10.764;
         this.output.class = 'text-emerald-600';
-        this.output.text =
-            `You need: ${parseFloat(Math.round(fc * 100) / 100).toFixed(2)} footcandle ` +
-            `and ${parseFloat(Math.round(lux * 100) / 100).toFixed(2)} lux.`;
+        this.output.text
+            = `You need: ${parseFloat(Math.round(fc * 100) / 100).toFixed(2)} footcandle `
+            + `and ${parseFloat(Math.round(lux * 100) / 100).toFixed(2)} lux.`;
       }
-    }
-  }
+    },
+  },
 };
 </script>

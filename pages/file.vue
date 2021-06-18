@@ -111,24 +111,24 @@ export default {
         {id: 3, text: 'Ultra HD (3840 × 2160)', value: '4'},
         {id: 4, text: 'Retina 5K (5120 × 2880)', value: '7.1111'},
         {id: 5, text: '6K (6144 × 3456)', value: '10.24'},
-        {id: 6, text: '8K (7680 × 4320)', value: '16'}
+        {id: 6, text: '8K (7680 × 4320)', value: '16'},
       ],
       durations: [
         {id: 1, text: 'Hours', value: 'h'},
         {id: 2, text: 'Minutes', value: 'm'},
-        {id: 3, text: 'Seconds', value: 's'}
+        {id: 3, text: 'Seconds', value: 's'},
       ],
       output: {
         class: '',
-        text: ''
+        text: '',
       },
       input: {
         format: '',
         fps: 24,
         resolution: 1,
         duration: '',
-        unit: 'h'
-      }
+        unit: 'h',
+      },
     };
   },
   watch: {
@@ -136,8 +136,8 @@ export default {
       handler() {
         this.calculateFileSize();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     calculateFileSize() {
@@ -188,12 +188,12 @@ export default {
       const FormatData = this.dataList.filter(o => o.Format === format);
 
       // File size = (Bitrate / FPS) * Time
-      const Calculation =
-          (Number(FormatData[0]['24-1080']) *
-            Number(resolution || 1) *
-            FPSConst *
-            durationInSecond) /
-          8;
+      const Calculation
+          = (Number(FormatData[0]['24-1080'])
+            * Number(resolution || 1)
+            * FPSConst
+            * durationInSecond)
+          / 8;
 
       if (Calculation < 1000) {
         // MB
@@ -204,32 +204,32 @@ export default {
         // GB
         const sizeInMB = Number.parseFloat(Math.round(Calculation * 100) / 100).toFixed(2);
         const sizeInGB = Number.parseFloat(Math.round((Calculation / 1000) * 100) / 100).toFixed(
-          2
+          2,
         );
         this.output.text = `The file size should be ${sizeInMB} MB / ${sizeInGB} GB`;
         this.output.class = 'text-emerald-600';
       } else if (Calculation < 1000000000) {
         // TB
         const sizeInGB = Number.parseFloat(Math.round((Calculation / 1000) * 100) / 100).toFixed(
-          2
+          2,
         );
         const sizeInTB = Number.parseFloat(
-          Math.round((Calculation / 1000000) * 100) / 100
+          Math.round((Calculation / 1000000) * 100) / 100,
         ).toFixed(2);
         this.output.text = `The file size should be ${sizeInGB} GB / ${sizeInTB} TB`;
         this.output.class = 'text-emerald-600';
       } else if (Calculation >= 1000000000) {
         // PB
         const sizeInPB = Number.parseFloat(
-          Math.round((Calculation / 1000000000) * 100) / 100
+          Math.round((Calculation / 1000000000) * 100) / 100,
         ).toFixed(2);
         const sizeInTB = Number.parseFloat(
-          Math.round((Calculation / 1000000) * 100) / 100
+          Math.round((Calculation / 1000000) * 100) / 100,
         ).toFixed(2);
         this.output.text = `The file size should be ${sizeInTB} TB / ${sizeInPB} PB`;
         this.output.class = 'text-emerald-600';
       }
-    }
-  }
+    },
+  },
 };
 </script>

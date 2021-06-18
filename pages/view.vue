@@ -81,7 +81,7 @@ export default {
       input: {
         focalLength: '',
         cameraSensor: 1,
-        distance: 1
+        distance: 1,
       },
       output: {
         class: '',
@@ -89,8 +89,8 @@ export default {
         hFOV: '',
         vFOV: '',
         hAOV: '',
-        vAOV: ''
-      }
+        vAOV: '',
+      },
     };
   },
   watch: {
@@ -98,8 +98,8 @@ export default {
       handler() {
         this.calculateView();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     calculateView() {
@@ -152,7 +152,7 @@ export default {
     },
     roundNumber(payload) {
       return Math.round(payload * 100) / 100;
-    }
-  }
+    },
+  },
 };
 </script>

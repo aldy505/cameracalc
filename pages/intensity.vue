@@ -32,17 +32,17 @@ export default {
     return {
       isFclux: false,
       isAperture: true,
-      buttonText: 'Switch to: Aperture —> FC/LUX'
+      buttonText: 'Switch to: Aperture —> FC/LUX',
     };
   },
   methods: {
     toggleclass() {
       this.isFclux = !this.isFclux;
       this.isAperture = !this.isAperture;
-      this.buttonText = this.isAperture ?
-        'Switch to: Aperture —> FC/LUX' :
-        'Switch to: FC/LUX —> Aperture';
-    }
-  }
+      this.buttonText = this.isAperture
+        ? 'Switch to: Aperture —> FC/LUX'
+        : 'Switch to: FC/LUX —> Aperture';
+    },
+  },
 };
 </script>

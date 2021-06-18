@@ -94,14 +94,14 @@ export default {
     return {
       output: {
         text: '',
-        class: ''
+        class: '',
       },
       input: {
         from: '',
         to: '',
         focal: '',
-        aspectRatio: 1
-      }
+        aspectRatio: 1,
+      },
     };
   },
   watch: {
@@ -109,8 +109,8 @@ export default {
       handler() {
         this.calculateSensor();
       },
-      deep: true
-    }
+      deep: true,
+    },
   },
   methods: {
     calculateSensor() {
@@ -144,10 +144,10 @@ export default {
       const result = ((parsedFocal * fromData.crop_factor) / toData.crop_factor) * parsedAR;
 
       this.output.class = 'text-emerald-600';
-      this.output.text =
-          `Equivalent focal length for ${to}: ` +
-          `${parseFloat(Math.round(result * 100) / 100).toFixed(0)}mm.`;
-    }
-  }
+      this.output.text
+          = `Equivalent focal length for ${to}: `
+          + `${parseFloat(Math.round(result * 100) / 100).toFixed(0)}mm.`;
+    },
+  },
 };
 </script>

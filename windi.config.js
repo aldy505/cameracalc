@@ -6,7 +6,7 @@ export default defineConfig({
   darkMode: 'media',
   theme: {
     colors: {
-      ...colors
+      ...colors,
     },
     extend: {
       fontFamily: {
@@ -19,15 +19,15 @@ export default defineConfig({
           'BlinkMacSystemFont',
           'Helvetica\\ Neue',
           'Arial',
-          'sans-serif'
-        ]
+          'sans-serif',
+        ],
       },
       flex: {
-        2: '2 2 0%'
-      }
-    }
+        2: '2 2 0%',
+      },
+    },
   },
   plugins: [
-    form
-  ]
+    form,
+  ],
 });
