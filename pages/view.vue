@@ -50,15 +50,32 @@
         <div class="flex-1 w-full">
           <div class="flex flex-row items-center py-2">
             <div class="flex-1">
-              Distance (meters):&nbsp;
+              Distance:&nbsp;
             </div>
             <div class="flex-2 mx-4">
-              <input
-                v-model="input.distance"
-                class="w-full rounded-lg border-2 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2 dark:bg-gray-800"
-                type="number"
-                required="required"
-              >
+              <div class="flex flex-row items-center py-2">
+                <div class="flex-2">
+                  <input
+                    v-model="input.distance"
+                    class="w-full rounded-lg border-2 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2 dark:bg-gray-800"
+                    type="number"
+                    required="required"
+                  >
+                </div>
+                <div class="flex-1">
+                  <select
+                    v-model="input.unit"
+                    class="w-full rounded-lg border-2 dark:border-gray-800 border-gray-200 focus:border-indigo-600 ring-0 focus:ring-1 ring-indigo-600 dark:focus:border-indigo-400 dark:ring-indigo-400 px-4 py-2 dark:bg-gray-800"
+                  >
+                    <option value="m">
+                      meters
+                    </option>
+                    <option value="f">
+                      feet
+                    </option>
+                  </select>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -82,6 +99,7 @@ export default {
         focalLength: '',
         cameraSensor: 1,
         distance: 1,
+        unit: 'm',
       },
       output: {
         class: '',
@@ -126,21 +144,21 @@ export default {
       const horizontalAOV = this.angleOfView(width / Number(cameraSensor), this.parseStringToNumber(focalLength));
       const verticalAOV = this.angleOfView(height / Number(cameraSensor), this.parseStringToNumber(focalLength));
 
-      const horizontalFOV = this.fieldOfView(horizontalAOV, this.parseStringToNumber(distance));
-      const verticalFOV = this.fieldOfView(verticalAOV, this.parseStringToNumber(distance));
+      const horizontalFOV = this.fieldOfView(width / Number(cameraSensor), this.parseStringToNumber(focalLength), this.parseStringToNumber(distance));
+      const verticalFOV = this.fieldOfView(height / Number(cameraSensor), this.parseStringToNumber(focalLength), this.parseStringToNumber(distance));
 
       this.output.class = 'text-emerald-600';
       this.output.text = 'You will have:';
-      this.output.hFOV = `Horizontal Field of View: ${this.roundNumber(horizontalFOV)} meters`;
-      this.output.vFOV = `Vertical Field of View: ${this.roundNumber(verticalFOV)} meters`;
+      this.output.hFOV = `Horizontal Field of View: ${this.roundNumber(horizontalFOV)} ${this.unit === 'm' ? 'meters' : 'feet'}`;
+      this.output.vFOV = `Vertical Field of View: ${this.roundNumber(verticalFOV)} ${this.unit === 'm' ? 'meters' : 'feet'}`;
       this.output.hAOV = `Horizontal Angle of View: ${this.roundNumber(horizontalAOV)}°`;
       this.output.vAOV = `Vertical Angle of View: ${this.roundNumber(verticalAOV)}°`;
     },
     angleOfView(sensorWidth, focalLength) {
       return 2 * (Math.atan(sensorWidth / (2 * focalLength)) * (180 / Math.PI));
     },
-    fieldOfView(angleOfView, distance) {
-      return 2 * (Math.tan((angleOfView / 2) * distance));
+    fieldOfView(sensorWidth, focalLength, distance) {
+      return Math.tan(Math.atan(sensorWidth / (2 * focalLength))) * distance;
     },
     parseStringToNumber(payload) {
       switch (typeof payload) {

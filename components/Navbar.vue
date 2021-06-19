@@ -8,7 +8,7 @@
       </nuxt-link>
     </div>
     <nav class="py-2">
-      <div class="px-8 mx-auto lg:w-2/3">
+      <div class="px-8 mx-auto lg:w-4/5">
         <div class="flex flex-col lg:flex-row text-center content-center justify-center">
           <div
             class="flex-1 px-2 my-2 lg:my-0"
@@ -55,11 +55,11 @@ export default {
           path: '/file',
           name: 'File Size',
         },
-        // {
-        //   id: 5,
-        //   path: '/view',
-        //   name: 'Field of View'
-        // }
+        {
+          id: 5,
+          path: '/view',
+          name: 'Field of View',
+        },
       ],
     };
   },
