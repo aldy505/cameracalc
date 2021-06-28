@@ -1,4 +1,7 @@
 # Camera Calculator
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/00e494d016604f209f78272b6ef9f3c7)](https://www.codacy.com/gh/aldy505/cameracalc/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=aldy505/cameracalc&amp;utm_campaign=Badge_Grade) [![CodeFactor](https://www.codefactor.io/repository/github/aldy505/cameracalc/badge)](https://www.codefactor.io/repository/github/aldy505/cameracalc) ![GitHub](https://img.shields.io/github/license/aldy505/cameracalc)
+
 This is actually an impromptu project on my curiosity at calculating something for film camera. As you know (*or might don't know*), there is no free online camera calculator out there that can calculate some of camera's settings like [ISO](https://www.adobe.com/creativecloud/photography/discover/iso.html), [aperture](https://photographylife.com/what-is-aperture-in-photography), [FPS](https://www.videosurveillance.com/tech/frame-rate.asp), or even [footcandle](https://en.wikipedia.org/wiki/Foot-candle). (*Except ARRI's photometric data, but it's just calculating their light*). **So I made one!**
 
 This project is open source, meaning you can see the actual code. I'm making this an open sourced project because I want to help people and this is just math revisited.
