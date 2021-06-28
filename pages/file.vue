@@ -190,7 +190,7 @@ export default {
       // File size = (Bitrate / FPS) * Time
       const Calculation
           = (Number(FormatData[0]['24-1080'])
-            * Number(resolution || 1)
+            * (Number(resolution) || 1)
             * FPSConst
             * durationInSecond)
           / 8;
